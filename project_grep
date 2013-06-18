@@ -1,0 +1,23 @@
+#! /usr/bin/env ruby
+
+options_array = []
+word = nil
+place = './'
+
+ARGV.each do |a|
+  case
+  when a.match(/\A-/)
+    options_array << a
+  when word
+    place = a
+  else
+    word = a
+  end
+end
+
+options = options_array.join(' ')
+
+puts %x[/usr/local/bin/grep #{word.inspect} #{options} -rnP \
+  --exclude-dir={log,.git,tmp,db,middleman-shared,styleguide,photos,landing,nymag} \
+  --exclude=\*.sphinx.conf \
+  #{place}]
