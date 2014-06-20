@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+
+require_relative 'find_and_replace'
+
+find = Regexp.new(ARGV[0])
+replace = ARGV[1].to_s
+FindAndReplaceText.new(find, replace).call

@@ -1,0 +1,18 @@
+#! /usr/bin/env rvm 2.1.1@default do ruby
+
+require "term/ansicolor"
+
+include Term::ANSIColor
+
+['/Sites/apps/*', '/Sites/gems/*'].map{|d| Dir.home + d }.each do |superdir|
+  puts red(superdir)
+  colors = [:green, :bright_green]
+
+  Dir[superdir].each do |dir|
+    color = colors.pop
+    Dir.chdir(dir) do
+      puts send(color, underline("#{Dir.pwd.gsub(/^.*\//, '').ljust(21)} #{`git rev-parse --abbrev-ref HEAD`}".gsub("\n", '')))
+    end
+    colors.unshift(color)
+  end
+end

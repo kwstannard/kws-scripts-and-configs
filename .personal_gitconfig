@@ -1,0 +1,23 @@
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold ul
+
+[diff]
+  color = true
+  whitespace = red reverse
+
+[alias]
+  fc = fynanz_checkout
+  fp = fynanz_push
+  st = status
+  co = checkout
+  g = checkout Gemfile.lock
+  po = push origin
+  cbr = !git branch --merged | grep -v master | grep -v dev | xargs git branch -d
+  r = !git l -30
+  ra = !git r --all
+#  l = "!. ~/.githelpers && pretty_git_log"
+  la = !git l --all
+
+  aa = commit -a --amend

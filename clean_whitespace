@@ -1,0 +1,44 @@
+#! /usr/bin/env ruby
+
+dir = ARGV.pop
+puts dir
+`cd #{dir}`
+
+message='FY-1865 destroy all trailing whitespace'
+new_branch='FY-1865_destroy_all_trailing_whitespace'
+main_branch='dev'
+branch=`__git_ps1`
+
+changes_exist=`git st -s | tr -d ' '`
+
+if changes_exist
+  `git stash`
+end
+
+`git co .`
+`git clean -f`
+
+`git co #{main_branch}`
+`git co .`
+`git clean -f`
+`git pull`
+`git push origin :#{new_branch}`
+`git branch -D #{new_branch}`
+`git co -b #{new_branch}`
+
+`find . \( -name '*.rb' -o -name '*.erb' -o -name '*.js' -o -name '*.yml' \) -print0 | xargs -0 sed -i '' -E "s/([^ ])[ ]+$/\1/g"`
+`find . \( -name '*.rb' -o -name '*.erb' -o -name '*.js' -o -name '*.yml' \) -exec dos2unix {} \; > /dev/null 2>&1`
+
+`git commit -am #{new_branch}`
+`git push origin #{new_branch}`
+`hub pull-request -b #{main_branch} -h #{new_branch}`
+
+`git co #{main_branch}`
+`git branch -D #{new_branch}`
+`echo #{branch} | sed s/[\(\)]//g | xargs git co `
+
+if changes_exist
+  `git stash pop`
+end
+}
+

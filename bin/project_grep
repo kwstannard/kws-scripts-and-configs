@@ -1,0 +1,24 @@
+#! /usr/bin/env ruby
+
+options_array = []
+word = nil
+place = './'
+
+ARGV.each do |a|
+  case
+  when a.match(/\A-/)
+    options_array << a
+  when word
+    place = a
+  else
+    word = a
+  end
+end
+
+options = options_array.join(' ')
+images = '*.png,*.jpg,*.pdf,*.gif'
+
+puts %x[/usr/local/bin/ggrep #{word.inspect} #{options} -rnP \
+  --exclude-dir={log,.git,fixtures,tmp,db,middleman-shared,coverage,charts,ckeditor,tinymce} \
+  --exclude={\*.sphinx.conf,juggernaut*,jquery*,ZeroClipboard*,#{images},*.pem} \
+  #{place}]
