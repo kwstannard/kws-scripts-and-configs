@@ -1,0 +1,15 @@
+alias powrestart=`touch ~/.pow/restart.txt`
+
+export PATH=/Users/kstannard/scripts/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+
+for f in ~/scripts/bash/*.bash; do source $f; done
+
+source ~/Sites/.env_project_dirs.bash
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
