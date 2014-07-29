@@ -1,6 +1,9 @@
-#! /usr/bin/ruby
+#! /usr/bin/env rvm 2.1.1@default do ruby
+
 require 'pathname'
-require 'open3'
+
+require_relative '../utility/executor'
+require_relative '../utility/ruby_version'
 
 class AllProjectPuller
   def call
@@ -17,31 +20,41 @@ class AllProjectPuller
         sakura
         service_connections
         duzica
-    ].map{|a| Pathname.new("#{root_dir}/gems/#{a}")}
+    ].map{|a| Pathname.new("#{root_dir}/gems/#{a}")} +
+      Pathname.glob("#{root_dir}/configs") +
+      Pathname.glob("#{root_dir}/utilities/*") +
+      Pathname.glob("#{root_dir}/scripts/release")
 
     directories.each do |d|
-      Dir.chdir(d) do
-        ProjectPuller.new.call
+      fork do
+        Dir.chdir(d) do
+          ProjectPuller.new.call
+        end
       end
     end
+
+    Process.waitall
   end
 end
 
 class ProjectPuller
   def call
     clear_logs
-    print "#{dir.ljust(50, '_')} => "
-    from_branch 'dev' do
-      ex 'git pull'
-      install_gems
-      Dir.chdir(migration_dir) do
-        migrate
+    output_string = "#{dir.ljust(50, '_')} => "
+    from_branch development_branch do
+      if (!ex('git pull').match("is up to date"))
+        install_gems
+        Dir.chdir(migration_dir) do
+          migrate
+        end
       end
     end
-    puts (@executions.any?(&:error?) ? "Fail" : "Pass")
+    output_string += (@executions.any?(&:error?) ? "Fail" : "Pass")
   rescue => e
-    puts "Fail"
+    output_string += "Fail"
     log_error(e.message)
+  ensure
+    puts output_string
   end
 
   def install_gems
@@ -57,10 +70,7 @@ class ProjectPuller
   end
 
   def gemset
-    return @gemset if @gemset
-    rvm_ruby_version = File.read(".ruby-version").gsub("/n", '')
-    rvm_gemset = File.read(".ruby-gemset").gsub("/n", '')
-    @gemset = "#{rvm_ruby_version}@#{rvm_gemset}"
+    @gemset = RubyVersion.current
   end
 
   def migration_dir
@@ -76,6 +86,12 @@ class ProjectPuller
     clear_branch
     ex "git co #{original_branch}" unless branch == original_branch
     unstash
+  end
+
+  def development_branch
+    return @development_branch if @development_branch
+    branches = ex "git branch --list" 
+    @development_branch = %w[dev  master].detect{|b| branches.include?(b)}
   end
 
   def g_branchname
@@ -95,7 +111,7 @@ class ProjectPuller
   end
 
   def git_changes
-    @git_changes ||= ex "git st -s | tr -d ' '"
+    @git_changes ||= ex "git st --porcelain --untracked-files=no | tr -d ' '"
   end
 
   def clear_branch
@@ -108,7 +124,7 @@ class ProjectPuller
   end
 
   def ex(*args)
-    execution = Execution.new(self, *args)
+    execution = Executor.new(self, *args)
     executions << execution
     execution.call
   end
@@ -125,7 +141,7 @@ class ProjectPuller
 
   def log_error(text)
     File.open(error_log_path, 'a') do |f|
-      f.write "#{text}\n\n"
+      f.write "#{text}"
     end
   end
 
@@ -149,38 +165,6 @@ class ProjectPuller
     dir.gsub(/.*\/(.*)/, '\1')
   end
 
-  class Execution
-    def initialize(executor, command, opts = {})
-      @executor = executor
-      @command = command
-      @opts = opts
-    end
-
-    def call
-      @output, @error, @status = Open3.capture3(command)
-      log
-      raise "Failure: #{self}" if error?
-      grepv(opts[:ignore])
-    end
-
-    def log
-      executor.log_error("COMMAND: #{command}\n#{@error}") if error?
-      executor.log("COMMAND: #{command}\n#{grepv(opts[:ignore])}")
-    end
-
-    def error?
-      !@error.empty?
-    end
-
-    def grepv(pattern)
-      return @output if pattern.nil?
-      @output.each_line.reject{|l| l.match(pattern)}.join
-    end
-
-    def executor; @executor; end
-    def command; @command; end
-    def opts; @opts; end
-  end
 end
 
 AllProjectPuller.new.call
