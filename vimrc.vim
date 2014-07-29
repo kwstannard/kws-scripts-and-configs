@@ -1,3 +1,4 @@
+call pathogen#infect()
 syntax enable
 set nocompatible
 set nowrap
@@ -18,7 +19,8 @@ set splitbelow
 set splitright
 
 set backupdir=~/.vim/backup
-set directory=~/.vim/swap
+"set directory=~/.vim/swap
+set noswapfile
 
 "function! FontSizeChange(size)
 "  let basesize=12
@@ -38,6 +40,10 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+
+nnoremap ; :
+
+nnoremap y% :%y+<CR>
 
 filetype plugin indent on
 
@@ -83,6 +89,8 @@ au FocusLost *.fugitiveblame* call FugitiveBufEnter()
 
 " clear all buffers
 nnoremap <C-delete> :bufdo<space>bd<Cr>
+nnoremap <C-S-delete> :bufdo<space>bd<Cr>:q<Cr>
+nnoremap <C-backspace> :windo<space>bd<Cr>
 
 " tabs
 nnoremap J :tabprevious<cr>
@@ -91,6 +99,12 @@ nnoremap K :tabnext<cr>
 " mush esc
 inoremap jk <esc>
 inoremap kj <esc>
+inoremap JK <esc>
+inoremap KJ <esc>
+inoremap Jk <esc>
+inoremap Kj <esc>
+inoremap jK <esc>
+inoremap kJ <esc>
 
 "save file
 nnoremap <C-s> :wa<Cr>
