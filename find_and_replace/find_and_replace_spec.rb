@@ -27,6 +27,21 @@ describe FindAndReplaceText do
       context "replace string is 'goodbye'"do
         let(:replace_str) { 'goodbye' }
 
+        context "setting the file pattern" do
+          let(:file_pattern) { "*.foo" }
+          before do
+            File.open("#{@there}/file_2.foo", 'w+') do |f|
+              f.write 'hello world'
+            end
+          end
+
+          it 'changes only the specified files' do
+            described_class.new(find_str, replace_str, file_pattern).call
+            File.read("#{@there}/file_2.foo").should eq 'goodbye world'
+            File.read("#{@there}/file.rb").should eq 'hello world'
+          end
+        end
+
         context "multiple files" do
           before do
             File.open("#{@there}/file_2.rb", 'w+') do |f|
