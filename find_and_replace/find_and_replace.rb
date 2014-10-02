@@ -5,10 +5,14 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
     end
   end
 
+  def file_pattern
+    super || '{Rakefile,*.{rb,yml,erb,haml,feature,rdoc,ru,gemspec}}'
+  end
+
   private
 
   def files
-    Dir["#{Dir.pwd}/**/#{file_pattern}"]
+    Dir["#{Dir.pwd}/**/#{file_pattern}"].select{|f| File.file?(f)}
   end
 
   def gsub_file(file)
@@ -16,9 +20,8 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
     File.open(file, 'w+') do |f|
       f.write text.gsub(/#{find_pattern}/, replace_pattern)
     end
-  end
-
-  def file_pattern
-    super || '*.{rb,yml,erb,haml,feature}'
+  rescue => e
+    puts 'in: ' + file
+    raise e
   end
 end

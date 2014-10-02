@@ -20,6 +20,7 @@ class AllProjectPuller
         sakura
         service_connections
         duzica
+        bau_haus
     ].map{|a| Pathname.new("#{root_dir}/gems/#{a}")} +
       Pathname.glob("#{root_dir}/configs") +
       Pathname.glob("#{root_dir}/utilities/*") +

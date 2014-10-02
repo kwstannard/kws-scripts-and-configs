@@ -1,0 +1,14 @@
+#! /usr/bin/env ruby
+
+require 'pathname'
+
+ruby = `rvm-prompt`.strip.gsub(/@.*/, '')
+dir_name = ruby + '@global'
+dir = Pathname(Dir.home + '/.rvm/gems/' + dir_name)
+tmp_dir = Pathname(dir + 'xxx')
+
+dir.rename(tmp_dir)
+
+`#{ARGV.join(' ')}`
+
+tmp_dir.rename(dir.to_s)

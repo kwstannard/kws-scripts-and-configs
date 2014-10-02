@@ -209,3 +209,10 @@ endfunction
 map <leader>n :call GitMoveFile()<cr>
 
 nnoremap <leader><leader> <c-^>
+
+" word wrapping
+nnoremap <leader>" "wciw""<esc><left>"wp
+nnoremap <leader>' "wciw''<esc><left>"wp
+nnoremap <leader>( "wciw()<esc><left>"wp
+nnoremap <leader>{ "wciw{}<esc><left>"wp
+nnoremap <leader>[ "wciw[]<esc><left>"wp

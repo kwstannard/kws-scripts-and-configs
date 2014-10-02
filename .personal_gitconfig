@@ -3,6 +3,9 @@
   changed = yellow bold
   untracked = red bold ul
 
+[branch]
+  autosetuprebase = always
+
 [diff]
   color = true
   whitespace = red reverse
@@ -12,7 +15,7 @@
   fp = fynanz_push
   st = status
   co = checkout
-  g = checkout Gemfile.lock
+  g = !git status --porcelain Gemfile.lock || git checkout Gemfile.lock
   po = push origin
   cbr = !git branch --merged | grep -v master | grep -v dev | xargs git branch -d
   r = !git l -30

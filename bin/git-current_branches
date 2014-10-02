@@ -4,15 +4,34 @@ require "term/ansicolor"
 
 include Term::ANSIColor
 
+output = Array.new
+
 ['/Sites/apps/*', '/Sites/gems/*'].map{|d| Dir.home + d }.each do |superdir|
-  puts red(superdir)
-  colors = [:green, :bright_green]
+  dir_output = Array.new
+  dir_output.push red(superdir)
+
+  max_length = superdir.length
+
+  dirs = Array.new
 
   Dir[superdir].each do |dir|
-    color = colors.pop
     Dir.chdir(dir) do
-      puts send(color, underline("#{Dir.pwd.gsub(/^.*\//, '').ljust(21)} #{`git rev-parse --abbrev-ref HEAD`}".gsub("\n", '')))
+      dir =Dir.pwd.gsub(/^.*\//, '').ljust(21)
+      branch = `git rev-parse --abbrev-ref HEAD`
+      dir_info = "#{dir} #{branch}".gsub("\n", '')
+      max_length = dir_info.length if dir_info.length > max_length
+      dirs.push dir_info
     end
-    colors.unshift(color)
   end
+
+  colors = [:green, :bright_green]
+  dir_output += dirs.map{|d|
+    color = colors.pop
+    colors.unshift(color)
+    send(color, underline(d.ljust(max_length)))
+  }
+
+  output.push(dir_output)
 end
+
+puts output[0].zip(output[1]).map{|i| i.join(' | ')}.join("\n")

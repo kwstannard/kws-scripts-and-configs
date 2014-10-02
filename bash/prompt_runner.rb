@@ -8,7 +8,7 @@ end
 
 def rubytxt
   if !%{ which rvm }.empty?
-    gemset = %x{ rvm gemset name 2>/dev/null }.gsub(/\n/, '')
+    gemset = %x{ rvm-prompt 2>/dev/null }.strip.gsub(/.*@/, '')
     if Dir.pwd.match(/(?!\/)#{gemset}$/)
       green(rbv)
     elsif gemset.match(/\//)
