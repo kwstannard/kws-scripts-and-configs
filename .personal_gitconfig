@@ -15,7 +15,7 @@
   fp = fynanz_push
   st = status
   co = checkout
-  g = !git status --porcelain Gemfile.lock || git checkout Gemfile.lock
+  g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
   po = push origin
   cbr = !git branch --merged | grep -v master | grep -v dev | xargs git branch -d
   r = !git l -30

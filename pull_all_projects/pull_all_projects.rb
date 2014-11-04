@@ -9,19 +9,7 @@ class AllProjectPuller
   def call
     root_dir = "#{Dir.home}/Sites"
     directories = Pathname.glob("#{root_dir}/apps/*") +
-      %w[elasys_exporter
-        elasys_btable
-        experian
-        ecsi
-        baycities
-        certifier
-        reliamax
-        paperclip_strongbox
-        sakura
-        service_connections
-        duzica
-        bau_haus
-    ].map{|a| Pathname.new("#{root_dir}/gems/#{a}")} +
+      Pathname.glob("#{root_dir}/gems/*") +
       Pathname.glob("#{root_dir}/configs") +
       Pathname.glob("#{root_dir}/utilities/*") +
       Pathname.glob("#{root_dir}/scripts/release")
@@ -53,7 +41,7 @@ class ProjectPuller
     output_string += (@executions.any?(&:error?) ? "Fail" : "Pass")
   rescue => e
     output_string += "Fail"
-    log_error(e.message)
+    log_error_with_backtrace(e.message, e.backtrace)
   ensure
     puts output_string
   end
@@ -143,6 +131,13 @@ class ProjectPuller
   def log_error(text)
     File.open(error_log_path, 'a') do |f|
       f.write "#{text}"
+    end
+  end
+
+  def log_error_with_backtrace(message, trace)
+    File.open(error_log_path, 'a') do |f|
+      f.write "#{message}"
+      f.write "#{trace}"
     end
   end
 

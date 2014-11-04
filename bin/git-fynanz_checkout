@@ -1,7 +1,17 @@
-#! /usr/bin/env rvm 2.1.1@default do ruby
+#! /usr/bin/env ruby-rvm-env 2.1.1
 
-branch_match = `git branch -a`.match(/[A-Z]+-#{ARGV[0]}[\w-]+/)
+branch_match = `git branch -a --list *#{ARGV[0]}*`.split
 
-branch = branch_match ? branch_match[0].to_s : ARGV[0]
+if branch_match.size == 0
+  branch = ARGV[0]
+elsif branch_match.size == 1
+  branch = branch_match.first
+else
+  branch_match.each_with_index do |name, index|
+    puts "#{index}: #{name}"
+  end
+  index = $stdin.gets
+  branch = branch_match.fetch(index.to_i)
+end
 
 `git checkout #{branch}`

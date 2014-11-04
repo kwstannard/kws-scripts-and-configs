@@ -1,5 +1,6 @@
 class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pattern)
   def call
+    puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
     files.each do |file|
       gsub_file(file)
     end

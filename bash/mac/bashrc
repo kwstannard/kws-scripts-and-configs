@@ -5,7 +5,8 @@ export PATH=/usr/local/bin:$PATH
 
 for f in ~/scripts/bash/*.bash; do source $f; done
 
-source ~/Sites/.env_project_dirs.bash
+eval $(ruby ~/Sites/scripts/dev_machine/lib/generate_gem_dir_env_functions.rb)
+set_all_gem_dirs
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

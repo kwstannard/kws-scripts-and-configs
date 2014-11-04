@@ -1,6 +1,30 @@
-require 'term/ansicolor'
+  require 'term/ansicolor' rescue
 
-include Term::ANSIColor
+  include Term::ANSIColor if Class.const_defined?('Term')
+
+def yellow(arg)
+  if Class.const_defined? 'Term'
+    super(arg)
+  else
+    arg
+  end
+end
+
+def red(arg)
+  if Class.const_defined? 'Term'
+    super(arg)
+  else
+    arg
+  end
+end
+
+def green(arg)
+  if Class.const_defined? 'Term'
+    super(arg)
+  else
+    arg
+  end
+end
 
 def rbv
   RUBY_VERSION

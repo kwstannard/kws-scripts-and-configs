@@ -34,4 +34,5 @@ output = Array.new
   output.push(dir_output)
 end
 
+output.sort!{|a| a.length}
 puts output[0].zip(output[1]).map{|i| i.join(' | ')}.join("\n")

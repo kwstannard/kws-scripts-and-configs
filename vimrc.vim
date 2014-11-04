@@ -36,6 +36,22 @@ set noswapfile
 "  echo totallines
 "endfunc
 
+nnoremap <leader>cl :call ConvertLet()<cr>
+
+rubyfile ~/scripts/vim/convert_let.rb
+
+function! ConvertLet()
+  ruby ConvertLet.new.call
+endfunction
+
+nnoremap <leader>ch :call ConvertHash()<cr>
+
+rubyfile ~/scripts/vim/convert_hash.rb
+
+function! ConvertHash()
+  ruby ConvertHash.new.call
+endfunction
+
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -49,43 +65,32 @@ filetype plugin indent on
 
 " RELATIVE LINE NUMBERING
 set relativenumber
+set number
 
-au InsertEnter * :set number
-au InsertLeave * :set relativenumber
+"au InsertEnter * :set number
+"au InsertLeave * :set relativenumber
 
-au BufLeave * :set number
-au BufEnter * :set relativenumber
+"au BufLeave * :set number
+"au BufEnter * :set relativenumber
  
-function! FocusLose()
+"function! FocusLose()
 "  if(empty(hasntNumber))
-    :set number
+"    :set number
 "  else
 "    :set nonumber
 "  endif
-endfunc
-
-function! FocusGain()
-  if(mode() == 'i')
-    :set number
-  else
-    :set relativenumber
-  endif
-endfunc
- 
-au FocusLost * :call FocusLose()
-au FocusGained * :call FocusGain()
-
-function! FugitiveBufLeave()
-  set winwidth=84
-  call FocusGainNumbering()
-endfunction
-au FocusLost *.fugitiveblame* call FugitiveBufLeave()
-
-function! FugitiveBufEnter()
-  set winwidth=80
-  set nonumber
-endfunction
-au FocusLost *.fugitiveblame* call FugitiveBufEnter()
+"endfunc
+"
+"function! FocusGain()
+"  if(mode() == 'i')
+"    :set number
+"  else
+"    :set relativenumber
+"  endif
+"endfunc
+" 
+"au FocusLost * :call FocusLose()
+"au FocusGained * :call FocusGain()
 
 " clear all buffers
 nnoremap <C-delete> :bufdo<space>bd<Cr>
@@ -107,7 +112,7 @@ inoremap jK <esc>
 inoremap kJ <esc>
 
 "save file
-nnoremap <C-s> :wa<Cr>
+nnoremap <S-s> :wa<Cr>
 nnoremap <leader>d :!mkdir -p %:h<Cr>
 
 "logging
@@ -167,22 +172,19 @@ au BufWinEnter *.rb,*.js,*.html*,*.vim,*.coffee call IndentColoring()
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
+map <leader>E :edit ./
 map <leader>v :view %%
+map <leader>V :view ./
 map <leader>t :tabnew %%
-map <leader>s :call OpenCorrespondingFile()<cr>
+map <leader>T :tabnew ./
+map <leader>s :split %%
+map <leader>S :split ./
+map <leader>r :bufdo<space>e<cr>
+map <leader><c-o> :call OpenCorrespondingFile()<cr>
 
+rubyfile ~/scripts/vim/corresponding_file_openner.rb
 function! OpenCorrespondingFile()
-  let file_path = expand('%')
-  if match(file_path, 'spec/') >= 0
-    if match(file_path, '.js') >= 0
-      let corresponding_file = substitute(substitute(expand('%'), 'spec/', 'public/', ''), '_spec\.', '\.', '')
-    else
-      let corresponding_file = substitute(substitute(expand('%'), 'spec/', 'app/', ''), '_spec\.', '\.', '')
-    endif
-  else
-    let corresponding_file = substitute(substitute(expand('%'), '\(app\|public\)/', 'spec/', ''), '\(/\w\+\)\.', '\1_spec\.', '')
-  endif
-  exec ":split " . corresponding_file
+  ruby vim=Struct.new(:commander, :window).new(VIM, VIM::Window.current); CorrespondingFileOpenner.new(vim).open
 endfunction
 
 " RENAME CURRENT FILE

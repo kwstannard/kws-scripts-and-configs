@@ -1,7 +1,7 @@
 PATH
   remote: /Users/kstannard/personal_projects/advanced_subject
   specs:
-    rspec-advanced_subject (0.0.1)
+    rspec-advanced_subject (0.0.2.1)
       rspec (~> 3.0)
 
 GEM

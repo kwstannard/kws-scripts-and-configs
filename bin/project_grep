@@ -18,7 +18,7 @@ end
 options = options_array.join(' ')
 images = '*.png,*.jpg,*.pdf,*.gif'
 
-puts %x[/usr/local/bin/ggrep #{word.inspect} #{options} -rnP \
+puts %x[/usr/local/bin/ggrep #{word.inspect} #{options} -rn \
   --exclude-dir={log,.git,fixtures,tmp,db,middleman-shared,coverage,charts,ckeditor,tinymce} \
   --exclude={\*.sphinx.conf,juggernaut*,jquery*,ZeroClipboard*,#{images},*.pem} \
   #{place}]
