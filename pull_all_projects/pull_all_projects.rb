@@ -1,4 +1,4 @@
-#! /usr/bin/env rvm 2.1.1@default do ruby
+#! /usr/bin/env ruby-rvm-env 2.1
 
 require 'pathname'
 

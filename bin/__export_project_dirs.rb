@@ -1,4 +1,4 @@
-#! /usr/bin/env rvm 2.1.1@default do ruby
+#! /usr/bin/env rvm 2.1@default do ruby
 
 require File.expand_path('..', __FILE__) + '/utility_classes/lendkey_repos.rb'
 
