@@ -4,7 +4,7 @@ class AutoSplit
   end
 
   def call
-    if @window.width > 160
+    if @window.width > 170
       ":vsplit"
     else
       ":split"

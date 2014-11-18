@@ -52,15 +52,19 @@ class TicketCheckout
 
   def get_branch_uncached
     branches = ex('git branch -r')
-    verbatim_match = /^\s*(origin\/)?(#{branch})\s*$/
-    ticket_match = /^\s*(origin\/)?(FY-#{branch}\w+)\s*$/
+    verbatim_match = /^\s*(?:origin\/)?(#{branch})\s*$/
+    ticket_match = /^\s*(?:origin\/)?(FY-#{branch}\w+)\s*$/
 
     match = (branches.match(verbatim_match) || branches.match(ticket_match))
     match ? match[1].to_s : false
   end
 
   def branch
-    ARGV[0]
+    @branch ||= if ARGV[0] == 'dev'
+      'dev|master'
+    else
+      ARGV[0]
+    end
   end
 
   def commit_changes

@@ -52,10 +52,17 @@ function! ConvertHash()
   ruby ConvertHash.new.call
 endfunction
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+if &diff
+  nmap <down>
+  nmap <left> :diffget //2<cr>
+  nmap <right> :diffget //3<cr>
+  nmap <up> :only<cr>
+else
+  nmap <up> <nop>
+  nmap <down> <nop>
+  nmap <left> <nop>
+  nmap <right> <nop>
+end
 
 nnoremap ; :
 

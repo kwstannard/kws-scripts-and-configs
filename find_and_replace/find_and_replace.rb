@@ -1,3 +1,19 @@
+class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
+  def call
+    puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
+
+    files.each do |file|
+      %x(mv #{file} #{file.gsub(find_pattern, replace_pattern)})
+    end
+  end
+
+  private
+
+  def files
+    Dir["#{Dir.pwd}/**/*"].select{|f| File.file?(f)}
+  end
+end
+
 class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pattern)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"

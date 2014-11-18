@@ -1,11 +1,11 @@
-#! /usr/bin/env ruby-rvm-env 2.1.1
+#! /usr/bin/env ruby-rvm-env 2.1
 
-branch_match = `git branch -a --list *#{ARGV[0]}*`.split
+branch_match = `git branch --list *#{ARGV[0]}*`.split
 
 if branch_match.size == 0
   branch = ARGV[0]
 elsif branch_match.size == 1
-  branch = branch_match.first
+  branch = branch_match.first.gsub(/.*\//, '')
 else
   branch_match.each_with_index do |name, index|
     puts "#{index}: #{name}"

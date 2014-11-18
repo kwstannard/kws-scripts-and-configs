@@ -9,7 +9,7 @@ class AllProjectPuller
   def call
     root_dir = "#{Dir.home}/Sites"
     directories = Pathname.glob("#{root_dir}/apps/*") +
-      Pathname.glob("#{root_dir}/gems/*") +
+      Pathname.glob("#{root_dir}/gems/*").reverse +
       Pathname.glob("#{root_dir}/configs") +
       Pathname.glob("#{root_dir}/utilities/*") +
       Pathname.glob("#{root_dir}/scripts/release")
