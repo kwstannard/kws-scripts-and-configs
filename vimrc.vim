@@ -1,5 +1,6 @@
 call pathogen#infect()
 syntax enable
+set t_Co=256
 set nocompatible
 set nowrap
 set scrolloff=5
@@ -127,51 +128,41 @@ nnoremap <leader>d :!mkdir -p %:h<Cr>
 autocmd BufWritePre * %s/\(\w\)\s\+$/\1/ge
 
 " block select commenting & uncommenting
-au BufEnter *.rb map ,c :s/^/#/<CR>:nohlsearch<CR>
-au BufEnter *.rb map ,u :s/^#//<CR>:nohlsearch<CR>
+au FileType ruby map ,c :s/^/#/<CR>:nohlsearch<CR>
+au FileType *.rb map ,u :s/^#//<CR>:nohlsearch<CR>
 
-au BufEnter *.vim* map ,c :s/^/"/<CR>:nohlsearch<CR>
-au BufEnter *.vim* map ,u :s/^"//<CR>:nohlsearch<CR>
+au FileType vim map ,c :s/^/"/<CR>:nohlsearch<CR>
+au FileType vim map ,u :s/^"//<CR>:nohlsearch<CR>
 
-au BufEnter *.haml* map ,c :s/^/-#/<CR>:nohlsearch<CR>
-au BufEnter *.haml* map ,u :s/^-#//<CR>:nohlsearch<CR>
+au FileType haml map ,c :s/^/-#/<CR>:nohlsearch<CR>
+au FileType haml map ,u :s/^-#//<CR>:nohlsearch<CR>
 
-au BufEnter *.js map ,c :s/^/\/\//<CR>:nohlsearch<CR>
-au BufEnter *.js map ,u :s/^\/\///<CR>:nohlsearch<CR>
+au FileType javascript map ,c :s/^/\/\//<CR>:nohlsearch<CR>
+au FileType javascript map ,u :s/^\/\///<CR>:nohlsearch<CR>
 
-au BufEnter *.erb filetype indent off
-au BufLeave *.erb filetype indent on
+au FileType eruby filetype indent off
+au FileType eruby filetype indent on
 
 "whitespace highlighting
-   
+
 hi ExtraWhitespace ctermbg=red guibg=red
 autocmd Syntax * syn match ExtraWhitespace '\s\+$'
 
 " long line highlighing
 
-highlight LongLines guibg=#333300
-au BufWinEnter *.rb,*.js,*.coffee,*.vim call matchadd('LongLines', '^.\{80,119}$', -1)
- 
-highlight VeryLongLines guibg=#330000
-au BufWinEnter *.rb,*.js,*.coffee,*.vim call matchadd('VeryLongLines', '^.\{120,}$', -1)
+highlight LongLines ctermbg=4 guibg=#333300
+au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,119}$', -1)
+
+highlight VeryLongLines ctermbg=1 guibg=#330000
+au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{120,}$', -1)
 
 " indent highlighting
-"
-function! IndentColoring()
-  let indent_colors = ['#645640','#564832','#484024','#646452','#565644','#484834','#565656','#484848','#404040']
-  let indent = len(indent_colors) - 1
 
-  for icolor in indent_colors
-    let indent_name = 'Indent' . indent
-    let regex_pattern = '^\s\{' . (indent * 2 + 4) . '}\&^\s\{' . (indent * 2 + 1) . '}'
-    let importance = 200 - indent
-    exec 'highlight ' . indent_name . ' guibg=' . icolor
-    call matchadd(indent_name, regex_pattern, importance)
-    let indent -= 1
-  endfor
-endfunction
+highlight OddIndent ctermbg=236 guibg=236
+highlight EvenIndent ctermbg=240 guibg=240
 
-au BufWinEnter *.rb,*.js,*.html*,*.vim,*.coffee call IndentColoring()
+call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
+call matchadd('OddIndent', '\(^\|\(\s\s\)\)\zs\s\s\ze\s\s')
 
 " STATUS LINE
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -225,3 +216,16 @@ nnoremap <leader>' "wciw''<esc><left>"wp
 nnoremap <leader>( "wciw()<esc><left>"wp
 nnoremap <leader>{ "wciw{}<esc><left>"wp
 nnoremap <leader>[ "wciw[]<esc><left>"wp
+
+" shebang filetype detection
+
+function! s:DetectFileType()
+  if did_filetype()
+    finish
+  endif
+  if getline(1) =~ '^#!.*ruby'
+    setfiletype ruby
+  endif
+endfunction
+
+au BufNewFile,BufRead * :call s:DetectFileType()
