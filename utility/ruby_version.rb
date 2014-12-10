@@ -21,11 +21,11 @@ class RubyVersion
 
   private
 
-  def self.rvm?
+  def self.rvm_present?
     !%{ which rvm }.empty?
   end
 
-  def self.rbenv?
+  def self.rbenv_present?
     !%{ which rbenv }.empty?
   end
 

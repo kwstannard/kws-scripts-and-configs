@@ -1,7 +1,7 @@
-#! /usr/bin/env ruby-rvm-env 2.1.1
+#! /usr/bin/env ruby-rvm-env 2.1
 
-require 'debugger'
 require 'utility/executor'
+require 'utility/fuzzy_branch'
 
 class LoudLogger
   def log(msg);puts msg;end
@@ -53,7 +53,7 @@ class TicketCheckout
   def get_branch_uncached
     branches = ex('git branch -r')
     verbatim_match = /^\s*(?:origin\/)?(#{branch})\s*$/
-    ticket_match = /^\s*(?:origin\/)?(FY-#{branch}\w+)\s*$/
+    ticket_match = /^\s*(?:origin\/)?((PL|FY)-#{branch}\w+)\s*$/
 
     match = (branches.match(verbatim_match) || branches.match(ticket_match))
     match ? match[1].to_s : false

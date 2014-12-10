@@ -12,7 +12,7 @@ class AllProjectPuller
       Pathname.glob("#{root_dir}/gems/*").reverse +
       Pathname.glob("#{root_dir}/configs") +
       Pathname.glob("#{root_dir}/utilities/*") +
-      Pathname.glob("#{root_dir}/scripts/release")
+      Pathname.glob("#{root_dir}/scripts")
 
     directories.each do |d|
       fork do
@@ -79,7 +79,7 @@ class ProjectPuller
 
   def development_branch
     return @development_branch if @development_branch
-    branches = ex "git branch --list" 
+    branches = ex "git branch --list {master,dev}" 
     @development_branch = %w[dev  master].detect{|b| branches.include?(b)}
   end
 

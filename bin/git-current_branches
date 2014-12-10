@@ -1,4 +1,4 @@
-#! /usr/bin/env rvm 2.1.1@default do ruby
+#! /usr/bin/env ruby-rvm-env 2.1
 
 require "term/ansicolor"
 
@@ -18,7 +18,8 @@ output = Array.new
     Dir.chdir(dir) do
       dir =Dir.pwd.gsub(/^.*\//, '').ljust(21)
       branch = `git rev-parse --abbrev-ref HEAD`
-      dir_info = "#{dir} #{branch}".gsub("\n", '')
+      status = `git status --porcelain`.empty? ? "" : "+"
+      dir_info = "#{dir} #{status} #{branch}".gsub("\n", '')
       max_length = dir_info.length if dir_info.length > max_length
       dirs.push dir_info
     end
