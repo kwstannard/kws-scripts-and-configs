@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require_relative 'find_and_replace'
+require Dir.home + '/scripts/find_and_replace/find_and_replace'
 
 if ARGV.empty?
   puts <<-HELP
