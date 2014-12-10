@@ -101,4 +101,4 @@ def gittxt
   end
 end
 
-puts "\n#{Dir.pwd}  (#{rubytxt}#{railstxt}#{gittxt})  #{Time.now.strftime("%b %e")}\n>> "
+puts "\n#{Dir.pwd}  (#{rubytxt}#{railstxt}#{gittxt})  #{Time.now.strftime("%b %e")}"

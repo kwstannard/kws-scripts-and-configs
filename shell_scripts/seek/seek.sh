@@ -4,5 +4,5 @@ seek(){
 }
 
 seek_all_projects(){
-  ruby ~/scripts/seek_all_projects.rb "$@"
+  ruby ~/scripts/shell_scripts/seek/seek_all_projects.rb "$@"
 }
