@@ -150,19 +150,19 @@ autocmd Syntax * syn match ExtraWhitespace '\s\+$'
 
 " long line highlighing
 
-highlight LongLines ctermbg=4 guibg=#333300
+highlight LongLines ctermbg=18 guibg=#333300
 au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,119}$', -1)
 
-highlight VeryLongLines ctermbg=1 guibg=#330000
+highlight VeryLongLines ctermbg=52 guibg=#330000
 au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{120,}$', -1)
 
 " indent highlighting
 
-highlight OddIndent ctermbg=236 guibg=236
-highlight EvenIndent ctermbg=240 guibg=240
+highlight OddIndent ctermbg=236 guibg=#303030
+highlight EvenIndent ctermbg=240 guibg=#585858
 
-call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
-call matchadd('OddIndent', '\(^\|\(\s\s\)\)\zs\s\s\ze\s\s')
+au FileType * call matchadd('OddIndent', '\%(^\|\%(\s\s\)\)\zs\s\s\ze\s\s')
+au FileType * call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
 
 " STATUS LINE
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -229,3 +229,5 @@ function! s:DetectFileType()
 endfunction
 
 au BufNewFile,BufRead * :call s:DetectFileType()
+
+au BufEnter * :checktime
