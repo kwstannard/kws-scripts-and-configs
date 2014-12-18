@@ -11,7 +11,7 @@ class FuzzyBranch < Struct.new(:search_term)
 
   def local_branch
     if local_branches.size == 1
-      local_branches.first#.gsub(/.*\//, '')
+      local_branches.first
     else
       false
     end
@@ -27,7 +27,7 @@ class FuzzyBranch < Struct.new(:search_term)
         puts "#{index}: #{name}"
       end
       index = $stdin.gets
-      remote_branches.fetch(index.to_i, false)
+      remote_branches.fetch(index.to_i, false).gsub(/.*\//, '')
     end
   end
 
