@@ -1,5 +1,6 @@
 require 'rspec-advanced_subject'
-require 'utility/executor'
+require 'pathname'
+require Pathname(__FILE__) + '../../lib/executor'
 
 describe Executor do
   let(:executor) { described_class.new(*init_args) }
