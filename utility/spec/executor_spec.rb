@@ -6,6 +6,7 @@ describe Executor do
   let(:executor) { described_class.new(*init_args) }
   let(:init_args) { [logger, command] }
   let(:logger) { double(log: 'log') }
+
   describe '#call' do
     subject(:call) { executor.call }
     context 'when passed nothing' do
