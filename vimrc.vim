@@ -227,6 +227,7 @@ function! s:DetectFileType()
     setfiletype ruby
   endif
 endfunction
+au BufNewFile,BufRead Guardfile,.Guardfile setfiletype ruby
 
 au BufNewFile,BufRead * :call s:DetectFileType()
 
