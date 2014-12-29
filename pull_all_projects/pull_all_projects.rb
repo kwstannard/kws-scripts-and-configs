@@ -2,8 +2,8 @@
 
 require 'pathname'
 
-require_relative '../utility/executor'
-require_relative '../utility/ruby_version'
+require_relative '../utility/lib/executor'
+require_relative '../utility/lib/ruby_version'
 
 class AllProjectPuller
   def call

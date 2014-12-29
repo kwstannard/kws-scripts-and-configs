@@ -2,7 +2,7 @@
 
 require 'pathname'
 require 'delegate'
-require File.expand_path('../../utility/gem_finder.rb', __FILE__)
+require Pathname(__FILE__) + '../../utility/lib/gem_finder'
 
 class GemDirEnvFunctionGenerator
   def call
