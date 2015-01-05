@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby-rvm-env 2.1
 
-require 'utility/fuzzy_branch'
+require 'utility/lib/fuzzy_branch'
 
 class FuzzyCheckout < Struct.new(:search_term)
   def self.call(search_term)

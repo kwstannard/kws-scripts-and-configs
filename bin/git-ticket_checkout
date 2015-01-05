@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby-rvm-env 2.1
 
-require 'utility/executor'
-require 'utility/fuzzy_branch'
+require 'utility/lib/executor'
+require 'utility/lib/fuzzy_branch'
 
 class LoudLogger
   def log(msg);puts msg;end
