@@ -28,14 +28,15 @@ end
 
 class ProjectPuller
   def call
+    puts "#{Dir.pwd} => #{gemset}"
     clear_logs
     output_string = "#{dir.ljust(50, '_')} => "
     from_branch development_branch do
-      if (!ex('git pull').match("is up to date"))
-        install_gems
-        Dir.chdir(migration_dir) do
-          migrate
-        end
+      ex('git pull')
+      run_setup_script
+      install_gems
+      Dir.chdir(migration_dir) do
+        migrate
       end
     end
     output_string += (@executions.any?(&:error?) ? "Fail" : "Pass")
@@ -50,6 +51,10 @@ class ProjectPuller
     if File.exist?("Gemfile")
       ex "rvm #{gemset} do bundle install"
     end
+  end
+
+  def run_setup_script
+    ex "bin/setup" if File.exist?("bin/setup")
   end
 
   def migrate
@@ -72,6 +77,7 @@ class ProjectPuller
     clear_branch
     ex "git co #{branch}" unless branch == original_branch
     yield
+  ensure
     clear_branch
     ex "git co #{original_branch}" unless branch == original_branch
     unstash
