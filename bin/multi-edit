@@ -1,0 +1,36 @@
+#! /usr/bin/env ruby-rvm-env 2.1
+
+require 'pry'
+require 'thor'
+
+def apps
+  $_xappsx_ ||= Pathname.glob(Dir.home + '/Sites/apps/*')
+end
+
+def gems
+  $_Xgemsx_ ||= Pathname.glob(Dir.home + '/Sites/gems/*')
+end
+
+def services
+  $_xservicesx_ ||= Pathname.glob(Dir.home + '/Sites/apps/{decisionator,fom,gh,pricer,pullson,quotes}/')
+end
+
+def clients
+  $_xclientsx_ ||= Pathname.glob(Dir.home + '/Sites/gems/{decisionator,fom,gh,pricer,pullson,quotes}-client/')
+end
+
+___klass = Class.new(Thor) do
+  include Thor::Actions
+  def pry; binding.pry;end
+
+  def mexec(cmd, dirs)
+    dirs.each{|d| fork { Dir.chdir(d) { puts "####{d}"; puts %x[#{cmd}] } } }
+    Process.waitall
+  end
+
+  def gst(dirs)
+    mexec('git status', dirs)
+  end
+end
+
+___klass.new.pry
