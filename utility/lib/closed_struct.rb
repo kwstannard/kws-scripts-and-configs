@@ -1,5 +1,9 @@
 require_relative 'modifiable_struct'
 
+# ClosedStruct is a variation on OpenStruct where the original hash is the
+# final form the struct can take. In practice it is like a Struct where you
+# define variables at initialization instead of when the class is loaded.
+
 class ClosedStruct < ModifiableStruct
   def initialize(*args)
     super
