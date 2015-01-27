@@ -51,20 +51,11 @@ class TicketCheckout
   end
 
   def get_branch_uncached
-    branches = ex('git branch -r')
-    verbatim_match = /^\s*(?:origin\/)?(#{branch})\s*$/
-    ticket_match = /^\s*(?:origin\/)?((PL|FY)-#{branch}\w+)\s*$/
-
-    match = (branches.match(verbatim_match) || branches.match(ticket_match))
-    match ? match[1].to_s : false
+    FuzzyBranch.call(branch, true)
   end
 
   def branch
-    @branch ||= if ARGV[0] == 'dev'
-      'dev|master'
-    else
-      ARGV[0]
-    end
+    ARGV[0]
   end
 
   def commit_changes
@@ -95,7 +86,7 @@ class TicketCheckout
   end
 
   def ex(cmd)
-    Executor.new(QuietLogger.new, cmd).call
+    Executor.new(QuietLogger.new, cmd, stop_on_error: false).call
   end
 end
 
