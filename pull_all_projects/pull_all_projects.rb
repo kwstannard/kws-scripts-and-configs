@@ -8,13 +8,13 @@ require_relative '../utility/lib/ruby_version'
 class AllProjectPuller
   def call
     root_dir = "#{Dir.home}/Sites"
-    directories = Pathname.glob("#{root_dir}/apps/*") +
+    all_directories = Pathname.glob("#{root_dir}/apps/*") +
       Pathname.glob("#{root_dir}/gems/*").reverse +
       Pathname.glob("#{root_dir}/configs") +
       Pathname.glob("#{root_dir}/utilities/*") +
       Pathname.glob("#{root_dir}/scripts")
 
-    directories.each do |d|
+    SmartDirFilter.new.call(all_directories).each do |d|
       fork do
         Dir.chdir(d) do
           ProjectPuller.new.call
@@ -26,9 +26,35 @@ class AllProjectPuller
   end
 end
 
+module PAP
+  ROOT = Pathname(Dir.home).join("Sites/pap")
+end
+
+class SmartDirFilter
+  def call(dirs)
+    if updated_in_last_5_minutes?
+      dirs_with_errors(dirs)
+    else
+      dirs
+    end
+  end
+
+  def updated_in_last_5_minutes?
+    PAP::ROOT.mtime > Time.now - 5 * 60
+  end
+
+  def dirs_with_errors(dirs)
+    dirs.select{|d| error_logs.include?(d.basename.to_s) }
+  end
+
+  def error_logs
+    PAP::ROOT.children(false).map{|f| f.to_s.match("error") && f.to_s.sub('_error.log','')}.compact
+  end
+end
+
 class ProjectPuller
   def call
-    puts "#{Dir.pwd} => #{gemset}"
+    puts "#{Dir.pwd} => #{gemset}" if ENV["DEBUG"] == "1"
     clear_logs
     output_string = "#{dir.ljust(50, '_')} => "
     from_branch development_branch do
@@ -148,19 +174,17 @@ class ProjectPuller
   end
 
   def clear_logs
-    ex 'mkdir -p ~/Sites/pap/'
+    ex "mkdir -p #{PAP::ROOT}"
     File.delete(log_path) if File.exist?(log_path)
     File.delete(error_log_path) if File.exist?(error_log_path)
   end
 
   def log_path
-    root_dir = "#{Dir.home}/Sites/pap"
-    "#{root_dir}/#{self}.log"
+    "#{PAP::ROOT}/#{self}.log"
   end
 
   def error_log_path
-    root_dir = "#{Dir.home}/Sites/pap"
-    "#{root_dir}/#{self}_error.log"
+    "#{PAP::ROOT}/#{self}_error.log"
   end
 
   def to_s
