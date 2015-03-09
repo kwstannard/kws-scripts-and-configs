@@ -35,3 +35,4 @@ find = Regexp.new(ARGV[0])
 replace = ARGV[1].to_s
 file = ARGV[2]
 FindAndReplaceText.new(find, replace, file).call
+FindAndReplacePath.new(find, replace).call

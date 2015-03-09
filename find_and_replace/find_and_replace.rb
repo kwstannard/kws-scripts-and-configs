@@ -1,16 +1,17 @@
+require 'pathname'
 class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
 
     files.each do |file|
-      %x(mv #{file} #{file.gsub(find_pattern, replace_pattern)})
+      %x(git mv #{file} #{file.to_s.gsub(find_pattern, replace_pattern)})
     end
   end
 
   private
 
   def files
-    Dir["#{Dir.pwd}/**/*"].select{|f| File.file?(f)}
+    Pathname.glob(Pathname.pwd.join("**/*")).select{|p| p.to_s.match find_pattern}
   end
 end
 
@@ -23,7 +24,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
   end
 
   def file_pattern
-    super || '{Rakefile,*.{rb,yml,erb,haml,feature,rdoc,ru,gemspec}}'
+    super || '{Rakefile,*.{rb,yml,erb,haml,slim,feature,rdoc,ru,gemspec,js,coffee}}'
   end
 
   private
