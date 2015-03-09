@@ -66,6 +66,8 @@ else
 end
 
 nnoremap ; :
+inoremap ' "
+inoremap " '
 
 nnoremap y% :%y+<CR>
 
@@ -127,19 +129,6 @@ nnoremap <leader>d :!mkdir -p %:h<Cr>
 
 autocmd BufWritePre * %s/\(\w\)\s\+$/\1/ge
 
-" block select commenting & uncommenting
-au FileType ruby map ,c :s/^/#/<CR>:nohlsearch<CR>
-au FileType *.rb map ,u :s/^#//<CR>:nohlsearch<CR>
-
-au FileType vim map ,c :s/^/"/<CR>:nohlsearch<CR>
-au FileType vim map ,u :s/^"//<CR>:nohlsearch<CR>
-
-au FileType haml map ,c :s/^/-#/<CR>:nohlsearch<CR>
-au FileType haml map ,u :s/^-#//<CR>:nohlsearch<CR>
-
-au FileType javascript map ,c :s/^/\/\//<CR>:nohlsearch<CR>
-au FileType javascript map ,u :s/^\/\///<CR>:nohlsearch<CR>
-
 au FileType eruby filetype indent off
 au FileType eruby filetype indent on
 
@@ -158,11 +147,11 @@ au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{120,}
 
 " indent highlighting
 
-highlight OddIndent ctermbg=236 guibg=#303030
-highlight EvenIndent ctermbg=240 guibg=#585858
+"highlight OddIndent ctermbg=236 guibg=#303030
+"highlight EvenIndent ctermbg=240 guibg=#585858
 
-au FileType * call matchadd('OddIndent', '\%(^\|\%(\s\s\)\)\zs\s\s\ze\s\s')
-au FileType * call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
+"au FileType * call matchadd('OddIndent', '\%(^\|\%(\s\s\)\)\zs\s\s\ze\s\s')
+"au FileType * call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
 
 " STATUS LINE
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
