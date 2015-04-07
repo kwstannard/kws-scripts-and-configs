@@ -66,8 +66,6 @@ else
 end
 
 nnoremap ; :
-inoremap ' "
-inoremap " '
 
 nnoremap y% :%y+<CR>
 
