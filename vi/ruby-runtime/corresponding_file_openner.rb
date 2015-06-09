@@ -1,6 +1,8 @@
 require 'pathname'
 require_relative 'auto_split'
 
+# This class opens the corresponding test file if the current buffer is
+# code and the corresponding code file if the current buffer is a test.
 class CorrespondingFileOpenner
 
   module VIMFile
