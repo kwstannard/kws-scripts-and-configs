@@ -32,15 +32,15 @@ end
 
 class SmartDirFilter
   def call(dirs)
-    if updated_in_last_5_minutes?
+    if updated_in_last_60_minutes?
       dirs_with_errors(dirs)
     else
       dirs
     end
   end
 
-  def updated_in_last_5_minutes?
-    PAP::ROOT.mtime > Time.now - 5 * 60
+  def updated_in_last_60_minutes?
+    PAP::ROOT.mtime > Time.now - 60 * 60
   end
 
   def dirs_with_errors(dirs)
@@ -54,23 +54,34 @@ end
 
 class ProjectPuller
   def call
+    start_timer
     puts "#{Dir.pwd} => #{gemset}" if ENV["DEBUG"] == "1"
     clear_logs
     output_string = "#{dir.ljust(50, '_')} => "
     from_branch development_branch do
       ex('git pull')
-      run_setup_script
-      install_gems
-      Dir.chdir(migration_dir) do
-        migrate
-      end
+      setup_app
     end
     output_string += (@executions.any?(&:error?) ? "Fail" : "Pass")
   rescue => e
     output_string += "Fail"
     log_error_with_backtrace(e.message, e.backtrace)
   ensure
+    stop_timer
+    output_string += " (time: #{timer}s)"
     puts output_string
+  end
+
+  def setup_app
+    run_setup_script ||
+      old_setup
+  end
+
+  def old_setup
+    install_gems
+    Dir.chdir(migration_dir) do
+      migrate
+    end
   end
 
   def install_gems
@@ -80,7 +91,7 @@ class ProjectPuller
   end
 
   def run_setup_script
-    ex "bin/setup" if File.exist?("bin/setup")
+    ex "rvm #{gemset} do bin/setup" if File.exist?("bin/setup")
   end
 
   def migrate
@@ -191,6 +202,17 @@ class ProjectPuller
     dir.gsub(/.*\/(.*)/, '\1')
   end
 
+  def start_timer
+    @start_time = Time.now
+  end
+
+  def stop_timer
+    @stop_time = Time.now
+  end
+
+  def timer
+    @stop_time - @start_time
+  end
 end
 
 AllProjectPuller.new.call
