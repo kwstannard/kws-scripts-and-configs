@@ -64,6 +64,9 @@ nnoremap ; :
 
 nnoremap y% :%y+<CR>
 
+nnoremap \<c>' :s/'/"/g<cr>
+nnoremap \<c>" :%s/'/"/g<cr>
+
 filetype plugin indent on
 
 " RELATIVE LINE NUMBERING
