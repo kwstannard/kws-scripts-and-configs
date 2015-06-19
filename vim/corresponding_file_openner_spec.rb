@@ -66,5 +66,23 @@ describe CorrespondingFileOpenner do
         end
       end
     end
+
+    context 'when buffer is lib/models/foo.rb' do
+      let(:file) { '/home/lib/models/foo.rb' }
+
+      context 'when there is a file' do
+        it 'splits to spec/models/foo_spec.rb' do
+          expect(commander).to receive(:command).with(":split /home/spec/models/foo_spec.rb")
+          openner.open
+        end
+      end
+
+      context 'when there is not a file' do
+        it 'splits to spec/models/foo_spec.rb' do
+          expect(commander).to receive(:command).with(":split /home/spec/models/foo_spec.rb")
+          openner.open
+        end
+      end
+    end
   end
 end

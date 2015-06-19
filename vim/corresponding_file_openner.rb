@@ -44,10 +44,13 @@ class CorrespondingFileOpenner
 
   class RBOpenner < Struct.new(:file)
     def get
-      if file.match('spec/')
+      case file
+      when /\bspec\//
         corresponding_file = Pathname(file.gsub('spec/', 'app/').gsub('_spec.', '.'))
-      else
+      when /\bapp\//
         corresponding_file = Pathname(file.gsub('app/', 'spec/').gsub('.', '_spec.'))
+      when /\blib\//
+        corresponding_file = Pathname(file.gsub('lib/', 'spec/').gsub('.', '_spec.'))
       end
     end
   end
