@@ -1,0 +1,13 @@
+noremap H :back<enter>
+noremap L :forward<enter>
+
+noremap J :tabp<enter>
+noremap K :tabn<enter>
+
+noremap j 3j
+noremap k 3k
+
+set hintchars=jfkdhglsa
+
+noremap : ;
+noremap ; :
