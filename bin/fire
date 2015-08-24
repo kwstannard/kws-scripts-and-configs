@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'optparse'
 require Dir.home + '/scripts/find_and_replace/find_and_replace'
 
 if ARGV.empty?
@@ -31,8 +32,20 @@ Replace foo with bar only if it is at start of the line in default files:
   exit
 end
 
+options = Hash.new
+
+OptionParser.new do |opts|
+  c_desc = "change all references to a class in code and paths"
+  opts.on("-c", "--class_name", c_desc) do
+    options[:class_name] = true
+  end
+end.parse!
+
 find = Regexp.new(ARGV[0])
 replace = ARGV[1].to_s
 file = ARGV[2]
+
+if options[:class_name]
+  FindAndReplacePath.new(find, replace).call
+end
 FindAndReplaceText.new(find, replace, file).call
-FindAndReplacePath.new(find, replace).call
