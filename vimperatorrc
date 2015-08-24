@@ -11,3 +11,6 @@ set hintchars=jfkdhglsa
 
 noremap : ;
 noremap ; :
+
+noremap d D
+noremap D d
