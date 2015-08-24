@@ -206,7 +206,7 @@ nnoremap <leader>[ "wciw[]<esc><left>"wp
 
 function! s:DetectFileType()
   if did_filetype()
-    finish
+    return
   endif
   if getline(1) =~ '^#!.*ruby'
     setfiletype ruby
