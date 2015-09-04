@@ -12,10 +12,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 #export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 eval "$(rbenv init -)"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
