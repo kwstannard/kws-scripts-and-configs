@@ -1,5 +1,6 @@
 call pathogen#infect()
 syntax enable
+colorscheme google
 set t_Co=256
 set nocompatible
 set nowrap
