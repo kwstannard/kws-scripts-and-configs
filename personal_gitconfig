@@ -26,7 +26,7 @@
   co = checkout
   g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
   po = push origin
-  cbr = !git branch --merged | grep -v master | grep -v dev | xargs git branch -d
+  cbr = !git remote | xargs git remote prune && git branch --merged | grep -v master | grep -v dev | xargs git branch -d
   r = !git l -30
   ra = !git r --all
 #  l = "!. ~/.githelpers && pretty_git_log"
