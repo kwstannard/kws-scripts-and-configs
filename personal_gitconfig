@@ -20,8 +20,6 @@
   whitespace = red reverse
 
 [alias]
-  fc = fynanz_checkout
-  fp = fynanz_push
   st = status
   co = checkout
   g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
