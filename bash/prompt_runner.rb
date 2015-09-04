@@ -1,6 +1,7 @@
-  require 'term/ansicolor' rescue
+begin; require 'term/ansicolor'; rescue; puts "$ gem install term-ansicolor"; end
 
-  include Term::ANSIColor if Class.const_defined?('Term')
+include Term::ANSIColor if Class.const_defined?('Term')
+
 
 def yellow(arg)
   if Class.const_defined? 'Term'
@@ -27,11 +28,15 @@ def green(arg)
 end
 
 def rbv
-  RUBY_VERSION
+  if !`which rbenv`.empty?
+    `rbenv version-name`.strip
+  else
+    RUBY_VERSION
+  end
 end
 
 def rubytxt
-  if !%{ which rvm }.empty?
+  if !`which rvm`.empty?
     gemset = %x{ rvm-prompt 2>/dev/null }.strip.gsub(/.*@/, '')
     if Dir.pwd.match(/(?!\/)#{gemset}$/)
       green(rbv)
@@ -40,6 +45,7 @@ def rubytxt
     else
       red(rbv)
     end
+    `rbenv version-name`.strip
   else
     rbv
   end
