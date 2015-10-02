@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+commit_info=`git log --summary HEAD...master db/migrate`.split
+migration_versions=commit_info.grep(/\.rb$/).map{|f| f.slice(/\d+/)}.reverse
+migration_versions.each{|m| `rake db:migrate:up VERSION=#{m}`}
