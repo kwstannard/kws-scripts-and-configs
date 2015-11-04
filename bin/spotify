@@ -64,28 +64,28 @@ while [ $# -gt 0 ]; do
             fi
             break ;;
 
-        "play"    ) echo $bold$green"Playing Spotify.";
+        "play"    ) echo $bold$green"Playing Spotify."$reset;
             osascript -e 'tell application "Spotify" to play';
             break ;;
 
-        "pause"    ) echo $bold$green"Pausing Spotify.";
+        "pause"    ) echo $bold$green"Pausing Spotify."$reset;
             osascript -e 'tell application "Spotify" to pause';
             break ;;
 
         "toggle"  ) state=`osascript -e 'tell application "Spotify" to player state as string'`;
             osascript -e 'tell application "Spotify" to playpause';
             if [ $state = "playing" ]; then
-              echo $bold$green"Pausing Spotify.";
+              echo $bold$green"Pausing Spotify."$reset;
             else
-              echo $bold$green"Playing Spotify.";
+              echo $bold$green"Playing Spotify."$reset;
             fi
             break ;;
 
-        "next"    ) echo $bold$green"Going to next track." ;
+        "next"    ) echo $bold$green"Going to next track."$reset ;
             osascript -e 'tell application "Spotify" to next track';
             break ;;
 
-        "prev"    ) echo $bold$green"Going to previous track.";
+        "prev"    ) echo $bold$green"Going to previous track."$reset;
             osascript -e 'tell application "Spotify" to previous track';
             break ;;
 
@@ -101,24 +101,24 @@ while [ $# -gt 0 ]; do
               text="to $2";
             fi
 
-            echo $bold$green"Changing Spotify volume level $text.";
+            echo $bold$green"Changing Spotify volume level $text."$reset;
             osascript -e "tell application \"Spotify\" to set sound volume to $newvol";
             break ;;
 
-        "pos"   ) echo $bold$green"Adjusting Spotify play position."
+        "pos"   ) echo $bold$green"Adjusting Spotify play position."$reset;
             osascript -e "tell application \"Spotify\" to set player position to $2";
             break;;
 
         "shuffle"    )
             osascript -e "tell application \"Spotify\" to set shuffling to not shuffling";
             curr=`osascript -e 'tell application "Spotify" to shuffling'`;
-            echo $bold$green"Spotify shuffling set to $curr";
+            echo $bold$green"Spotify shuffling set to $curr"$reset;
             break;;
 
         "repeat"    )
             osascript -e "tell application \"Spotify\" to set repeating to not repeating";
             curr=`osascript -e 'tell application "Spotify" to repeating'`;
-            echo $bold$green"Spotify repeating set to $curr";
+            echo $bold$green"Spotify repeating set to $curr"$reset;
             break;;
 
         "share"     )
@@ -126,11 +126,11 @@ while [ $# -gt 0 ]; do
             remove='spotify:track:'
             url=${url#$remove}
             url="http://open.spotify.com/track/$url"
-            echo $bold$green"Share URL: $url";
+            echo $bold$green"Share URL: $url"$reset;
             echo "$url" | pbcopy
             break;;
 
-        "quit"    ) echo $bold$green"Quitting Spotify.";
+        "quit"    ) echo $bold$green"Quitting Spotify."$reset;
             osascript -e 'tell application "Spotify" to quit';
             exit 1 ;;
 
