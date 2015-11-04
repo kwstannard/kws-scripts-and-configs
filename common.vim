@@ -187,6 +187,12 @@ nnoremap <leader>( "wciw()<esc><left>"wp
 nnoremap <leader>{ "wciw{}<esc><left>"wp
 nnoremap <leader>[ "wciw[]<esc><left>"wp
 
+" tab manipulation
+nnoremap <c-t>$ :$tabm<cr>
+nnoremap <c-t>0 :0tabm<cr>
+nnoremap <c-t>l :tabm+<cr>
+nnoremap <c-t>h :tabm-<cr>
+
 " shebang filetype detection
 
 function! s:DetectFileType()
