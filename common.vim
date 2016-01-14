@@ -38,6 +38,9 @@ set backupdir=~/.vim/backup
 "set directory=~/.vim/swap
 set noswapfile
 
+" get rid of esc delay
+set timeoutlen=1000 ttimeoutlen=0
+
 "function! FontSizeChange(size)
 "  let basesize=12
 "  if(a:size > basesize)
