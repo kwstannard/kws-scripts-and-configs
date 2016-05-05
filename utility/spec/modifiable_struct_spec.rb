@@ -1,4 +1,5 @@
 require 'rspec-advanced_subject'
+require 'pathname'
 require Pathname(__FILE__) + '../../lib/modifiable_struct'
 
 describe ModifiableStruct do
