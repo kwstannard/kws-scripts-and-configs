@@ -1,0 +1,1 @@
+Plug 'floobits/floobits-neovim'

@@ -1,3 +1,8 @@
+call plug#begin('~/.vim/bundle')
+" source ~/scripts/vim_plugs.vim
+source ~/scripts/common_plugs.vim
+call plug#end()
+
 rubyfile ~/scripts/vim/convert_let.rb
 
 function! ConvertLet()

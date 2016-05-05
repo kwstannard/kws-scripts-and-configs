@@ -1,15 +1,3 @@
-call plug#begin('~/.vim/bundle')
-Plug 'scrooloose/nerdcommenter'
-Plug 'vim-scripts/SQLUtilities'
-Plug 'kwstannard/align'
-Plug 'tpope/vim-fugitive'
-Plug 'flazz/vim-colorschemes'
-Plug 'vim-ruby/vim-ruby'
-Plug 'bruno-/vim-ruby-fold'
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-call plug#end()
-
 syntax enable
 colorscheme google
 set shell=/bin/sh
