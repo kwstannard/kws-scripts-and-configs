@@ -8,7 +8,7 @@ set scrolloff=5
 set autoindent
 set smartindent
 set numberwidth=6
-set foldcolumn=2
+"set foldcolumn=2
 highlight Folded ctermbg=0 ctermfg=15
 set tabstop=2                     " a tab is two spaces
 set shiftwidth=2                  " an autoindent (with <<) is two spaces
@@ -25,6 +25,11 @@ set splitright
 set backupdir=~/.vim/backup
 "set directory=~/.vim/swap
 set noswapfile
+
+" fuzzy find
+set rtp+=/usr/local/opt/fzf
+
+let g:sqlutil_load_default_maps = 0
 
 " get rid of esc delay
 set timeoutlen=1000 ttimeoutlen=0
@@ -91,9 +96,9 @@ set number
 "au FocusGained * :call FocusGain()
 
 " clear all buffers
-nnoremap <C-delete> :bufdo<space>bd<Cr>
-nnoremap <C-S-delete> :bufdo<space>bd<Cr>:q<Cr>
-nnoremap <C-backspace> :windo<space>bd<Cr>
+nnoremap <leader><delete> :bufdo<space>bd<Cr>
+nnoremap <leader><s-delete> :bufdo<space>bd<Cr>:q<Cr>
+nnoremap <leader><backspace> :windo<space>bd<Cr>
 
 " tabs
 nnoremap J :tabprevious<cr>
@@ -128,10 +133,10 @@ autocmd Syntax * syn match ExtraWhitespace '\s\+$'
 " long line highlighing
 
 highlight LongLines ctermbg=18 guibg=#333300
-au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,119}$', -1)
+au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,107}$', -1)
 
 highlight VeryLongLines ctermbg=52 guibg=#330000
-au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{120,}$', -1)
+au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{108,}$', -1)
 
 " indent highlighting
 
@@ -210,3 +215,7 @@ au BufNewFile,BufRead Guardfile,.Guardfile setfiletype ruby
 au BufNewFile,BufRead * :call s:DetectFileType()
 
 au BufEnter * :checktime
+
+" rotate windows
+nnoremap <c-w><end> :tabdo wincmd h \| wincmd K<cr>
+nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
