@@ -1,1 +1,1 @@
-alias powrestart=`touch ~/.pow/restart.txt`
+alias powrestart=`touch tmp/restart.txt`
