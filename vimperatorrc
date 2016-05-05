@@ -16,4 +16,4 @@ noremap d D
 noremap D d
 
 " Get my damn focus back
-autocmd PageLoad .* :normal <Esc>
+" autocmd PageLoad .* :normal <Esc>
