@@ -5,10 +5,6 @@ require_relative 'modifiable_struct'
 # define variables at initialization instead of when the class is loaded.
 
 class ClosedStruct < ModifiableStruct
-  def initialize(*args)
-    super
-  end
-
   protected
 
   def method_missing(method, *args, &block)
