@@ -1,4 +1,5 @@
 require_relative 'closed_struct'
+require 'pathname'
 require 'yaml'
 require 'octokit'
 
@@ -22,7 +23,7 @@ class OrgRepoPuller < Struct.new(:read_io, :write_io)
   end
 
   def get_org_repo_info
-    @repos = github.organization_repositories(@org, per_page: 100).map{|r|
+    @repos = github.organization_repositories(@org, per_page: 100).each{|r|
       ClosedStruct.new(r)
     }
   end
@@ -32,15 +33,16 @@ class OrgRepoPuller < Struct.new(:read_io, :write_io)
     base_dir = Pathname(read_io.gets.strip).expand_path
     @repos.each do |repo|
       next if already_cloned?(base_dir, repo) || user_doesnt_want_to_clone?(repo)
-      write_io.print "what subdirectory would you like to clone to (eg. `gems` or leave blank): "
+      write_io.print "what path would you like to clone to (eg. `gems/repo` or leave blank for repo name): "
       dir = read_io.gets.strip
+      dir = (dir.empty? ? repo.name : dir)
       `git clone #{repo.ssh_url} #{base_dir}/#{dir}/#{repo.name}`
     end
   end
 
   def user_doesnt_want_to_clone?(repo)
     write_io.puts "### now cloning #{repo.name}"
-    write_io.print "Would you like to clone this repo? (Y/n)"
+    write_io.print "Would you like to clone this repo? (y/N)"
     !read_io.gets.match(/^(y|yes|sure|why not|punch it|)$/i)
   end
 
@@ -53,7 +55,7 @@ class OrgRepoPuller < Struct.new(:read_io, :write_io)
   end
 
   def permissions
-    file = Pathname(Dir.home) + '.config/github_cmd_line_auth'
+    file = Pathname(Dir.home).join('.config/hub')
     file_info = YAML.load_file(file).fetch('github.com').fetch(0)
     {login: file_info.fetch('user'), password: file_info.fetch('oauth_token')}
   end
