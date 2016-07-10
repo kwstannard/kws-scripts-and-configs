@@ -2,3 +2,6 @@ source ~/scripts/init.bash
 
 export PATH=$HOME/scripts/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+
+export NVM_DIR="/Users/stannard/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
