@@ -7,3 +7,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/scripts/pull_all_projects:$PATH"
 
 export DISABLE_SPRING=1
+export HISTSIZE=
+export HISTFILESIZE=1000000
