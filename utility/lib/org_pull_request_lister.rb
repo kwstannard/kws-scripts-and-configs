@@ -24,8 +24,8 @@ class OrgPullRequestLister < Struct.new(:read_io, :write_io)
   end
 
   def list_open_pull_requests
-    all_pull_requests.send(@repo_filter_method){|i| i.url.match(/\/(#{@repo_filter.join("|")})\//)}.each do |p|
-      puts p.title
+    filtered_pull_requests.sort_by{|o| o.comments}.each do |p|
+      puts "#{p.comments} || #{p.title}"
       puts p.html_url
       puts
     end
@@ -33,6 +33,12 @@ class OrgPullRequestLister < Struct.new(:read_io, :write_io)
 
   def open_new_firefox_window
     #implement this
+  end
+
+  def filtered_pull_requests
+    all_pull_requests.send(@repo_filter_method) do |i|
+      i.url.match(/\/(#{@repo_filter.join("|")})\//)
+    end
   end
 
   def involved_pull_requests
