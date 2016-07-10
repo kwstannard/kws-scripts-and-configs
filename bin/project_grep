@@ -20,7 +20,8 @@ images = '*.png,*.jpg,*.pdf,*.gif'
 
 exclude_dirs = %w{
 log  .git  fixtures  tmp  db  middleman-shared  coverage  charts  ckeditor
-tinymce  sassdoc  bower_components jspm_packages bower
+tinymce  sassdoc  bower_components jspm_packages bower bower_components
+node_modules gulp vendor browserslist bundles
 }
 
 puts %x[/usr/local/bin/ggrep #{word.inspect} #{options} -rn \
