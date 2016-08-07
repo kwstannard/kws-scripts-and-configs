@@ -1,4 +1,0 @@
-source ~/scripts/init.bash
-
-export PATH=$HOME/scripts/bin:$PATH
-export PATH=/usr/local/bin:$PATH
