@@ -24,7 +24,7 @@ tinymce  sassdoc  bower_components jspm_packages bower bower_components
 node_modules gulp vendor browserslist bundles
 }
 
-puts %x[/usr/local/bin/ggrep #{word.inspect} #{options} -rn \
+puts %x[ggrep #{word.inspect} #{options} -rn \
   --exclude-dir={#{exclude_dirs.join(",")}} \
   --exclude={\*.sphinx.conf,juggernaut*,jquery*,*.min.js,ZeroClipboard*,#{images},*.pem,bootstrap*,angular*} \
   #{place}]
