@@ -1,0 +1,4 @@
+[include]
+  path = ~/scripts/configs/gitconfig
+[credential]
+	helper = osxkeychain
