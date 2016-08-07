@@ -1,7 +1,16 @@
-#! /usr/bin/env ruby
+#! /Users/stannard/.rbenv/versions/alt-2.3.1/bin/ruby
 
+utils = File.expand_path(__FILE__ + '../../../utility/lib')
+$LOAD_PATH << utils
 require 'pry'
-require_relative '../utility/lib/casper_pull_requests'
+require 'casper_pull_requests'
+require 'task_manager'
 
-binding.pry
-1
+include TaskManager
+self.save_path = Dir.home + "/.tasks"
+load_tasks
+
+Pry.prompt = to_prompts
+Pry.config.print = Proc.new {}
+
+Pry.start(Pry.toplevel_binding, :input => StringIO.new(""))
