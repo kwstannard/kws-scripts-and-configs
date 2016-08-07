@@ -1,4 +1,5 @@
-begin; require 'term/ansicolor'; rescue; puts "$ gem install term-ansicolor"; end
+begin; require 'term/ansicolor'; rescue LoadError; puts "$ gem install term-ansicolor"; exit; end
+require 'mkmf'
 
 include Term::ANSIColor if Class.const_defined?('Term')
 
@@ -28,7 +29,7 @@ def green(arg)
 end
 
 def rbv
-  if !`which rbenv`.empty?
+  if rbenv_installed?
     `rbenv version-name`.strip
   else
     RUBY_VERSION
@@ -36,7 +37,7 @@ def rbv
 end
 
 def rubytxt
-  if !`which rvm`.empty?
+  if rbenv_installed?
     gemset = %x{ rvm-prompt 2>/dev/null }.strip.gsub(/.*@/, '')
     if Dir.pwd.match(/(?!\/)#{gemset}$/)
       green(rbv)
@@ -105,6 +106,11 @@ def gittxt
   if gb
     ")(#{gb}"
   end
+end
+
+def rbenv_installed?
+  return @__rbenv if defined? @__rbenv
+  @__rbenv = find_executable0 "rbenv"
 end
 
 puts "\n#{Dir.pwd}  (#{rubytxt}#{railstxt}#{gittxt})  #{Time.now.strftime("%b %e")}"

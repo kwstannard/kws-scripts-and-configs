@@ -1,0 +1,16 @@
+# User specific aliases and functions
+source ~/scripts/init.bash
+
+export PATH=$HOME/scripts/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/scripts/bin:$PATH
+
+export PGDATA=/var/lib/pgsql/data
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+export NVM_DIR="/Users/stannard/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
