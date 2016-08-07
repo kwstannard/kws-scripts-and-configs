@@ -1,0 +1,13 @@
+[user]
+  name = Kelly Stannard
+  email = kelly.stannard@caspersleep.com
+
+[include]
+  path = /Users/stannard/scripts/personal_gitconfig
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[credential]
+	helper = osxkeychain
+[diff]
+	compactionHeuristic = true

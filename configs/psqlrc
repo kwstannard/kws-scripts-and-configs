@@ -1,0 +1,6 @@
+\x auto
+\pset null ¤
+\set COMP_KEYWORD_CASE upper
+\set HISTCONTROL ignoredups
+\set HISTFILE ~/.psql_history- :DBNAME
+\setenv PSQL_EDITOR "/usr/local/bin/nvim"
