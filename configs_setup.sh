@@ -12,13 +12,12 @@ ln -s $dir/configs/inputrc ~/.inputrc
 ln -s $dir/configs/pryrc ~/.pryrc
 ln -s $dir/configs/psqlrc ~/.psqlrc
 
-rm ~/.bashrc
-ln -s $dir/configs/bashrc ~/.bashrc
+ln -s $dir/configs/$system_type/bashrc ~/.bashrc
+ln -s $dir/configs/$system_type/bash_profile ~/.bash_profile
 
 case $system_type in
   "Linux")
     ;;
   "Darwin")
-    ln -s $dir/configs/mac/bash_profile ~/.bash_profile
     ;;
 esac
