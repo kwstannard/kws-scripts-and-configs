@@ -1,6 +1,10 @@
 [core]
   editor = vim
 
+[user]
+  name = Kelly Stannard
+  email = kwstannard@gmail.com
+
 [init]
   templatedir=/Users/stannard/scripts/git_template
 
