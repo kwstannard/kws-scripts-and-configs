@@ -36,7 +36,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
   def gsub_file(file)
     text = File.read(file)
     File.open(file, 'w+') do |f|
-      f.write text.gsub(/#{find_pattern}/, replace_pattern)
+      f.write text.gsub(find_pattern, replace_pattern)
     end
   rescue => e
     puts 'in: ' + file
