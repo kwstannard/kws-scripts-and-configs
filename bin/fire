@@ -33,15 +33,19 @@ Replace foo with bar only if it is at start of the line in default files:
 end
 
 options = Hash.new
+options[:regexp] = 0
 
 OptionParser.new do |opts|
   c_desc = "change all references to a class in code and paths"
   opts.on("-c", "--class_name", c_desc) do
     options[:class_name] = true
   end
+  opts.on("-m", "--multiline") do
+    options[:regexp] += 4
+  end
 end.parse!
 
-find = Regexp.new(ARGV[0])
+find = Regexp.new(ARGV[0], options[:regexp])
 replace = eval "\"#{ARGV[1]}\""
 file = ARGV[2]
 
