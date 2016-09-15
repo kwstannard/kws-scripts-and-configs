@@ -16,7 +16,7 @@ ARGV.each do |a|
 end
 
 options = options_array.join(' ')
-images = '*.png,*.jpg,*.pdf,*.gif'
+images = '*.png,*.jpg,*.pdf,*.gif,*.mp4,*.svg'
 
 exclude_dirs = %w{
 log  .git  fixtures  tmp  db  middleman-shared  coverage  charts  ckeditor
