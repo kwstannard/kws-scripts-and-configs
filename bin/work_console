@@ -7,7 +7,7 @@ require 'casper_pull_requests'
 require 'task_manager'
 
 include TaskManager
-self.save_path = Dir.home + "/.tasks"
+self.save_path = Dir.home + "/Dropbox/tasks"
 load_tasks
 
 Pry.prompt = to_prompts
