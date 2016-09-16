@@ -3,8 +3,11 @@ system_type="$(uname -s)"
 echo $system_type
 
 ln -s $dir/configs/vimrc.vim ~/.vimrc
-mkdir ~/.config/nvim
+mkdir -p ~/.config/nvim/autoload
+mkdir ~/.vim/backup
 ln -s $dir/configs/nvimrc.vim ~/.config/nvim/init.vim
+ln -s $dir/configs/plug.vim ~/.config/nvim/autoload/plug.vim
+ln -s $dir/configs/plug.vim ~/.vim/autoload/plug.vim
 
 ln -s $dir/configs/vimperatorrc ~/.vimperatorrc
 ln -s $dir/configs/$system_type/gitconfig ~/.gitconfig
