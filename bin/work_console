@@ -1,4 +1,4 @@
-#! /Users/stannard/.rbenv/versions/alt-2.3.1/bin/ruby
+#! /usr/bin/env ruby
 
 utils = File.expand_path(__FILE__ + '../../../utility/lib')
 $LOAD_PATH << utils
