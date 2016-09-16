@@ -24,7 +24,12 @@ tinymce  sassdoc  bower_components jspm_packages bower bower_components
 node_modules gulp vendor browserslist bundles
 }
 
-puts %x[ggrep #{word.inspect} #{options} -rn \
-  --exclude-dir={#{exclude_dirs.join(",")}} \
-  --exclude={\*.sphinx.conf,juggernaut*,jquery*,*.min.js,ZeroClipboard*,#{images},*.pem,bootstrap*,angular*} \
-  #{place}]
+cmd = <<-CMD
+ggrep #{word.inspect} #{options} -rn \
+--exclude-dir={#{exclude_dirs.join(",")}} \
+--exclude={\*.sphinx.conf,juggernaut*,jquery*,*.min.js,ZeroClipboard*,#{images},*.pem,bootstrap*,angular*} \
+#{place}
+CMD
+
+puts %x[bash -c 'echo "#{cmd}"'] if ENV['DEBUG']
+puts %x[bash -c '#{cmd}']
