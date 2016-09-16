@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 begin; require 'term/ansicolor'; rescue LoadError; puts "$ gem install term-ansicolor"; exit; end
 require 'mkmf'
 
@@ -28,35 +30,22 @@ def green(arg)
   end
 end
 
-def rbv
+def rubytxt
   if rbenv_installed?
-    `rbenv version-name`.strip
+    rbenv_local || rbenv_global
   else
     RUBY_VERSION
   end
 end
 
-def rubytxt
-  if rbenv_installed?
-    gemset = %x{ rvm-prompt 2>/dev/null }.strip.gsub(/.*@/, '')
-    if Dir.pwd.match(/(?!\/)#{gemset}$/)
-      green(rbv)
-    elsif gemset.match(/\//)
-      rbv
-    else
-      red(rbv)
-    end
-    `rbenv version-name`.strip
-  else
-    rbv
-  end
+def rbenv_global
+  s = `rbenv global 2> /dev/null`.strip
+  s.empty? ? nil : s
 end
 
-def railstxt
-  env = ENV["RAILS_ENV"]
-  if env
-    ")(RENV = #{env}"
-  end
+def rbenv_local
+  s = `rbenv local 2> /dev/null`.strip
+  s.empty? ? nil : s
 end
 
 def gitbranch
@@ -113,4 +102,4 @@ def rbenv_installed?
   @__rbenv = find_executable0 "rbenv"
 end
 
-puts "\n#{Dir.pwd}  (#{rubytxt}#{railstxt}#{gittxt})  #{Time.now.strftime("%b %e")}"
+puts "\n#{Dir.pwd}  (#{rubytxt}#{gittxt})  #{Time.now.strftime("%b %e")}"
