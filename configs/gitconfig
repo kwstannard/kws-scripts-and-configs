@@ -6,7 +6,7 @@
   email = kwstannard@gmail.com
 
 [init]
-  templatedir=/Users/stannard/scripts/git_template
+  templatedir=~/scripts/git_template
 
 [push]
 	default = current
