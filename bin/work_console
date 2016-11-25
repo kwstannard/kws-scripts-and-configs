@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+Process.setproctitle("work_console")
 utils = File.expand_path(__FILE__ + '../../../utility/lib')
 $LOAD_PATH << utils
 require 'pry'

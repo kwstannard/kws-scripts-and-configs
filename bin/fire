@@ -51,5 +51,6 @@ file = ARGV[2]
 
 if options[:class_name]
   FindAndReplacePath.new(find, replace).call
+else
+  FindAndReplaceText.new(find, replace, file).call
 end
-FindAndReplaceText.new(find, replace, file).call
