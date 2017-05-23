@@ -63,15 +63,15 @@ def gitbranch
 end
 
 def g_branchname
-  @branch ||= %x{git rev-parse --abbrev-ref HEAD 2>/dev/null}.gsub(/\n/, '')
+  g_st.match(/branch.head (\w*)/)[1]
 end
 
 def g_ahead
-  g_st.match(/ahead.*of.*commit/)
+  g_st.match(/branch.ab \+[^0]/)
 end
 
 def g_behind
-  g_st.match(/behind.*by.*commit/)
+  g_st.match(/branch.ab .. -[^0]/)
 end
 
 def g_working_directory
@@ -83,11 +83,11 @@ def g_working_directory
 end
 
 def g_clean
-  g_st.match(/nothing.to.commit,.working.directory.clean/)
+  !g_st.match(/\x00[^#]/)
 end
 
 def g_st
-  @status ||= %x{ git status 2>/dev/null }
+  @status ||= %x{ git status --porcelain=v2 -z --branch 2>/dev/null }
 end
 
 def gittxt

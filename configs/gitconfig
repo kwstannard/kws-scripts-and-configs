@@ -36,3 +36,5 @@
   la = !git l --all
 
   aa = commit -a --amend
+
+  squash = !git rebase -i $(git merge-base --fork-point master)

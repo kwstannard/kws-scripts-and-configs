@@ -1,3 +1,4 @@
+echo 'hi'
 syntax enable
 colorscheme google
 set shell=/bin/sh
@@ -48,8 +49,6 @@ set timeoutlen=1000 ttimeoutlen=0
 "  echo totallines
 "endfunc
 
-nnoremap <leader>cl :call ConvertLet()<cr>
-
 if &diff
   nmap <down>
   nmap <left> :diffget //2<cr>
@@ -72,31 +71,35 @@ filetype plugin indent on
 set relativenumber
 set number
 
-"au InsertEnter * :set number
+"au InsertEnter * :set norelativenumber
 "au InsertLeave * :set relativenumber
 
-"au BufLeave * :set number
-"au BufEnter * :set relativenumber
+au BufLeave * :set norelativenumber
+au BufEnter * :set relativenumber
  
-"function! FocusLose()
-"  if(empty(hasntNumber))
-"    :set number
-"  else
-"    :set nonumber
-"  endif
+"function! KwsFunFocusLose()
+  "if(empty(hasntNumber))
+    ":set number
+  "else
+    ":set nonumber
+  "endif
 "endfunc
-"
-"function! FocusGain()
-"  if(mode() == 'i')
-"    :set number
-"  else
-"    :set relativenumber
-"  endif
-"endfunc
-" 
-"au FocusLost * :call FocusLose()
-"au FocusGained * :call FocusGain()
 
+"function! KwsFunFocusGain()
+  "if(mode() == 'i')
+    ":set number
+  "else
+    ":set relativenumber
+  "endif
+"endfunc
+
+function! KwsFunHello()
+  :echo 'HELLO'
+endfunc
+ 
+au FocusLost * set norelativenumber
+au FocusGained * set relativenumber
+au FocusLost * call KwsFunHello()
 " clear all buffers
 nnoremap <leader><delete> :bufdo<space>bd<Cr>
 nnoremap <leader><s-delete> :bufdo<space>bd<Cr>:q<Cr>
@@ -107,14 +110,10 @@ nnoremap J :tabprevious<cr>
 nnoremap K :tabnext<cr>
 
 " mush esc
-inoremap jk <esc>
-inoremap kj <esc>
-inoremap JK <esc>
-inoremap KJ <esc>
-inoremap Jk <esc>
-inoremap Kj <esc>
-inoremap jK <esc>
-inoremap kJ <esc>
+call arpeggio#map('i','',0,'jk','<esc>')
+call arpeggio#map('i','',0,'JK','<esc>')
+call arpeggio#map('i','',0,'Jk','<esc>')
+call arpeggio#map('i','',0,'Kj','<esc>')
 
 "save file
 nnoremap <S-s> :wa<Cr>
@@ -162,7 +161,6 @@ map <leader>T :tabnew ./
 map <leader>s :split %%
 map <leader>S :split ./
 map <leader>r :bufdo<space>e<cr>
-map <leader><c-o> :call OpenCorrespondingFile()<cr>
 
 " RENAME CURRENT FILE
 function! RenameFile()
@@ -221,3 +219,12 @@ au BufEnter * :checktime
 " rotate windows
 nnoremap <c-w><end> :tabdo wincmd h \| wincmd K<cr>
 nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

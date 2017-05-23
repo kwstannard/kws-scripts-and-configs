@@ -9,3 +9,6 @@
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
+if [ -e /home/kwstannard/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kwstannard/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export PATH=./bin:$PATH

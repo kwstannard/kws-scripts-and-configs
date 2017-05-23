@@ -1,0 +1,379 @@
+#! /usr/bin/env node
+
+var argv = require('yargs')
+  .array('tags')
+  .argv
+
+var https = require('https')
+var qs = require('querystring')
+var url = require('url')
+var util = require('util')
+
+
+var DEFAULT_ERROR_CODE = -1
+var DEFAULT_TIMEOUT_MS = 5000
+
+
+
+
+
+
+var Scope = {
+  BASIC_PROFILE: 'basicProfile',
+  LIST_PUBLICATIONS: 'listPublications',
+  PUBLISH_POST: 'publishPost'
+}
+
+
+
+
+
+
+var PostPublishStatus = {
+  DRAFT: 'draft',
+  UNLISTED: 'unlisted',
+  PUBLIC: 'public'
+}
+
+
+
+
+
+
+var PostContentFormat = {
+  HTML: 'html',
+  MARKDOWN: 'markdown'
+}
+
+
+
+
+
+
+var PostLicense = {
+  ALL_RIGHTS_RESERVED: 'all-rights-reserved',
+  CC_40_BY: 'cc-40-by',
+  CC_40_BY_ND: 'cc-40-by-nd',
+  CC_40_BY_SA: 'cc-40-by-sa',
+  CC_40_BY_NC: 'cc-40-by-nc',
+  CC_40_BY_NC_ND: 'cc-40-by-nc-nd',
+  CC_40_BY_NC_SA: 'cc-40-by-nc-sa',
+  CC_40_ZERO: 'cc-40-zero',
+  PUBLIC_DOMAIN: 'public-domain'
+}
+
+
+
+
+
+
+
+
+
+function MediumError(message, code) {
+  this.message = message
+  this.code = code
+}
+util.inherits(MediumError, Error)
+
+
+
+
+
+
+
+
+
+
+
+function MediumClient(options) {
+  this._accessToken = options.accessToken
+}
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype.getUser = function (callback) {
+  this._makeRequest({
+    method: 'GET',
+    path: '/v1/me'
+  }, callback)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype.getPublicationsForUser = function (options, callback) {
+  this._enforce(options, ['userId'])
+  this._makeRequest({
+    method: 'GET',
+    path: '/v1/users/' + options.userId + '/publications'
+  }, callback)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype.getContributorsForPublication = function (options, callback) {
+  this._enforce(options, ['publicationId'])
+  this._makeRequest({
+    method: 'GET',
+    path: '/v1/publications/' + options.publicationId + '/contributors'
+  }, callback)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype.createPost = function (options, callback) {
+  this._enforce(options, ['userId'])
+  this._makeRequest({
+    method: 'POST',
+    path: '/v1/users/' + options.userId + '/posts',
+    data: {
+      title: options.title,
+      content: options.content,
+      contentFormat: options.contentFormat,
+      tags: options.tags,
+      canonicalUrl: options.canonicalUrl,
+      publishedAt: options.publishedAt,
+      publishStatus: options.publishStatus,
+      license: options.license
+    }
+  }, callback)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype.createPostInPublication = function (options, callback) {
+  console.log(options)
+  this._enforce(options, ['publicationId'])
+  this._makeRequest({
+    method: 'POST',
+    path: '/v1/publications/' + options.publicationId + '/posts',
+    data: {
+      title: options.title,
+      content: options.content,
+      contentFormat: options.contentFormat,
+      tags: options.tags,
+      publishStatus: "draft",
+    }
+  }, callback)
+}
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype._acquireAccessToken = function (params, callback) {
+  this._makeRequest({
+    method: 'POST',
+    path: '/v1/tokens',
+    contentType: 'application/x-www-form-urlencoded',
+    data: qs.stringify(params)
+  }, function (err, data) {
+    if (!err) {
+        this._accessToken = data.access_token
+    }
+      callback(err, data)
+  }.bind(this))
+}
+
+
+
+
+
+
+
+
+
+
+MediumClient.prototype._enforce = function (options, requiredKeys) {
+  if (!options) {
+      throw new MediumError('Parameters for this call are undefined', DEFAULT_ERROR_CODE)
+  }
+    requiredKeys.forEach(function (requiredKey) {
+      if (!options[requiredKey]) throw new MediumError('Missing required parameter "' + requiredKey + '"', DEFAULT_ERROR_CODE)
+    })
+}
+
+MediumClient.prototype._parseGithubMarkdown = function(content, callback) {
+  var requestParams = {
+    host: 'api.github.com',
+    method: 'POST',
+    path: '/markdown/raw',
+  }
+
+  var req = https.request(requestParams, function (res) {
+    var body = []
+    res.setEncoding('utf-8')
+
+    res.on('data', function (data) {
+      body.push(data)
+    })
+    res.on('end', function (r) {
+      callback(null, body.join(''))
+    })
+  }).on('error', function (err) {
+    console.log(err)
+  })
+
+  req.setHeader('Content-Type', 'text/plain')
+  req.setHeader('Accept-Charset', 'utf-8')
+  req.setHeader('User-Agent', 'Octocat')
+
+  req.setTimeout(DEFAULT_TIMEOUT_MS, function () {
+    // Aborting a request triggers the 'error' event.
+    req.abort()
+  })
+
+  req.write(content)
+  req.end()
+}
+
+
+
+
+
+
+
+
+
+MediumClient.prototype._makeRequest = function (options, callback) {
+  var requestParams = {
+    host: 'api.medium.com',
+    port: 443,
+    method: options.method,
+    path: options.path
+  }
+  var req = https.request(requestParams, function (res) {
+    var body = []
+
+    res.setEncoding('utf-8')
+    res.on('data', function (data) {
+      body.push(data)
+    })
+    res.on('end', function () {
+      var payload
+      var responseText = body.join('')
+      try {
+        payload = JSON.parse(responseText)
+      } catch (err) {
+        callback(new MediumError('Failed to parse response', DEFAULT_ERROR_CODE), null)
+        return
+      }
+
+      var statusCode = res.statusCode
+      var statusType = Math.floor(res.statusCode / 100)
+
+      if (statusType == 4 || statusType == 5) {
+          var err = payload.errors[0]
+          callback(new MediumError(err.message, err.code), null)
+      } else if (statusType == 2) {
+        callback(null, payload.data || payload)
+      } else {
+        callback(new MediumError('Unexpected response', DEFAULT_ERROR_CODE), null)
+      }
+    })
+  }).on('error', function (err) {
+    callback(new MediumError(err.message, DEFAULT_ERROR_CODE), null)
+  })
+
+  req.setHeader('Content-Type', options.contentType || 'application/json')
+  req.setHeader('Authorization', 'Bearer ' + this._accessToken)
+  req.setHeader('Accept', 'application/json')
+  req.setHeader('Accept-Charset', 'utf-8')
+
+  req.setTimeout(DEFAULT_TIMEOUT_MS, function () {
+    // Aborting a request triggers the 'error' event.
+    req.abort()
+  })
+
+  if (options.data) {
+      var data = options.data
+      if (typeof data == 'object') {
+          data = JSON.stringify(data)
+      }
+        req.write(data)
+  }
+    req.end()
+}
+var client = new MediumClient({accessToken: process.env.MEDIUM_TOKEN})
+
+client.getUser(function(err,user) {
+  console.log(err)
+  client.getPublicationsForUser({userId: user.id}, function(err, publications) {
+      client.createPostInPublication({
+        publicationId: publications[0].id,
+        tags: argv.tags,
+        content: argv._[0],
+        contentFormat: "markdown",
+      }, function(e,p) { console.log(e)})
+  })
+})

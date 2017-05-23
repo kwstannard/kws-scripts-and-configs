@@ -4,6 +4,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $homedir "/home/kwstannard/"
 
 hide_edge_borders both
 
@@ -18,7 +19,7 @@ for_window [class="Slack"] border none
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -28,6 +29,13 @@ font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+#set $current_workspace "
+  # $(i3-msg -t get_workspaces |
+    #jq -r '.[] | "(.name) (.focused)"' |
+    #grep true |
+    #sed 's/ w*$//')
+#"
 # resize window (you can also use the mouse for that)
 mode "resize" {
 # These bindings trigger as soon as you enter the resize mode
@@ -71,12 +79,12 @@ mode "$mode_movement" {
     bindsym Escape mode "default"
 }
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
   bindsym l exec --no-startup-id custom_locker, mode "default"
     bindsym e exec --no-startup-id i3msg exit, mode "default"
     bindsym s exec --no-startup-id custom_locker && systemctl suspend, mode "default"
-#    bindsym h exec --no-startup-id custom_locker && systemctl hibernate, mode "default"
+    bindsym h exec --no-startup-id custom_locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
 
@@ -84,7 +92,7 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-set $mode_project_4 Project 4
+set $mode_project_4 Project_4
 mode "$mode_project_4" {
   # use xev to determine correct keys if these don't work
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
@@ -108,19 +116,23 @@ mode "$mode_project_4" {
   bindsym XF86AudioPrev exec playerctl previous
 
   bindsym $mod+1 workspace 15
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 15
+  bindsym $mod+Control+1 move window to workspace 15
   bindsym $mod+2 workspace 16
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 16
+  bindsym $mod+Control+2 move window to workspace 16
   bindsym $mod+3 workspace 17
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 17
+  bindsym $mod+Control+3 move window to workspace 17
   bindsym $mod+4 workspace 18
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 18
+  bindsym $mod+Control+4 move window to workspace 18
   bindsym $mod+5 workspace 19
-  bindsym $mod+Shift+1 workspace 15
-  bindsym $mod+Shift+2 workspace 16
-  bindsym $mod+Shift+3 workspace 17
-  bindsym $mod+Shift+4 workspace 18
-  bindsym $mod+Shift+5 workspace 19
-  bindsym $mod+minus mode "default"; workspace 1
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 19
+  bindsym $mod+Control+5 move window to workspace 19
+  bindsym $mod+minus mode "default"; workspace 1;exec --no-startup-id rm ~/.current_config.sh
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -142,10 +154,14 @@ mode "$mode_project_4" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -157,16 +173,16 @@ mode "$mode_project_4" {
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
   bindsym $mod+Shift+Next exec --no-startup-id xbacklight -dec 10
 
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
-  bindsym $mod+9 mode "$mode_project_3"; workspace 25
-  bindsym $mod+8 mode "$mode_project_2"; workspace 35
-  bindsym $mod+7 mode "$mode_project_1"; workspace 45
-  bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
+  bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
+  bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
+  bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
+  bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 }
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
 
 
-set $mode_project_3 Project 3
+set $mode_project_3 Project_3
 mode "$mode_project_3" {
   # use xev to determine correct keys if these don't work
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
@@ -190,19 +206,23 @@ mode "$mode_project_3" {
   bindsym XF86AudioPrev exec playerctl previous
 
   bindsym $mod+1 workspace 25
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 25
+  bindsym $mod+Control+1 move window to workspace 25
   bindsym $mod+2 workspace 26
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 26
+  bindsym $mod+Control+2 move window to workspace 26
   bindsym $mod+3 workspace 27
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 27
+  bindsym $mod+Control+3 move window to workspace 27
   bindsym $mod+4 workspace 28
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 28
+  bindsym $mod+Control+4 move window to workspace 28
   bindsym $mod+5 workspace 29
-  bindsym $mod+Shift+1 workspace 25
-  bindsym $mod+Shift+2 workspace 26
-  bindsym $mod+Shift+3 workspace 27
-  bindsym $mod+Shift+4 workspace 28
-  bindsym $mod+Shift+5 workspace 29
-  bindsym $mod+minus mode "default"; workspace 1
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 29
+  bindsym $mod+Control+5 move window to workspace 29
+  bindsym $mod+minus mode "default"; workspace 1;exec --no-startup-id rm ~/.current_config.sh
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -224,10 +244,14 @@ mode "$mode_project_3" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -239,16 +263,16 @@ mode "$mode_project_3" {
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
   bindsym $mod+Shift+Next exec --no-startup-id xbacklight -dec 10
 
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
-  bindsym $mod+9 mode "$mode_project_3"; workspace 25
-  bindsym $mod+8 mode "$mode_project_2"; workspace 35
-  bindsym $mod+7 mode "$mode_project_1"; workspace 45
-  bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
+  bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
+  bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
+  bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
+  bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 }
-bindsym $mod+9 mode "$mode_project_3"; workspace 25
+bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
 
 
-set $mode_project_2 Project 2
+set $mode_project_2 Project_2
 mode "$mode_project_2" {
   # use xev to determine correct keys if these don't work
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
@@ -272,19 +296,23 @@ mode "$mode_project_2" {
   bindsym XF86AudioPrev exec playerctl previous
 
   bindsym $mod+1 workspace 35
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 35
+  bindsym $mod+Control+1 move window to workspace 35
   bindsym $mod+2 workspace 36
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 36
+  bindsym $mod+Control+2 move window to workspace 36
   bindsym $mod+3 workspace 37
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 37
+  bindsym $mod+Control+3 move window to workspace 37
   bindsym $mod+4 workspace 38
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 38
+  bindsym $mod+Control+4 move window to workspace 38
   bindsym $mod+5 workspace 39
-  bindsym $mod+Shift+1 workspace 35
-  bindsym $mod+Shift+2 workspace 36
-  bindsym $mod+Shift+3 workspace 37
-  bindsym $mod+Shift+4 workspace 38
-  bindsym $mod+Shift+5 workspace 39
-  bindsym $mod+minus mode "default"; workspace 1
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 39
+  bindsym $mod+Control+5 move window to workspace 39
+  bindsym $mod+minus mode "default"; workspace 1;exec --no-startup-id rm ~/.current_config.sh
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -306,10 +334,14 @@ mode "$mode_project_2" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -321,16 +353,16 @@ mode "$mode_project_2" {
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
   bindsym $mod+Shift+Next exec --no-startup-id xbacklight -dec 10
 
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
-  bindsym $mod+9 mode "$mode_project_3"; workspace 25
-  bindsym $mod+8 mode "$mode_project_2"; workspace 35
-  bindsym $mod+7 mode "$mode_project_1"; workspace 45
-  bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
+  bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
+  bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
+  bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
+  bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 }
-bindsym $mod+8 mode "$mode_project_2"; workspace 35
+bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
 
 
-set $mode_project_1 Project 1
+set $mode_project_1 Project_1
 mode "$mode_project_1" {
   # use xev to determine correct keys if these don't work
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
@@ -354,19 +386,23 @@ mode "$mode_project_1" {
   bindsym XF86AudioPrev exec playerctl previous
 
   bindsym $mod+1 workspace 45
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 45
+  bindsym $mod+Control+1 move window to workspace 45
   bindsym $mod+2 workspace 46
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 46
+  bindsym $mod+Control+2 move window to workspace 46
   bindsym $mod+3 workspace 47
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 47
+  bindsym $mod+Control+3 move window to workspace 47
   bindsym $mod+4 workspace 48
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 48
+  bindsym $mod+Control+4 move window to workspace 48
   bindsym $mod+5 workspace 49
-  bindsym $mod+Shift+1 workspace 45
-  bindsym $mod+Shift+2 workspace 46
-  bindsym $mod+Shift+3 workspace 47
-  bindsym $mod+Shift+4 workspace 48
-  bindsym $mod+Shift+5 workspace 49
-  bindsym $mod+minus mode "default"; workspace 1
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 49
+  bindsym $mod+Control+5 move window to workspace 49
+  bindsym $mod+minus mode "default"; workspace 1;exec --no-startup-id rm ~/.current_config.sh
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -388,10 +424,14 @@ mode "$mode_project_1" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -403,16 +443,16 @@ mode "$mode_project_1" {
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
   bindsym $mod+Shift+Next exec --no-startup-id xbacklight -dec 10
 
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
-  bindsym $mod+9 mode "$mode_project_3"; workspace 25
-  bindsym $mod+8 mode "$mode_project_2"; workspace 35
-  bindsym $mod+7 mode "$mode_project_1"; workspace 45
-  bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
+  bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
+  bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
+  bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
+  bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 }
-bindsym $mod+7 mode "$mode_project_1"; workspace 45
+bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
 
 
-set $mode_project_0 Project 0
+set $mode_project_0 Project_0
 mode "$mode_project_0" {
   # use xev to determine correct keys if these don't work
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
@@ -436,19 +476,23 @@ mode "$mode_project_0" {
   bindsym XF86AudioPrev exec playerctl previous
 
   bindsym $mod+1 workspace 55
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 55
+  bindsym $mod+Control+1 move window to workspace 55
   bindsym $mod+2 workspace 56
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 56
+  bindsym $mod+Control+2 move window to workspace 56
   bindsym $mod+3 workspace 57
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 57
+  bindsym $mod+Control+3 move window to workspace 57
   bindsym $mod+4 workspace 58
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 58
+  bindsym $mod+Control+4 move window to workspace 58
   bindsym $mod+5 workspace 59
-  bindsym $mod+Shift+1 workspace 55
-  bindsym $mod+Shift+2 workspace 56
-  bindsym $mod+Shift+3 workspace 57
-  bindsym $mod+Shift+4 workspace 58
-  bindsym $mod+Shift+5 workspace 59
-  bindsym $mod+minus mode "default"; workspace 1
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 59
+  bindsym $mod+Control+5 move window to workspace 59
+  bindsym $mod+minus mode "default"; workspace 1;exec --no-startup-id rm ~/.current_config.sh
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -470,10 +514,14 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -485,26 +533,25 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
   bindsym $mod+Shift+Next exec --no-startup-id xbacklight -dec 10
 
-bindsym $mod+0 mode "$mode_project_4"; workspace 15
-  bindsym $mod+9 mode "$mode_project_3"; workspace 25
-  bindsym $mod+8 mode "$mode_project_2"; workspace 35
-  bindsym $mod+7 mode "$mode_project_1"; workspace 45
-  bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+0 mode "$mode_project_4";workspace 15;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
+  bindsym $mod+9 mode "$mode_project_3";workspace 25;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
+  bindsym $mod+8 mode "$mode_project_2";workspace 35;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
+  bindsym $mod+7 mode "$mode_project_1";workspace 45;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
+  bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 }
-bindsym $mod+6 mode "$mode_project_0"; workspace 55
+bindsym $mod+6 mode "$mode_project_0";workspace 55;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 bindsym $mod+1 workspace 1
   bindsym $mod+2 workspace 2
   bindsym $mod+3 workspace 3
   bindsym $mod+4 workspace 4
   bindsym $mod+5 workspace 5
-  bindsym $mod+Shift+1 workspace 1
-  bindsym $mod+Shift+2 workspace 2
-  bindsym $mod+Shift+3 workspace 3
-  bindsym $mod+Shift+4 workspace 4
-  bindsym $mod+Shift+5 workspace 5
+  bindsym $mod+Shift+1 exec --no-startup-id swap_workspace 1
+  bindsym $mod+Shift+2 exec --no-startup-id swap_workspace 2
+  bindsym $mod+Shift+3 exec --no-startup-id swap_workspace 3
+  bindsym $mod+Shift+4 exec --no-startup-id swap_workspace 4
+  bindsym $mod+Shift+5 exec --no-startup-id swap_workspace 5
   bindsym $mod+Return exec konsole
   bindsym $mod+Shift+Return split h; exec konsole; split v
-  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+d split toggle; exec dmenu_run; split toggle
   bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -526,10 +573,14 @@ bindsym $mod+1 workspace 1
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+a focus parent
+  bindsym $mod+backslash workspace 100: WorkConsole
   bindsym $mod+p workspace 14: Firefox
   bindsym $mod+o workspace 13: Slack
   bindsym $mod+i workspace 12: Pidgin
-  bindsym $mod+u workspace 11: Keepass
+  bindsym $mod+Shift+u workspace 11: Keepass
+  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -585,10 +636,11 @@ assign [title="work_console"] 100: WorkConsole
 # startup apps
 exec --no-startup-id keepassx 
 exec --no-startup-id firefox
-exec --no-startup-id slack
+exec --no-startup-id /usr/bin/slack
 exec --no-startup-id pidgin
 
 exec --no-startup-id konsole --profile work_console
+exec --no-startup-id cron_notify_setup
 
 #screensaver + lock on screen saver
 exec_always --no-startup-id xautolock -time 15 -locker custom_lock
