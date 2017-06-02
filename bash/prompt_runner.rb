@@ -63,7 +63,7 @@ def gitbranch
 end
 
 def g_branchname
-  g_st.match(/branch.head (\w*)/).to_a.fetch(1, "not a repo")
+  g_st.match(/branch.head ([\w\/-]*)/).to_a.fetch(1, "not a repo")
 end
 
 def g_ahead

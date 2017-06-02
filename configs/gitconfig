@@ -5,11 +5,17 @@
   name = Kelly Stannard
   email = kwstannard@gmail.com
 
+[fetch]
+  prune = true
+
 [init]
   templatedir=~/scripts/git_template
 
 [push]
 	default = current
+
+[pull]
+  rebase = true
 
 [color "status"]
   added = green bold
@@ -38,3 +44,9 @@
   aa = commit -a --amend
 
   squash = !git rebase -i $(git merge-base --fork-point master)
+  stats = shortlog -sn
+  praise = blame
+  difw = diff --word-diff
+  overview = log --all --oneline --no-merges --since='2 weeks' -15
+  pullover = !git pull --log
+  graph = log --graph --all --decorate --stat --date=iso
