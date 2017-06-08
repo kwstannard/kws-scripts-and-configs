@@ -48,5 +48,5 @@
   praise = blame
   difw = diff --word-diff
   overview = log --all --oneline --no-merges --since='2 weeks' -15
-  pullover = !git pull --log
+  pull = pull --log
   graph = log --graph --all --decorate --stat --date=iso
