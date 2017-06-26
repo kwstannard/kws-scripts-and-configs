@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+pushd spec
+foo="run me!"
+while [ "$foo" ]; do
+  fire '(describe|feature)(.*?["'\''])(, (.*)), (\w+): true' '\\1\\2, :\\5\\3'
+  foo="$(git status --porcelain -uno)"
+  echo $foo
+  git commit -am 'shorten true to symbol'
+done
+popd
+
