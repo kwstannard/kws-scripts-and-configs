@@ -50,3 +50,5 @@
   overview = log --all --oneline --no-merges --since='2 weeks' -15
   pl = pull --log
   graph = log --graph --all --decorate --stat --date=iso
+  cf = !git status --porcelain ./ | grep UU | sed 's/UU //'
+
