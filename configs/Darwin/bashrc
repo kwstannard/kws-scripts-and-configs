@@ -5,3 +5,5 @@ export PATH=/usr/local/bin:$PATH
 
 export NVM_DIR="/Users/stannard/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PGDATA=/usr/local/var/postgres/
+export OCI_DIR=/opt/oracle/instantclient_12_1

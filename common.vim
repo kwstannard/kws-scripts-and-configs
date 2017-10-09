@@ -68,14 +68,14 @@ nnoremap <enter> J
 filetype plugin indent on
 
 " RELATIVE LINE NUMBERING
-set relativenumber
+" set relativenumber
 set number
 
 "au InsertEnter * :set norelativenumber
 "au InsertLeave * :set relativenumber
 
-au BufLeave * :set norelativenumber
-au BufEnter * :set relativenumber
+"au BufLeave * :set norelativenumber
+"au BufEnter * :set relativenumber
  
 "function! KwsFunFocusLose()
   "if(empty(hasntNumber))
@@ -231,3 +231,4 @@ let g:syntastic_check_on_wq = 0
 
 let g:ruby_indent_block_style = 'do'
 let g:ruby_indent_access_modifier_style = 'indent'
+let g:ruby_indent_assignment_style = 'variable'

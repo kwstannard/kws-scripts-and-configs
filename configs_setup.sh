@@ -11,7 +11,6 @@ ln -fs $dir/configs/plug.vim ~/.vim/autoload/plug.vim
 
 ln -fs $dir/configs/vimperatorrc ~/.vimperatorrc
 ln -fs $dir/configs/$system_type/gitconfig ~/.gitconfig
-ln -fs $dir/configs/inputrc ~/.inputrc
 ln -fs $dir/configs/pryrc ~/.pryrc
 ln -fs $dir/configs/psqlrc ~/.psqlrc
 
@@ -24,7 +23,9 @@ case $system_type in
   "Linux")
     ln -fs $dir/configs/Linux/i3config ~/.config/i3/config
     ln -fs /bin/grep ~/bin/ggrep
+    ln -fs $dir/configs/Linux/inputrc ~/.inputrc
     ;;
   "Darwin")
+    ln -fs $dir/configs/Darwin/inputrc ~/.inputrc
     ;;
 esac

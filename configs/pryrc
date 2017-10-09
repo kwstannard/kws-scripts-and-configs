@@ -1,7 +1,7 @@
 # https://github.com/pry/pry/wiki/Customization-and-configuration
 
 # editor when running `edit`
-Pry.editor = 'nvim'
+Pry.editor = 'vim'
 
 # pagination of results (less) (true == on)
 # Pry.config.pager = false

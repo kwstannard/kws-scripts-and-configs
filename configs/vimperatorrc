@@ -1,3 +1,6 @@
+noremap <F1> <Nop>
+noremap <F8> :help<enter>
+
 noremap H :back<enter>
 noremap L :forward<enter>
 
@@ -49,7 +52,7 @@ nnoremap \\c :co<space>
 " Get the multifox version hash by looking inside the multifox XPI file.
 " (Look at the hash it uses in its own imports.)
 :js << EOF
-Components.utils.import("resource://multifox-4796877/commands.js");
+Components.utils.import("resource://multifox-00d95f8/commands.js");
 function set_multifox_profile(id) {
     event = {   
         target: {
