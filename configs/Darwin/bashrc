@@ -7,3 +7,8 @@ export NVM_DIR="/Users/stannard/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export PGDATA=/usr/local/var/postgres/
 export OCI_DIR=/opt/oracle/instantclient_12_1
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+else
+  echo run \`brew install bash-completion\`
+fi
