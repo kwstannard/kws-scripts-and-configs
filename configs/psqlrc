@@ -3,4 +3,4 @@
 \set COMP_KEYWORD_CASE upper
 \set HISTCONTROL ignoredups
 \set HISTFILE ~/.psql_history- :DBNAME
-\setenv PSQL_EDITOR "/usr/local/bin/nvim"
+\setenv PSQL_EDITOR "/usr/local/bin/vim"

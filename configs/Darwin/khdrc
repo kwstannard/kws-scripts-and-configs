@@ -8,13 +8,13 @@ cmd + alt + ctrl - r : khd -e "reload"
 #cmd + alt + ctrl - c : killall chunkwm; chunkwm
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-#alt - return : open -na /Applications/Utility/Terminal.app
 alt - p : open -a /Applications/Firefox.app
 alt + shift - p : open -a /Applications/Google\ Chrome.app
 alt - o : open -a /Applications/Slack.app
 
-alt - return [iTerm2] : tmux new-window
-alt - return ![iTerm2] : open -a /Applications/Iterm.app
+alt - return [iTerm2,Terminal] : tmux new-window -c ~/
+#alt - return ![iTerm2,Terminal] : open -a /Applications/Iterm.app
+alt - return ![iTerm2,Terminal] : open -a /Applications/Utilities/Terminal.app
 alt - t : tmux new-window
 
 # focus window
@@ -43,19 +43,19 @@ alt - pageup : tmux copy-mode -u
 
 alt - 0: tmux move-window -r
 
-alt - 1 : tmux select-window -t :=0; open -a /Applications/Iterm.app
-alt - 2 : tmux select-window -t :=1; open -a /Applications/Iterm.app
-alt - 3 : tmux select-window -t :=2; open -a /Applications/Iterm.app
-alt - 4 : tmux select-window -t :=3; open -a /Applications/Iterm.app
-alt - 5 : tmux select-window -t :=4; open -a /Applications/Iterm.app
-alt - 6 : tmux select-window -t :=5; open -a /Applications/Iterm.app
+alt - 1 : tmux select-window -t :=0; open -a /Applications/Utilities/Terminal.app
+alt - 2 : tmux select-window -t :=1; open -a /Applications/Utilities/Terminal.app
+alt - 3 : tmux select-window -t :=2; open -a /Applications/Utilities/Terminal.app
+alt - 4 : tmux select-window -t :=3; open -a /Applications/Utilities/Terminal.app
+alt - 5 : tmux select-window -t :=4; open -a /Applications/Utilities/Terminal.app
+alt - 6 : tmux select-window -t :=5; open -a /Applications/Utilities/Terminal.app
 
-alt + shift - 1 : tmux swap-window -t :=0; open -a /Applications/Iterm.app
-alt + shift - 2 : tmux swap-window -t :=1; open -a /Applications/Iterm.app
-alt + shift - 3 : tmux swap-window -t :=2; open -a /Applications/Iterm.app
-alt + shift - 4 : tmux swap-window -t :=3; open -a /Applications/Iterm.app
-alt + shift - 5 : tmux swap-window -t :=4; open -a /Applications/Iterm.app
-alt + shift - 6 : tmux swap-window -t :=5; open -a /Applications/Iterm.app
+alt + shift - 1 : tmux swap-window -t :=0; open -a /Applications/Utilities/Terminal.app
+alt + shift - 2 : tmux swap-window -t :=1; open -a /Applications/Utilities/Terminal.app
+alt + shift - 3 : tmux swap-window -t :=2; open -a /Applications/Utilities/Terminal.app
+alt + shift - 4 : tmux swap-window -t :=3; open -a /Applications/Utilities/Terminal.app
+alt + shift - 5 : tmux swap-window -t :=4; open -a /Applications/Utilities/Terminal.app
+alt + shift - 6 : tmux swap-window -t :=5; open -a /Applications/Utilities/Terminal.app
 
 ctrl - 1 [Slack,Firefox] : khd -p 'cmd - 1'
 ctrl - 2 [Slack,Firefox] : khd -p 'cmd - 2'
@@ -68,14 +68,15 @@ ctrl - 8 [Slack,Firefox] : khd -p 'cmd - 8'
 ctrl - 9 [Slack,Firefox] : khd -p 'cmd - 9'
 ctrl - 0 [Slack,Firefox] : khd -p 'cmd - 0'
 
-ctrl - q : khd -p 'cmd - q'
-ctrl - w : khd -p 'cmd - w'
+ctrl - q ![iTerm2,Terminal] : khd -p 'cmd - q'
+ctrl - w ![iTerm2,Terminal] : khd -p 'cmd - w'
+ctrl + shift - w [iTerm2,Terminal] : tmux kill-window
 ctrl - k [Slack] : khd -p 'cmd - k'
 
-ctrl - c ![iTerm2] : khd -p 'cmd - c'
-ctrl - v ![iTerm2] : khd -p 'cmd - v'
-ctrl + shift -c [iTerm2] : khd -p 'cmd - c'
-ctrl + shift -v [iTerm2] : khd -p 'cmd - v'
+ctrl - c ![iTerm2,Terminal] : khd -p 'cmd - c'
+ctrl - v ![iTerm2,Terminal] : khd -p 'cmd - v'
+ctrl + shift -c [iTerm2,Terminal] : khd -p 'cmd - c'
+ctrl + shift -v [iTerm2,Terminal] : khd -p 'cmd - v'
 
 ctrl - space : dismiss_notification
 

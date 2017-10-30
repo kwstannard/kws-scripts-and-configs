@@ -152,8 +152,8 @@ au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{108,}
 
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>E :edit ./
+map <leader>e :write<CR>:edit %%
+map <leader>E :write<CR>:edit ./
 map <leader>v :view %%
 map <leader>V :view ./
 map <leader>t :tabnew %%
@@ -220,15 +220,42 @@ au BufEnter * :checktime
 nnoremap <c-w><end> :tabdo wincmd h \| wincmd K<cr>
 nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:ale_lint_delay=500
+let g:ale_set_signs=0
+
+if file_readable('.rubocop.yml')
+  let g:ale_fixers = {
+        \   'ruby': [
+        \       'ale#fixers#rubocop#Fix',
+        \   ],
+        \}
+
+  let g:ale_ruby_rubocop_executable='be rubocop'
+endif
+
+
+call arpeggio#map('n','',0,'at',':ALEToggle<CR>')
+call arpeggio#map('n','',0,'af',':ALEFix<CR>')
+
 
 let g:ruby_indent_block_style = 'do'
 let g:ruby_indent_access_modifier_style = 'indent'
 let g:ruby_indent_assignment_style = 'variable'
+
+
+function! ProseMode()
+  set spell noci nosi noai nolist noshowmode noshowcmd wrap linebreak
+  set complete+=s
+  set bg=light
+  if !has('gui_running')
+    let g:solarized_termcolors=256
+  endif
+  colors solarized
+endfunction
+
+command! ProseMode call ProseMode()
+nmap \p :Goyo<CR>
+nmap ZZ :w<CR>:q<CR>:q<CR>
+au User GoyoEnter nested call ProseMode()
+au VimEnter PULLREQ_EDITMSG,*.txt Goyo

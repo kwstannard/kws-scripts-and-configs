@@ -34,8 +34,8 @@
   st = status
   co = checkout
   g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
-  fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v master | grep -v dev | xargs git branch -d
-  cbr = !git branch --merged | grep -v master | grep -v dev | xargs git branch -d
+  fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
+  cbr = !git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
   r = !git l -30
   ra = !git r --all
 #  l = "!. ~/.githelpers && pretty_git_log"
@@ -43,7 +43,7 @@
 
   aa = commit -a --amend
 
-  squash = !git rebase -i $(git merge-base --fork-point master)
+  squash = !git rebase -i $(git merge-base --fork-point develop)
   stats = shortlog -sn
   praise = blame
   difw = diff --word-diff
