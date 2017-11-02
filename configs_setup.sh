@@ -27,5 +27,6 @@ case $system_type in
     ;;
   "Darwin")
     ln -fs $dir/configs/Darwin/inputrc ~/.inputrc
+    ln -fs $dir/configs/Darwin/khdrc ~/.khdrc
     ;;
 esac

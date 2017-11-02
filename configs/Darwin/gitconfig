@@ -2,3 +2,5 @@
   path = ~/scripts/configs/gitconfig
 [credential]
 	helper = osxkeychain
+[core]
+  commentChar = ~
