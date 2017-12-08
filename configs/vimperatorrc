@@ -69,3 +69,6 @@ EOF
 nnoremap \\1 :js set_multifox_profile("1")<Enter>
 nnoremap \\2 :js set_multifox_profile("2")<Enter>
 nnoremap \\3 :js set_multifox_profile("3")<Enter>
+
+nnoremap \\ob :open https://enterprisesupport.mdsol.com/hc/en-us<Enter>
+nnoremap \\ol :open https://www.lucidchart.com/documents#docs?folder_id=home&browser=icon&sort=saved-desc<Enter>

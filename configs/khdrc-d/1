@@ -16,7 +16,7 @@ alt - i : open -a /Applications/KeePassX.app
 alt - return [iTerm2,Terminal] : tmux new-window -c ~/
 #alt - return ![iTerm2,Terminal] : open -a /Applications/Iterm.app
 alt - return ![iTerm2,Terminal] : open -a /Applications/Utilities/Terminal.app
-alt - t : tmux new-window
+alt - t : tmux new-window -a -t :=0
 
 # focus window
 alt - h : tmux select-pane -L

@@ -16,7 +16,7 @@ alt - i : open -a /Applications/KeePassX.app
 alt - return [iTerm2,Terminal] : tmux new-window -c ~/
 #alt - return ![iTerm2,Terminal] : open -a /Applications/Iterm.app
 alt - return ![iTerm2,Terminal] : open -a /Applications/Utilities/Terminal.app
-alt - t : tmux new-window
+alt - t : tmux new-window -a -t :=5
 
 # focus window
 alt - h : tmux select-pane -L
@@ -44,22 +44,22 @@ alt - pageup : tmux copy-mode -u
 
 alt - 0: tmux move-window -r
 
-alt - 1 : tmux select-window -t :=0; open -a /Applications/Utilities/Terminal.app
-alt - 2 : tmux select-window -t :=1; open -a /Applications/Utilities/Terminal.app
-alt - 3 : tmux select-window -t :=2; open -a /Applications/Utilities/Terminal.app
-alt - 4 : tmux select-window -t :=3; open -a /Applications/Utilities/Terminal.app
-alt - 5 : tmux select-window -t :=4; open -a /Applications/Utilities/Terminal.app
+alt - 1 : tmux select-window -t :=15; open -a /Applications/Utilities/Terminal.app
+alt - 2 : tmux select-window -t :=16; open -a /Applications/Utilities/Terminal.app
+alt - 3 : tmux select-window -t :=17; open -a /Applications/Utilities/Terminal.app
+alt - 4 : tmux select-window -t :=18; open -a /Applications/Utilities/Terminal.app
+alt - 5 : tmux select-window -t :=19; open -a /Applications/Utilities/Terminal.app
 
-alt + shift - 1 : tmux swap-window -t :=0; open -a /Applications/Utilities/Terminal.app
-alt + shift - 2 : tmux swap-window -t :=1; open -a /Applications/Utilities/Terminal.app
-alt + shift - 3 : tmux swap-window -t :=2; open -a /Applications/Utilities/Terminal.app
-alt + shift - 4 : tmux swap-window -t :=3; open -a /Applications/Utilities/Terminal.app
-alt + shift - 5 : tmux swap-window -t :=4; open -a /Applications/Utilities/Terminal.app
+alt + shift - 1 : tmux swap-window -t :=15; open -a /Applications/Utilities/Terminal.app
+alt + shift - 2 : tmux swap-window -t :=16; open -a /Applications/Utilities/Terminal.app
+alt + shift - 3 : tmux swap-window -t :=17; open -a /Applications/Utilities/Terminal.app
+alt + shift - 4 : tmux swap-window -t :=18; open -a /Applications/Utilities/Terminal.app
+alt + shift - 5 : tmux swap-window -t :=19; open -a /Applications/Utilities/Terminal.app
 
 alt - 6 : ln -sF ~/scripts/configs/khdrc-d/1 ~/.khdrc; khd -e "reload"
 alt - 7 : ln -sF ~/scripts/configs/khdrc-d/2 ~/.khdrc; khd -e "reload"
-#alt - 8 : ln -s ~/scripts/configs/khdrc-d/3 ~/.khdrc; khd -e "reload"
-#alt - 9 : ln -s ~/scripts/configs/khdrc-d/4 ~/.khdrc; khd -e "reload"
+alt - 8 : ln -s ~/scripts/configs/khdrc-d/3 ~/.khdrc; khd -e "reload"
+alt - 9 : ln -s ~/scripts/configs/khdrc-d/4 ~/.khdrc; khd -e "reload"
 #alt - 0 : ln -s ~/scripts/configs/khdrc-d/5 ~/.khdrc; khd -e "reload"
 
 ctrl - 1 [Slack,Firefox] : khd -p 'cmd - 1'

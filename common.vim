@@ -248,6 +248,8 @@ function! ProseMode()
   set spell noci nosi noai nolist noshowmode noshowcmd wrap linebreak
   set complete+=s
   set bg=light
+  nunmap J
+  nunmap K
   if !has('gui_running')
     let g:solarized_termcolors=256
   endif
