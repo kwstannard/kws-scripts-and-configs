@@ -58,9 +58,9 @@ alt + shift - 5 : tmux swap-window -t :=19; open -a /Applications/Utilities/Term
 
 alt - 6 : ln -sF ~/scripts/configs/khdrc-d/e1 ~/.khdrc; khd -e "reload"
 alt - 7 : ln -sF ~/scripts/configs/khdrc-d/e2 ~/.khdrc; khd -e "reload"
-alt - 8 : ln -s ~/scripts/configs/khdrc-d/e3 ~/.khdrc; khd -e "reload"
-alt - 9 : ln -s ~/scripts/configs/khdrc-d/e4 ~/.khdrc; khd -e "reload"
-#alt - 0 : ln -s ~/scripts/configs/khdrc-d/e5 ~/.khdrc; khd -e "reload"
+alt - 8 : ln -sF ~/scripts/configs/khdrc-d/e3 ~/.khdrc; khd -e "reload"
+alt - 9 : ln -sF ~/scripts/configs/khdrc-d/e4 ~/.khdrc; khd -e "reload"
+#alt - 0 : ln -sF ~/scripts/configs/khdrc-d/e5 ~/.khdrc; khd -e "reload"
 
 ctrl - 1 [Slack,Firefox] : khd -p 'cmd - 1'
 ctrl - 2 [Slack,Firefox] : khd -p 'cmd - 2'
