@@ -9,7 +9,7 @@ cmd + alt + ctrl - r : khd -e "reload"
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 alt - p : open -a /Applications/Firefox.app
-alt + shift - p : open -a /Applications/Google\ Chrome.app
+alt + shift - p : open -a /Applications/FirefoxDeveloperEdition.app
 alt - o : open -a /Applications/Slack.app
 alt - i : open -a /Applications/KeePassX.app
 
