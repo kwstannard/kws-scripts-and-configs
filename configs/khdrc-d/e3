@@ -44,17 +44,17 @@ alt - pageup : tmux copy-mode -u
 
 alt - 0: tmux move-window -r
 
-alt - 1 : tmux select-window -t :=10; open -a /Applications/Utilities/Terminal.app
-alt - 2 : tmux select-window -t :=11; open -a /Applications/Utilities/Terminal.app
-alt - 3 : tmux select-window -t :=12; open -a /Applications/Utilities/Terminal.app
-alt - 4 : tmux select-window -t :=13; open -a /Applications/Utilities/Terminal.app
-alt - 5 : tmux select-window -t :=14; open -a /Applications/Utilities/Terminal.app
+alt - 1 : tmux select-window -t :=10; tmux set status-left "[#S] e3 10"; open -a /Applications/Utilities/Terminal.app
+alt - 2 : tmux select-window -t :=11; tmux set status-left "[#S] e3 11"; open -a /Applications/Utilities/Terminal.app
+alt - 3 : tmux select-window -t :=12; tmux set status-left "[#S] e3 12"; open -a /Applications/Utilities/Terminal.app
+alt - 4 : tmux select-window -t :=13; tmux set status-left "[#S] e3 13"; open -a /Applications/Utilities/Terminal.app
+alt - 5 : tmux select-window -t :=14; tmux set status-left "[#S] e3 14"; open -a /Applications/Utilities/Terminal.app
 
-alt + shift - 1 : tmux swap-window -t :=10; open -a /Applications/Utilities/Terminal.app
-alt + shift - 2 : tmux swap-window -t :=11; open -a /Applications/Utilities/Terminal.app
-alt + shift - 3 : tmux swap-window -t :=12; open -a /Applications/Utilities/Terminal.app
-alt + shift - 4 : tmux swap-window -t :=13; open -a /Applications/Utilities/Terminal.app
-alt + shift - 5 : tmux swap-window -t :=14; open -a /Applications/Utilities/Terminal.app
+alt + shift - 1 : tmux swap-window -t :=10; tmux set status-left "[#S] e3 10"; open -a /Applications/Utilities/Terminal.app
+alt + shift - 2 : tmux swap-window -t :=11; tmux set status-left "[#S] e3 11"; open -a /Applications/Utilities/Terminal.app
+alt + shift - 3 : tmux swap-window -t :=12; tmux set status-left "[#S] e3 12"; open -a /Applications/Utilities/Terminal.app
+alt + shift - 4 : tmux swap-window -t :=13; tmux set status-left "[#S] e3 13"; open -a /Applications/Utilities/Terminal.app
+alt + shift - 5 : tmux swap-window -t :=14; tmux set status-left "[#S] e3 14"; open -a /Applications/Utilities/Terminal.app
 
 alt - 6 : ln -sF ~/scripts/configs/khdrc-d/e1 ~/.khdrc; khd -e "reload"
 alt - 7 : ln -sF ~/scripts/configs/khdrc-d/e2 ~/.khdrc; khd -e "reload"
