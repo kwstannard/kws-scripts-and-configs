@@ -13,4 +13,13 @@ if [[ -z "$TMUX" ]]; then
   else
     exec tmux
   fi
+else
+  echo 'creating windows'
+  ruby -e "
+    ((%x[tmux list-windows | wc -l].to_i)...25).each do
+      %x[tmux new-window]
+    end
+  "
+
+  #exec tmux set status off
 fi
