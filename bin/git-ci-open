@@ -1,1 +1,1 @@
-hub ci-status -v | sed 's/[a-z]*: //' | xargs open
+hub ci-status -v | sed 's/.*https/https/' | xargs open

@@ -151,9 +151,9 @@ au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{108,}
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :write<CR>:edit %%
-map <leader>E :write<CR>:edit ./
+cnoremap %% <C-R>=(expand('%:h')).'/'<cr>
+map <leader>e :up<CR>:edit %%
+map <leader>E :up<CR>:edit ./
 map <leader>v :view %%
 map <leader>V :view ./
 map <leader>t :tabnew %%

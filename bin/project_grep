@@ -27,7 +27,7 @@ node_modules gulp vendor browserslist bundles
 cmd = <<-CMD
 ggrep #{word.inspect} #{options} -rn \
 --exclude-dir={#{exclude_dirs.join(",")}} \
---exclude={\*.sphinx.conf,juggernaut*,jquery*,*.min.js,ZeroClipboard*,#{images},*.pem,bootstrap*,angular*} \
+--exclude={\*.sphinx.conf,juggernaut*,jquery*,*.min.js,ZeroClipboard*,#{images},*.pem,bootstrap*,angular*,*.html} \
 #{place}
 CMD
 
