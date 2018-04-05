@@ -35,17 +35,6 @@ JS
 command! -nargs=+ rb javascript rb_doc_tabopen(<q-args>)
 nnoremap \\r :rb<space>
 
-" FAST ORDER
-javascript <<JS
-function order_tabopen(args) {
-  var split = args.split(" ")
-  var order = split[0].charAt(0).toUpperCase() + split[0].slice(1);
-  liberator.execute("tabopen http://casper.com/admin/orders/" + order + "/edit");
-  return;
-}
-JS
-command! -nargs=+ co javascript order_tabopen(<q-args>)
-nnoremap \\c :co<space>
 
 " MULTIFOX SWITCHING
 

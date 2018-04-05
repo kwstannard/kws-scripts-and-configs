@@ -5,3 +5,13 @@ export PATH="$HOME/scripts/bin:$PATH"
 export DISABLE_SPRING=1
 export HISTSIZE=15000
 export HISTFILESIZE=1000000
+
+source $HOME/.work_env_variables
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+export PGDATA=/usr/local/var/postgres/
+export OCI_DIR=/opt/oracle/instantclient_12_2
+
+alias ggrep="grep"
+

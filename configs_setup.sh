@@ -27,6 +27,6 @@ case $system_type in
     ln -fs /bin/grep ~/bin/ggrep
     ;;
   "Darwin")
-    ln -fs $dir/configs/Darwin/khdrc ~/.khdrc
+    ruby -r erb -e 'puts ERB.new(File.read(Dir.home+"/scripts/configs/khdrc.erb.conf")).result binding' <%= i %> > ~/.khdrc
     ;;
 esac

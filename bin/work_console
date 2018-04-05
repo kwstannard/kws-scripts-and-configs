@@ -1,17 +1,22 @@
 #! /usr/bin/env ruby
 
-Process.setproctitle("work_console")
-utils = File.expand_path(__FILE__ + '../../../utility/lib')
-$LOAD_PATH << utils
-require 'pry'
-require 'casper_pull_requests'
-require 'task_manager'
+require 'socket'
+require 'FileUtils'
+require 'pathname'
+require 'rutui'
 
-include TaskManager
-self.save_path = Dir.home + "/Dropbox/tasks"
-load_tasks
 
-Pry.prompt = to_prompts
-Pry.config.print = Proc.new {}
+socket_path = "/tmp/work_console.sock"
 
-Pry.start(Pry.toplevel_binding, :input => StringIO.new(""))
+at_exit { FileUtils.rm socket_path }
+
+server = UNIXServer.new(socket_path)
+screen = RuTui::Screen.new
+
+Socket.accept_loop(server) do |socket, _addr|
+  screen.rescreen
+  screen.add_static RuTui::Text.new(x: 1, y: 1, text: socket.read)
+  socket.close
+  #require 'pry';binding.pry
+  screen.draw
+end

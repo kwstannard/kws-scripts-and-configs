@@ -1,5 +1,6 @@
 [core]
   editor = vim
+  commentChar = ~
 
 [user]
   name = Kelly Stannard
@@ -51,4 +52,11 @@
   pl = pull --log
   graph = log --graph --all --decorate --stat --date=iso
   cf = !git status --porcelain ./ | grep UU | sed 's/UU //'
+  note = notes append -m
 
+[notes]
+	rewriteRef = refs/notes/*
+
+[notes "rewrite"]
+  squash = true
+  amend = true

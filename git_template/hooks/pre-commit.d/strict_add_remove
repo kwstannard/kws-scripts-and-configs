@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+commit_file_path = ARGV

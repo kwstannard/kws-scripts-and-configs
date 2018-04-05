@@ -2,8 +2,6 @@
   path = ~/scripts/configs/gitconfig
 [credential]
 	helper = osxkeychain
-[core]
-  commentChar = ~
 [user]
   name = Kelly Wolf Stannard
   email = kstannard@mdsol.com
