@@ -96,7 +96,8 @@ set number
 function! KwsFunHello()
   :echo 'HELLO'
 endfunc
- 
+
+au FocusLost * silent! wa
 au FocusLost * set norelativenumber
 au FocusGained * set relativenumber
 au FocusLost * call KwsFunHello()
@@ -133,11 +134,11 @@ autocmd Syntax * syn match ExtraWhitespace '\s\+$'
 
 " long line highlighing
 
-highlight LongLines ctermbg=18 guibg=#333300
-au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,107}$', -1)
+"highlight LongLines ctermbg=18 guibg=#333300
+"au FileType ruby,javascript,coffee,vim call matchadd('LongLines', '^.\{80,107}$', -1)
 
-highlight VeryLongLines ctermbg=52 guibg=#330000
-au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{108,}$', -1)
+"highlight VeryLongLines ctermbg=52 guibg=#330000
+"au FileType ruby,javascript,coffee,vim call matchadd('VeryLongLines', '^.\{108,}$', -1)
 
 " indent highlighting
 

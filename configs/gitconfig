@@ -54,6 +54,8 @@
   cf = !git status --porcelain ./ | grep UU | sed 's/UU //'
   note = notes append -m
 
+  update = !echo "git fetch origin develop \\&\\& git rebase --onto origin/develop develop $(git rev-parse --abbrev-ref HEAD)" | bash
+
 [notes]
 	rewriteRef = refs/notes/*
 
