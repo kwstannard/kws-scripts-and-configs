@@ -2,6 +2,7 @@ echo 'hi'
 syntax enable
 colorscheme google
 set shell=/bin/sh
+set history=1000
 set t_Co=256
 set nocompatible
 set nowrap
@@ -262,3 +263,5 @@ nmap \p :Goyo<CR>
 nmap ZZ :w<CR>:q<CR>:q<CR>
 au User GoyoEnter nested call ProseMode()
 au VimEnter PULLREQ_EDITMSG,*.txt Goyo
+
+let g:sort_motion_flags = "i"
