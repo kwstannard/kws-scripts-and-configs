@@ -1,3 +1,4 @@
+set -v
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 system_type="$(uname -s)"
 echo $system_type

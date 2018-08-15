@@ -133,6 +133,12 @@ au FileType eruby filetype indent on
 hi ExtraWhitespace ctermbg=red guibg=red
 autocmd Syntax * syn match ExtraWhitespace '\s\+$'
 
+" diff highlighting
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
 " long line highlighing
 
 "highlight LongLines ctermbg=18 guibg=#333300
