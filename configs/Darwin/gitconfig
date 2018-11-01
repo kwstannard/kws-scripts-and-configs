@@ -5,5 +5,3 @@
 [user]
   name = Kelly Wolf Stannard
   email = kstannard@mdsol.com
-[alias]
-	conflicted = !nvim +Conflicted

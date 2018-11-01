@@ -1,5 +1,5 @@
 [core]
-  editor = vim
+  editor = nvim
   commentChar = ~
 
 [user]
@@ -42,9 +42,11 @@
 #  l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
-  aa = commit -a --amend
+  fu = commit -a --fixup
+  sq = commit -a --squash
 
-  squash = !git rebase -i $(git merge-base --fork-point develop)
+  #squash = !git merge-base --fork-point develop | xargs git rebase -i
+  squash = rebase -i --autosquash develop
   stats = shortlog -sn
   praise = blame
   difw = diff --word-diff
@@ -55,6 +57,11 @@
   note = notes append -m
 
   update = !echo "git fetch origin develop \\&\\& git rebase --onto origin/develop develop $(git rev-parse --abbrev-ref HEAD)" | bash
+	conflicted = !nvim +Conflicted
+
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [notes]
 	rewriteRef = refs/notes/*

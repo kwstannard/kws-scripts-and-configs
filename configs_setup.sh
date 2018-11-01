@@ -29,5 +29,6 @@ case $system_type in
     ;;
   "Darwin")
     ruby -r erb -e 'puts ERB.new(File.read(Dir.home+"/scripts/configs/khdrc.erb.conf")).result binding' 0 > ~/.khdrc
+    ruby -r erb -e 'puts ERB.new(File.read(Dir.home+"/scripts/configs/skhdrc.erb.conf")).result binding' 0 > ~/.skhdrc
     ;;
 esac

@@ -1,3 +1,1 @@
-tell application "System Events"
-    perform action "AXZoomWindow" of (first button whose subrole is "AXFullScreenButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)
-end tell
+tell application (path to frontmost application as Unicode text) to tell first window to set zoomed to not zoomed

@@ -16,3 +16,6 @@ else
 
   #exec tmux set status off
 fi
+
+# added by travis gem
+[ -f /Users/kstannard/.travis/travis.sh ] && source /Users/kstannard/.travis/travis.sh

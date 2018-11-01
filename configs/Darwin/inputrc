@@ -1,7 +1,12 @@
+$include /etc/inputrc
+
 "\e[1~": beginning-of-line
 "\e[4~": end-of-line
+
+# up/down
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
 "\e[C": forward-char
 "\e[D": backward-char
 "\e[3~": delete-char
@@ -11,6 +16,8 @@
 "\e\e[C": forward-word
 "\e\e[D": backward-word
 
+"C-M-r": re-read-init-file
+
 set completion-ignore-case On
 set expand-tilde on
 set convert-meta off
@@ -18,3 +25,5 @@ set input-meta on
 set output-meta on
 set show-all-if-ambiguous on
 set visible-stats on
+set completion-prefix-display-length 3
+set colored-stats On
