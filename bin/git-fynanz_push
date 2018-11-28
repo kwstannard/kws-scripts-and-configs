@@ -1,7 +1,0 @@
-#! /usr/bin/env ruby-rvm-env 2.1
-
-branch_match = `git branch`.match(/^FY-#{ARGV[0]}\w+/)
-
-branch = branch_match ? branch_match[0].to_s : ARGV[0]
-
-`git push origin #{branch}`
