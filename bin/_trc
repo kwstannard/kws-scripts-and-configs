@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+set -e
+init_message="BASE INIT COMMIT"
+
+if bundle exec rake ; then
+  if [ "$(git log -n1 --format='%s')" = "$init_message" ]; then
+    git commit -a --fixup HEAD
+  else
+    git commit -am "$init_message"
+  fi
+else
+  git checkout .
+fi
