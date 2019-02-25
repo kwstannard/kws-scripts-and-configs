@@ -1,21 +1,23 @@
-if [[ -z "$TMUX" ]]; then
-  if tmux has-session 2>/dev/null; then
-    exec tmux attach
-  else
-    exec tmux
-  fi
-else
-  echo 'creating windows'
-  ruby -e "
-    ((%x[tmux list-windows | wc -l].to_i)...25).each do |i|
-      %x[tmux new-window -d -t #{i} 2>/dev/null]
-    end
-  "
+echo bashrc run
 
+if [[ -n "$TMUX" ]]; then
+  count="$(tmux list-windows | wc -l)"
+  echo $count >> ~/window_count.txt
+
+  if [[ "$count" -eq "20" ]]; then
+    echo final window. $count
+  else
+    echo
+    tmux new-window -d -t "$count" -n "generated_$count" 2>/dev/null
+  fi
   source ~/scripts/init.bash
 
-  #exec tmux set status off
+  # added by travis gem
+  [ -f /Users/kstannard/.travis/travis.sh ] && source /Users/kstannard/.travis/travis.sh
+elif tmux has-session; then
+  echo old session
+  tmux attach
+else
+  echo new session
+  tmux new-session
 fi
-
-# added by travis gem
-[ -f /Users/kstannard/.travis/travis.sh ] && source /Users/kstannard/.travis/travis.sh

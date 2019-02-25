@@ -118,7 +118,7 @@ call arpeggio#map('i','',0,'Jk','<esc>')
 call arpeggio#map('i','',0,'Kj','<esc>')
 
 "save file
-nnoremap <S-s> :wa<Cr>
+nnoremap <S-s> :wa<Cr>:!./trc<CR>
 nnoremap <leader>d :!mkdir -p %:h<Cr>
 
 "logging
