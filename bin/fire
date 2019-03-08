@@ -46,7 +46,7 @@ OptionParser.new do |opts|
 end.parse!
 
 find = Regexp.new(ARGV[0], options[:regexp])
-replace = eval "\"#{ARGV[1]}\""
+replace = ARGV[1].gsub("//", "/")
 file = ARGV[2]
 
 if options[:class_name]
