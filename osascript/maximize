@@ -1,1 +1,18 @@
-tell application (path to frontmost application as Unicode text) to tell first window to set zoomed to not zoomed
+set maxApplications to {¬
+	"Firefox Developer Edition", ¬
+	"Symphony", ¬
+	"Microsoft Outlook", ¬
+	"Microsoft Excel", ¬
+	"iTunes", ¬
+	"Activity Monitor",¬
+	"Terminal"¬
+}
+
+repeat with appName in maxApplications
+	try
+		tell application appName
+      tell windows to set zoomed to true
+		end tell
+	end try
+end repeat
+

@@ -1,6 +1,8 @@
 [core]
-  editor = nvim
+  editor = vim
   commentChar = ~
+  hooksPath = ~/scripts/git_template_ruby/hooks
+  autocrlf = true
 
 [user]
   name = Kelly Stannard
@@ -9,8 +11,11 @@
 [fetch]
   prune = true
 
+[apply]
+  whitespace = fix
+
 [init]
-  templatedir=~/scripts/git_template
+  templatedir=~/scripts/git_template_ruby
 
 [push]
 	default = current
@@ -24,7 +29,7 @@
   untracked = red bold ul
 
 [branch]
-  autosetupmerge = always
+#  autosetupmerge = always
   autosetuprebase = always
 
 [diff]
@@ -32,21 +37,23 @@
   whitespace = red reverse
 
 [alias]
-  st = status
-  co = checkout
+st = status
+co = checkout
   g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
-  cbr = !git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
+  cbr = !git branch --merged | grep -v master | xargs git branch -d
   r = !git l -30
   ra = !git r --all
 #  l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
   fu = commit -a --fixup
+  fuh = commit -a --fixup HEAD
   sq = commit -a --squash
+  sqh = commit -a --squash HEAD
 
   #squash = !git merge-base --fork-point develop | xargs git rebase -i
-  squash = rebase -i --autosquash develop
+  squash = "!f() { git rebase -i --autosquash ${1:-master}; }; f"
   stats = shortlog -sn
   praise = blame
   difw = diff --word-diff

@@ -5,8 +5,8 @@ commit_file_path = ARGV[0]
 commit_msg = File.read(commit_file_path)
 puts commit_msg if ENV['DEBUG']
 
-#comment_char = `git config --get core.commentchar` || "#"
-commit_msg_no_cmt = commit_msg.gsub(/^#.*\n/, '')
+comment_char = `git config --get core.commentchar`.strip || "#"
+commit_msg_no_cmt = commit_msg.gsub(/^#{comment_char}.*\n/, '')
 puts commit_msg_no_cmt if ENV['DEBUG']
 
 commit_msg_unwrapped = commit_msg_no_cmt.gsub(/(\S)\n(\w)/, '\1 \2')

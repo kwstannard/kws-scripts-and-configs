@@ -1,23 +1,36 @@
 echo bashrc run
 
-if [[ -n "$TMUX" ]]; then
-  count="$(tmux list-windows | wc -l)"
-  echo $count >> ~/window_count.txt
+ORIG_PATH=$PATH
+echo $TERM
 
-  if [[ "$count" -eq "20" ]]; then
-    echo final window. $count
+source ~/scripts/init.bash
+
+echo $TERM
+echo $PATH
+echo $HISTFILE
+history | wc -l
+
+if which tmux; then
+  echo tmux in PATH
+
+  if [[ $TMUX ]]; then
+    echo 2
+    count="$(tmux list-windows | wc -l)"
+
+    if [[ "$count" -eq "20" ]]; then
+      echo final window. $count
+    else
+      env PATH=$ORIG_PATH TERM=xterm-256color $(which tmux) new-window -d -t "$count" -n "generated_$count"
+    fi
+  elif tmux has-session; then
+    echo old session
+    tmux attach
   else
-    echo
-    tmux new-window -d -t "$count" -n "generated_$count" 2>/dev/null
+    echo new session
+    env PATH=$ORIG_PATH  TERM=xterm-256color $(which tmux) new-session
   fi
-  source ~/scripts/init.bash
-
-  # added by travis gem
-  [ -f /Users/kstannard/.travis/travis.sh ] && source /Users/kstannard/.travis/travis.sh
-elif tmux has-session; then
-  echo old session
-  tmux attach
 else
-  echo new session
-  tmux new-session
+  echo tmux not in PATH
 fi
+
+unset ORIG_PATH

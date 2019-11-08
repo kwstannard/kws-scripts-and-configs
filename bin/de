@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+if File.exists?(".env")
+  File.read(".env").lines.map(&:lstrip).grep(/^[^#].*=/).each do |l|
+    begin
+    _,k,v = l.match(/^(\w*)=(.*)$/).to_a
+    ENV[k] = v.gsub(/^['"]/, '').gsub(/['"]$/, '')
+    rescue
+      puts l
+      raise
+    end
+  end
+end
+exec(ENV, *ARGV)
+
+#!/usr/bin/env sh
+
+#[ -f .env ] && <.env grep -v "^#" | tr '\n' ' ' | sed -E 's/(.*)/env \1 "$@"/' | bash

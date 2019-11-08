@@ -2,9 +2,9 @@ echo 'hi'
 syntax enable
 colorscheme google
 set shell=/bin/sh
+set nocompatible
 set history=1000
 set t_Co=256
-set nocompatible
 set nowrap
 set scrolloff=5
 set autoindent
@@ -77,7 +77,7 @@ set number
 
 "au BufLeave * :set norelativenumber
 "au BufEnter * :set relativenumber
- 
+
 "function! KwsFunFocusLose()
   "if(empty(hasntNumber))
     ":set number
@@ -123,10 +123,14 @@ nnoremap <leader>d :!mkdir -p %:h<Cr>
 
 "logging
 
-autocmd BufWritePre * %s/\(\w\)\s\+$/\1/ge
+autocmd BufWritePre * %s/\s\+$//ge
 
 au FileType eruby filetype indent off
 au FileType eruby filetype indent on
+
+"colorscheme changes
+highlight Comment ctermfg=LightRed
+highlight LineNr ctermfg=DarkGrey
 
 "whitespace highlighting
 
@@ -138,6 +142,9 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+" ale highlighting
+highlight ALEWarning ctermbg=DarkRed
 
 " long line highlighing
 
@@ -159,14 +166,13 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
-cnoremap %% <C-R>=(expand('%:h')).'/'<cr>
-map <leader>e :up<CR>:edit %%
+map <leader>e :up<CR>:edit <C-r>=(expand('%:h')).'/'<cr>
 map <leader>E :up<CR>:edit ./
-map <leader>v :view %%
+map <leader>v :view <C-r>=(expand('%:h')).'/'<cr>
 map <leader>V :view ./
-map <leader>t :tabnew %%
+map <leader>t :tabnew <C-r>=(expand('%:h')).'/'<cr>
 map <leader>T :tabnew ./
-map <leader>s :split %%
+map <leader>s :split <C-r>=(expand('%:h')).'/'<cr>
 map <leader>S :split ./
 map <leader>r :bufdo<space>e<cr>
 
@@ -271,3 +277,6 @@ au User GoyoEnter nested call ProseMode()
 au VimEnter PULLREQ_EDITMSG,*.txt Goyo
 
 let g:sort_motion_flags = "i"
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1

@@ -1,1 +1,1 @@
-Plug 'floobits/floobits-neovim'
+" Plug 'floobits/floobits-neovim'

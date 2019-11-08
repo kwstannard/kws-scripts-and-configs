@@ -1,0 +1,16 @@
+#! /usr/bin/env ruby
+
+commit_file_path = ARGV[0]
+
+subject_line = File.read(commit_file_path).lines.first
+
+unless subject_line.size < 70
+  puts "subject is too long"
+  exit 1
+end
+
+allowed_verbs = %w[Add Drop Fix]
+unless allowed_verbs.include? subject_line.split.first
+  puts "Start commits with one of the following: #{allowed_verbs.join(", ")}"
+  exit 1
+end

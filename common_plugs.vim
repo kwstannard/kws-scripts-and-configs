@@ -13,12 +13,14 @@ Plug 'junegunn/goyo.vim', { 'for': ['text', 'markdown'] }
 Plug 'junegunn/limelight.vim'
 Plug 'kana/vim-arpeggio'
 Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-user'
 Plug 'kwstannard/align'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'vim-scripts/SQLUtilities'

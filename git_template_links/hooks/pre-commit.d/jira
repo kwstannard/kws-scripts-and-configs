@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -z "$STORY" ]; then
+  echo No STORY variable set
+  echo '$ export STORY=""'
+  exit 1
+fi
+
+echo Story is $STORY

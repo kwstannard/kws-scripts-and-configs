@@ -4,4 +4,6 @@
 	helper = osxkeychain
 [user]
   name = Kelly Wolf Stannard
-  email = kstannard@mdsol.com
+  email = kelly.stannard@bnymellon.com
+[core]
+	autocrlf = input

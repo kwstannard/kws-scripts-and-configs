@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+tmpcontent="$(cat $1 | sed -n '/### Jira/q;p')"
+echo -e "$tmpcontent\n\n### Jira\n\n$STORY" > $1

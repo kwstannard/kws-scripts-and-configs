@@ -2,6 +2,7 @@
 
 # editor when running `edit`
 Pry.editor = 'vim'
+Pry.config.should_load_plugins = false
 
 # pagination of results (less) (true == on)
 # Pry.config.pager = false
