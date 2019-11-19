@@ -1,0 +1,4 @@
+#! /usr/bin/env ruby
+require 'pathname'
+
+exec Pathname.glob(ARGV[0] + '/**/*').select(&:file?).map {|f| "path_attribute #{f}" }.join("; ")

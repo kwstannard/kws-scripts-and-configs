@@ -1,5 +1,6 @@
 [include]
   path = ~/scripts/configs/gitconfig
+  path = ~/.config/work.git
 [credential]
 	helper = osxkeychain
 [user]

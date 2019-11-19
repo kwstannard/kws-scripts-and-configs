@@ -24,4 +24,5 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'vim-scripts/SQLUtilities'
+Plug 'vim-scripts/groovy.vim'
 Plug 'w0rp/ale'

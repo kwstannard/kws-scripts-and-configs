@@ -1,4 +1,4 @@
-alias be='bundle exec'
+alias be='de bundle exec'
 
 #! bash
 # bash completion for the `bundle` command.

@@ -238,15 +238,13 @@ nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
 let g:ale_lint_delay=500
 let g:ale_set_signs=0
 
-if file_readable('.rubocop.yml')
-  let g:ale_fixers = {
-        \   'ruby': [
-        \       'ale#fixers#rubocop#Fix',
-        \   ],
-        \}
+let g:ale_fixers = {
+      \   'ruby': [
+      \       'ale#fixers#rubocop#Fix',
+      \   ],
+      \}
 
-  let g:ale_ruby_rubocop_executable='be rubocop'
-endif
+let g:ale_ruby_rubocop_executable='rubocop'
 
 
 call arpeggio#map('n','',0,'at',':ALEToggle<CR>')

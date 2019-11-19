@@ -5,19 +5,18 @@ echo $TERM
 
 source ~/scripts/init.bash
 
-echo $TERM
-echo $PATH
-echo $HISTFILE
+echo TERM = $TERM
+echo PATH = $PATH
+echo HIST = $HISTFILE
 history | wc -l
 
 if which tmux; then
   echo tmux in PATH
 
   if [[ $TMUX ]]; then
-    echo 2
     count="$(tmux list-windows | wc -l)"
 
-    if [[ "$count" -eq "20" ]]; then
+    if [[ "$count" -ge "25" ]]; then
       echo final window. $count
     else
       env PATH=$ORIG_PATH TERM=xterm-256color $(which tmux) new-window -d -t "$count" -n "generated_$count"
