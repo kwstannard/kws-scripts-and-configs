@@ -2,46 +2,43 @@ set -e
 install_stuff () {
   set -v
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install bash-completion
-  brew install caskroom/cask/slack
-  brew install vim
-  brew install nvim
-  mkdir -p ~/.vim/backup
 
-  brew install bash
-  brew install grep
-  brew install git
-  brew install hub --without-docs
+  utils=<<UTILS
+  bash
+  bash-completion
+  bcal
   brew cask install keepassx
-  brew install caskroom/cask/dropbox
-  brew install caskroom/versions/firefox-esr
-  brew install tmux
-  brew install jq
-  brew install cloc
-  brew install postgresql@9.6
-  brew services start postgresql@9.6
-  brew install mysql@5.6
-  brew services start mysql@5.6
+  caskroom/cask/dropbox
+  caskroom/cask/slack
+  caskroom/versions/firefox-esr
+  cloc
+  diff-so-fancy
+  fd
+  git
+  grep
+  htop
+  hub --without-docs
+  jq
+  koekeishiya/formulae/skhd
+  mysql
+  nvim
+  postgresql
+  tmux
+  vim
+  yq
+UTILS
+  for util in $utils; do brew install $util; done
 
-
-  brew install koekeishiya/formulae/skhd
+  brew services start mysql
+  brew services start postgresql
   brew services start skhd
 
-  brew install rbenv
-  brew install rbenv-aliases
-
-
+  # RUBY
+  brew install chruby
+  brew install ruby-install
   gem install term-ansicolor
 
-  cp ~/Google\ Drive/oracle/* ~/Library/Caches/Homebrew/
-
-  brew tap InstantClientTap/instantclient
-  brew install instantclient-basiclite
-  brew install instantclient-sdk
-
-  brew install htop
-  brew install diff-so-fancy
-  brew install fd
+  mkdir -p ~/.vim/backup
 
   git clone https://github.com/jwilm/alacritty ~/alacritty
   pushd ~/alacritty
@@ -77,13 +74,6 @@ repositories() {
   set -v
   #git clone git@github.com:kwstannard/kws-scripts-and-configs ~/scripts
   #bash ~/scripts/configs_setup.sh
-
-  mkdir -p ~/work
-  pushd ~/work
-  git clone git@github.com:mdsol/plinth
-  git clone git@github.com:mdsol/pylon
-  git clone git@github.com:mdsol/subjects
-  popd
 }
 
 #install_stuff
@@ -93,3 +83,5 @@ github
 #ln -fs "$HOME/Google Drive/bash_history" "$HOME/.bash_history"
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
+
+# setup team_repos
