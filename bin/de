@@ -1,16 +1,7 @@
 #!/usr/bin/env ruby
 
-if File.exists?(".env")
-  File.read(".env").lines.map(&:lstrip).grep(/^[^#].*=/).each do |l|
-    begin
-    _,k,v = l.match(/^(\w*)=(.*)$/).to_a
-    ENV[k] = v.gsub(/^['"]/, '').gsub(/['"]$/, '')
-    rescue
-      puts l
-      raise
-    end
-  end
-end
+regexp = /^(?<a>\w+)=(?:'(?<b>.+?)'|"\g<b>"|\g<b>)$/m
+ENV.update File.read(".env").scan(regexp).to_h if File.exist?(".env")
 exec(ENV, *ARGV)
 
 #!/usr/bin/env sh

@@ -37,24 +37,23 @@
   whitespace = red reverse
 
 [alias]
-st = status
-co = checkout
-  g = !test \"$(git status --porcelain Gemfile.lock)\" && git checkout Gemfile.lock || exit 0
+  st = status
+  co = checkout
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
   cbr = !git branch --merged | grep -v master | xargs git branch -d
+
+  l = log
   r = !git l -30
   ra = !git r --all
-#  l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
   fu = commit -a --fixup
   fuh = commit -a --fixup HEAD
   sq = commit -a --squash
   sqh = commit -a --squash HEAD
+  squash = "! git rebase -i --autosquash ${1:-master} #"
 
-  #squash = !git merge-base --fork-point develop | xargs git rebase -i
-  squash = "!f() { git rebase -i --autosquash ${1:-master}; }; f"
-  stats = shortlog -sn
+  authorstats = shortlog -sn
   praise = blame
   difw = diff --word-diff
   overview = log --all --oneline --no-merges --since='2 weeks' -15
@@ -63,7 +62,6 @@ co = checkout
   cf = !git status --porcelain ./ | grep UU | sed 's/UU //'
   note = notes append -m
 
-  update = !echo "git fetch origin develop \\&\\& git rebase --onto origin/develop develop $(git rev-parse --abbrev-ref HEAD)" | bash
 	conflicted = !nvim +Conflicted
 
 [pager]
