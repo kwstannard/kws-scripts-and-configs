@@ -6,5 +6,5 @@ tmp = tmp.lines.select{|l|
   i += 4 if l == "### Jira\n"
   i -= 1 unless i == 0
   i == 0
-}.join("") + "### Jira\n\n#{ENV["STORY"]}"
+}.join("") + "\n\n### Jira\n\n#{ENV["STORY"]}"
 File.write(ARGV[0], tmp, 0)

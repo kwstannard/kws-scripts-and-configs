@@ -17,6 +17,7 @@ if which tmux; then
     count="$(tmux list-windows | wc -l)"
 
     if [[ "$count" -ge "25" ]]; then
+      tmux new-window -n "tasks" taskell
       echo final window. $count
     else
       env PATH=$ORIG_PATH TERM=xterm-256color $(which tmux) new-window -d -t "$count" -n "generated$count"

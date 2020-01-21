@@ -1,8 +1,8 @@
-echo 'hi'
+set nocompatible
+source ~/scripts/configs/vim/buffers.vim
 syntax enable
 colorscheme google
 set shell=/bin/sh
-set nocompatible
 set history=1000
 set t_Co=256
 set nowrap
@@ -19,10 +19,12 @@ set noignorecase
 set smartcase
 set backspace=indent,eol,start    " backspace through everything in insert mode
 set laststatus=2
-set wildmode=list:full,full       " tab completion in command line
+set wildmode=full       " tab completion in command line
 set wildmenu
 set splitbelow
 set splitright
+
+set path=.,,,,lib/**,config/**,app/**
 
 set backupdir=~/.vim/backup
 "set directory=~/.vim/swap
@@ -35,20 +37,6 @@ let g:sqlutil_load_default_maps = 0
 
 " get rid of esc delay
 set timeoutlen=1000 ttimeoutlen=0
-
-"function! FontSizeChange(size)
-"  let basesize=12
-"  if(a:size > basesize)
-"    let totallines=&lines * basesize / a:size
-"  else
-"    let totallines=&lines * a:size / basesize
-"  end
-"
-"  let &lines=totallines
-"  exec 'set guifont=consolas:h' . a:size
-"  set winheight=999
-"  echo totallines
-"endfunc
 
 if &diff
   nmap <down>
@@ -94,22 +82,13 @@ set number
   "endif
 "endfunc
 
-function! KwsFunHello()
-  :echo 'HELLO'
-endfunc
-
 au FocusLost * silent! wa
 au FocusLost * set norelativenumber
 au FocusGained * set relativenumber
-au FocusLost * call KwsFunHello()
 " clear all buffers
 nnoremap <leader><delete> :bufdo<space>bd<Cr>
 nnoremap <leader><s-delete> :bufdo<space>bd<Cr>:q<Cr>
 nnoremap <leader><backspace> :windo<space>bd<Cr>
-
-" tabs
-nnoremap J :tabprevious<cr>
-nnoremap K :tabnext<cr>
 
 " mush esc
 call arpeggio#map('i','',0,'jk','<esc>')
@@ -146,6 +125,8 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " ale highlighting
 highlight ALEWarning ctermbg=DarkRed
 
+let g:ale_lint_on_enter=0
+
 " long line highlighing
 
 "highlight LongLines ctermbg=18 guibg=#333300
@@ -170,8 +151,6 @@ map <leader>e :up<CR>:edit <C-r>=(expand('%:h')).'/'<cr>
 map <leader>E :up<CR>:edit ./
 map <leader>v :view <C-r>=(expand('%:h')).'/'<cr>
 map <leader>V :view ./
-map <leader>t :tabnew <C-r>=(expand('%:h')).'/'<cr>
-map <leader>T :tabnew ./
 map <leader>s :split <C-r>=(expand('%:h')).'/'<cr>
 map <leader>S :split ./
 map <leader>r :bufdo<space>e<cr>
@@ -208,12 +187,6 @@ nnoremap <leader>( "wciw()<esc><left>"wp
 nnoremap <leader>{ "wciw{}<esc><left>"wp
 nnoremap <leader>[ "wciw[]<esc><left>"wp
 
-" tab manipulation
-nnoremap <c-t>$ :$tabm<cr>
-nnoremap <c-t>0 :0tabm<cr>
-nnoremap <c-t>l :tabm+<cr>
-nnoremap <c-t>h :tabm-<cr>
-
 " shebang filetype detection
 
 function! s:DetectFileType()
@@ -224,7 +197,7 @@ function! s:DetectFileType()
     setfiletype ruby
   endif
 endfunction
-au BufNewFile,BufRead Guardfile,.Guardfile setfiletype ruby
+" au BufNewFile,BufRead Guardfile,.Guardfile setfiletype ruby
 
 au BufNewFile,BufRead * :call s:DetectFileType()
 
@@ -278,3 +251,4 @@ let g:sort_motion_flags = "i"
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
