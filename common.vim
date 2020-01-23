@@ -23,6 +23,7 @@ set wildmode=full       " tab completion in command line
 set wildmenu
 set splitbelow
 set splitright
+set hidden
 
 set path=.,,,,lib/**,config/**,app/**
 
