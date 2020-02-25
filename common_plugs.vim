@@ -17,7 +17,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'kwstannard/align'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'

@@ -39,6 +39,7 @@
 [alias]
   st = status
   co = checkout
+  sw = "!git branch $1; git switch"
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
   cbr = !git branch --merged | grep -v master | xargs git branch -d
 

@@ -239,7 +239,7 @@ function! ProseMode()
   if !has('gui_running')
     let g:solarized_termcolors=256
   endif
-  colors solarized
+  colors seoul256
 endfunction
 
 command! ProseMode call ProseMode()
