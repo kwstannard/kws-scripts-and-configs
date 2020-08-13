@@ -1,50 +1,51 @@
 set -e
 install_stuff () {
   set -v
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-  utils=<<UTILS
-  bash
-  bash-completion
-  bcal
-  brew cask install keepassx
-  caskroom/cask/dropbox
-  caskroom/cask/slack
-  caskroom/versions/firefox-esr
-  cloc
-  diff-so-fancy
-  fd
-  git
-  grep
-  htop
-  hub --without-docs
-  jq
-  koekeishiya/formulae/skhd
-  mysql
-  nvim
-  postgresql
-  tmux
-  vim
-  yq
-UTILS
-  for util in $utils; do brew install $util; done
-
-  brew services start mysql
-  brew services start postgresql
-  brew services start skhd
-
-  # RUBY
-  brew install chruby
-  brew install ruby-install
-  gem install term-ansicolor
-
+  #ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install bash-completion
+  brew cask install slack
+  brew install vim
+  brew install nvim
   mkdir -p ~/.vim/backup
 
-  git clone https://github.com/jwilm/alacritty ~/alacritty
-  pushd ~/alacritty
-  make app
-  ln -sf $(pwd)/target/release/osx/Alacritty.app/ /Applications/
-  popd
+  brew install bash
+  brew install grep
+  brew install ripgrep
+  brew install git
+  brew install gh
+  brew cask install keepassx
+  brew cask install dropbox
+  brew cask install homebrew/cask-versions/firefox-developer-edition
+  brew install tmux
+  brew install jq
+  brew install yq
+  brew install cloc
+  brew install postgresql@9.6
+  brew services start postgresql@9.6
+  brew install mysql@5.6
+  brew services start mysql@5.6
+
+
+  brew install koekeishiya/formulae/skhd
+  brew services start skhd
+
+  #cp ~/Google\ Drive/oracle/* ~/Library/Caches/Homebrew/
+
+  # brew tap InstantClientTap/instantclient
+  # brew install instantclient-basiclite
+  # brew install instantclient-sdk
+
+  brew install htop
+  brew install diff-so-fancy
+  brew install fd
+  brew install chruby
+  brew install ruby-install
+
+#  git clone https://github.com/jwilm/alacritty ~/alacritty
+#  pushd ~/alacritty
+#  make app
+#  ln -sf $(pwd)/target/release/osx/Alacritty.app/ /Applications/
+#  popd
 }
 
 github() {
@@ -74,14 +75,19 @@ repositories() {
   set -v
   #git clone git@github.com:kwstannard/kws-scripts-and-configs ~/scripts
   #bash ~/scripts/configs_setup.sh
+
+  mkdir -p ~/work
+  pushd ~/work
+  git clone git@github.com:mdsol/plinth
+  git clone git@github.com:mdsol/pylon
+  git clone git@github.com:mdsol/subjects
+  popd
 }
 
-#install_stuff
-github
+install_stuff
+#github
 #repositories
 
 #ln -fs "$HOME/Google Drive/bash_history" "$HOME/.bash_history"
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
-
-# setup team_repos

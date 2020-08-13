@@ -10,6 +10,5 @@ DISABLE_SPRING=1
 HISTSIZE=15000
 HISTFILESIZE=1000000
 
-source $HOME/.work_env_variables
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

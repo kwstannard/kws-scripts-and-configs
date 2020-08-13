@@ -1,8 +1,6 @@
 set maxApplications to {¬
 	"Firefox Developer Edition", ¬
-	"Symphony", ¬
-	"Microsoft Outlook", ¬
-	"Microsoft Excel", ¬
+	"Slack", ¬
 	"iTunes", ¬
 	"Activity Monitor",¬
 	"Terminal"¬

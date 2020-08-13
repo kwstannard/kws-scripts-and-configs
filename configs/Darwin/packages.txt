@@ -1,0 +1,22 @@
+bash
+bash-completion
+bcal
+brew cask install keepassx
+caskroom/cask/dropbox
+caskroom/cask/slack
+caskroom/versions/firefox-esr
+cloc
+diff-so-fancy
+fd
+git
+grep
+htop
+hub --without-docs
+jq
+koekeishiya/formulae/skhd
+mysql
+nvim
+postgresql
+tmux
+vim
+yq

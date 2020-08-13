@@ -2,7 +2,7 @@ set nocompatible
 source ~/scripts/configs/vim/buffers.vim
 syntax enable
 colorscheme google
-set shell=/bin/sh
+set shell=/bin/bash
 set history=1000
 set t_Co=256
 set nowrap
@@ -21,6 +21,7 @@ set backspace=indent,eol,start    " backspace through everything in insert mode
 set laststatus=2
 set wildmode=full       " tab completion in command line
 set wildmenu
+set wildcharm=<C-Z>
 set splitbelow
 set splitright
 set hidden
@@ -253,3 +254,4 @@ let g:sort_motion_flags = "i"
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
+let $BASH_ENV="~/scripts/vim.bash"

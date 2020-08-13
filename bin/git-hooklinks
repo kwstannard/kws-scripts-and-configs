@@ -1,0 +1,27 @@
+#! /usr/bin/env ruby
+
+require 'pathname'
+
+walker_script_path = Pathname(__dir__).join('..', 'git_template_links', 'base_hook_dir_walker').realpath
+hook_path = Pathname(__dir__).join('..', 'git_template_links', 'hooks')
+%w(
+apply-msg
+commit-msg
+post-checkout
+post-update
+pre-applypatch
+pre-commit
+pre-push
+pre-rebase
+prepare-commit-msg
+update
+).each do |hook|
+  Pathname.pwd.join('.git', 'hooks', hook).make_symlink(walker_script_path)
+  hook_dir = hook_path.join(hook + '.d')
+  next unless hook_dir.exist?
+  dir = Pathname.pwd.join('.git', 'hooks', hook + '.d')
+  dir.mkdir
+  hook_dir.children.each do |script|
+    dir.join(script.basename).make_symlink(script)
+  end
+end
