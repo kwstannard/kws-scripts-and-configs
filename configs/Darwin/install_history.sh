@@ -1,7 +1,9 @@
 set -e
 install_stuff () {
   set -v
-  #ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if ! which brew; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
   brew install bash-completion
   brew cask install slack
   brew install vim
@@ -91,3 +93,7 @@ install_stuff
 #ln -fs "$HOME/Google Drive/bash_history" "$HOME/.bash_history"
 defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
+defaults write com.apple.AppleMultiTouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
+defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
+defaults write -g com.apple.swipescrolldirection -int 0
