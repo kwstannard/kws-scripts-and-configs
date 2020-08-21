@@ -1,1 +1,1 @@
-/Users/piper/scripts/shell_scripts/bundle_exec.sh
+../shell_scripts/bundle_exec.sh

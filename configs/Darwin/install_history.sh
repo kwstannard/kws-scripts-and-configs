@@ -5,7 +5,7 @@ install_stuff () {
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
   brew install bash-completion
-  brew cask install slack
+  #brew cask install slack
   brew install vim
   brew install nvim
   mkdir -p ~/.vim/backup
@@ -51,11 +51,11 @@ install_stuff () {
 }
 
 github() {
-  echo key pass?
+  echo ssh key pass?
   read -r pass
-  echo file:
+  echo ssh key file:
   read -r keyfile
-  ssh-keygen -t rsa -b 2048 -f "$HOME/.ssh/$keyfile" -C "kstannard@mdsol.com" -N "$pass"
+  ssh-keygen -t rsa -b 2048 -f "$HOME/.ssh/$keyfile" -C "kwstannard@gmail.com" -N "$pass"
   eval "$(ssh-agent -s)"
   echo "Host *
   AddKeysToAgent yes
@@ -67,33 +67,24 @@ github() {
   echo github token?
   read token
   curl -X POST \
-    -d "{\"title\": \"medidata-$(uuidgen)\", \"key\": \"$(cat "$HOME/.ssh/$keyfile.pub")\"}" \
+    -d "{\"title\": \"$(user)-$(uuidgen)\", \"key\": \"$(cat "$HOME/.ssh/$keyfile.pub")\"}" \
     -u "kwstannard:$password" \
     -H "Content-Type: application/json" \
     -H "X-GitHub-OTP: $token" https://api.github.com/user/keys
 }
 
-repositories() {
-  set -v
-  #git clone git@github.com:kwstannard/kws-scripts-and-configs ~/scripts
-  #bash ~/scripts/configs_setup.sh
-
-  mkdir -p ~/work
-  pushd ~/work
-  git clone git@github.com:mdsol/plinth
-  git clone git@github.com:mdsol/pylon
-  git clone git@github.com:mdsol/subjects
-  popd
+fix_defaults() {
+  defaults write -g KeyRepeat -int 1
+  defaults write -g InitialKeyRepeat -int 10
+  defaults write com.apple.AppleMultiTouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+  defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
+  defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
+  defaults write -g com.apple.swipescrolldirection -int 0
 }
 
+#fix_defaults
 install_stuff
 #github
 #repositories
 
 #ln -fs "$HOME/Google Drive/bash_history" "$HOME/.bash_history"
-defaults write -g KeyRepeat -int 1
-defaults write -g InitialKeyRepeat -int 10
-defaults write com.apple.AppleMultiTouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
-defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
-defaults write -g com.apple.swipescrolldirection -int 0
