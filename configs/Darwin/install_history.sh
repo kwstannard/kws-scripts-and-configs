@@ -28,14 +28,10 @@ install_stuff () {
   brew services start mysql@5.6
 
 
-  brew install koekeishiya/formulae/skhd
+  brew install https://raw.githubusercontent.com/kwstannard/kws-scripts-and-configs/master/homebrew_tap/skhd.rb
   brew services start skhd
 
   #cp ~/Google\ Drive/oracle/* ~/Library/Caches/Homebrew/
-
-  # brew tap InstantClientTap/instantclient
-  # brew install instantclient-basiclite
-  # brew install instantclient-sdk
 
   brew install htop
   brew install diff-so-fancy
