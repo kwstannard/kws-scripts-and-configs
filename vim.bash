@@ -1,4 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-shopt -s expand_aliases  
-for f in ~/scripts/vim_bash/*; do echo $f; source $f; done
+for f in ~/scripts/vim_bash/*; do source $f; done

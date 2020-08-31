@@ -255,3 +255,4 @@ let g:sort_motion_flags = "i"
 let g:NERDSpaceDelims = 1
 
 let $BASH_ENV="~/scripts/vim.bash"
+set stl+=%{ConflictedVersion()}
