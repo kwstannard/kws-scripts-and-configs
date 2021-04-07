@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'pathname'
+env = Pathname.pwd.ascend.map{|x| x.join(".env")}.select(&:exist?).map(&:read).reverse.join
+
 regexp = /^(?<a>\w+)=(?:'(?<b>.+?)'|"\g<b>"|\g<b>)$/m
-ENV.update File.read(".env").scan(regexp).to_h if File.exist?(".env")
+ENV.update env.scan(regexp).to_h
 exec(ENV, *ARGV)
-
-#!/usr/bin/env sh
-
-#[ -f .env ] && <.env grep -v "^#" | tr '\n' ' ' | sed -E 's/(.*)/env \1 "$@"/' | bash

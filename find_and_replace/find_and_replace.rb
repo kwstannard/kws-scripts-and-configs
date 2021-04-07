@@ -3,7 +3,7 @@ class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
 
-    files.each do |file|
+    files.tap{|x| puts x.join(' : ') }.each do |file|
       %x(git mv #{file} #{file.to_s.gsub(find_pattern, replace_pattern)})
     end
   end
@@ -30,7 +30,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
   private
 
   def files
-    Dir["#{Dir.pwd}/**/#{file_pattern}"].select{|f| File.file?(f)}
+    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd`.split("\n")
   end
 
   def gsub_file(file)
@@ -39,6 +39,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
       f.write text.gsub(find_pattern, replace_pattern)
     end
   rescue => e
+    require 'pry';binding.pry
     puts 'in: ' + file
     raise e
   end

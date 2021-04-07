@@ -1,10 +1,7 @@
 [include]
   path = ~/scripts/configs/gitconfig
-  path = ~/.config/work.git
+  path = ~/work/.gitconfig
 [credential]
 	helper = osxkeychain
-[user]
-  name = Kelly Wolf Stannard
-  email = kwstannard@gmail.com
 [core]
 	autocrlf = input

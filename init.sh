@@ -1,9 +1,8 @@
 PATH="/usr/local/sbin:$PATH"
 
-HOMEBREW_PREFIX="/usr/local/homebrew"
-PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+HOMEBREW_PREFIX="/usr/local"
 
-for f in ~/scripts/shell_scripts{,/**}/*.sh; do echo $f; source $f; done
+for f in ~/scripts/shell_scripts/*.sh; do echo $f; source $f; done
 PATH="$HOME/scripts/bin:$PATH"
 
 DISABLE_SPRING=1

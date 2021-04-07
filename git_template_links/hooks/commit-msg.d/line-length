@@ -12,7 +12,10 @@ puts commit_msg_no_cmt if ENV['DEBUG']
 commit_msg_unwrapped = commit_msg_no_cmt.gsub(/(\S)\n(\w)/, '\1 \2')
 puts commit_msg_unwrapped if ENV['DEBUG']
 
-commit_msg_rewrapped = commit_msg_unwrapped.gsub(/(.{1,72})\s/, "\\1\n").gsub("``` ", "```\n")
+commit_msg_rewrapped = commit_msg_unwrapped
+  .gsub("``` ", "```\n")
+  .gsub('\ ', "\\\n")
+  .gsub(/(.{1,72})\s/, "\\1\n")
 puts commit_msg_rewrapped if ENV['DEBUG']
 
 File.write(commit_file_path, commit_msg_rewrapped)

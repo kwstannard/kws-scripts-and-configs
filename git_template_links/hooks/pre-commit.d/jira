@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-if [ -z "$STORY" ]; then
-  echo No STORY variable set
-  echo '$ export STORY=""'
+if [ -n "$SKIP_JIRA" ]; then
+  exit 0
+fi
+
+if [ -z "$(git story)" ]; then
+  echo No story is set
+  echo '$ git story AA-1234'
   exit 1
 fi
 
-echo Story is $STORY
+echo "Story is $(git story)"

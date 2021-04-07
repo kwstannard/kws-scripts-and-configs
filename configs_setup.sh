@@ -19,6 +19,7 @@ ln -fs $dir/configs/$system_type/bashrc ~/.bashrc
 ln -fs $dir/configs/$system_type/bash_profile ~/.bash_profile
 ln -fs $dir/configs/$system_type/inputrc ~/.inputrc
 ln -fs $dir/configs/$system_type/gitconfig ~/.gitconfig
+ln -fs $dir/configs/$system_type/gitattributes ~/.gitattributes
 
 ln -fs $dir/git_template ~/.git_template
 

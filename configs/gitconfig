@@ -1,7 +1,7 @@
 [core]
   editor = vim
   commentChar = ~
-  hooksPath = ~/scripts/git_template_ruby/hooks
+  hooksPath = ../git/hooks
   autocrlf = true
 
 [user]
@@ -13,9 +13,6 @@
 
 [apply]
   whitespace = fix
-
-[init]
-  templatedir=~/scripts/git_template_ruby
 
 [push]
 	default = current
@@ -40,19 +37,19 @@
   st = status
   co = checkout
   sw = "!git branch $1; git switch"
+  mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
-  cbr = !git branch --merged | grep -v master | xargs git branch -d
+  cbr = !git branch --merged | grep -v $(git mainbranch) | grep -v master | xargs git branch -d
 
   l = log
-  r = !git l -30
-  ra = !git r --all
+  r = !git l -30 ra = !git r --all
   la = !git l --all
 
   fu = commit -a --fixup
   fuh = commit -a --fixup HEAD
   sq = commit -a --squash
   sqh = commit -a --squash HEAD
-  squash = "! git rebase -i --autosquash ${1:-master} #"
+  squash = "! git rebase -i --autosquash ${1:-$(git mainbranch)} #"
 
   authorstats = shortlog -sn
   praise = blame
@@ -65,6 +62,13 @@
 
 	conflicted = !nvim +Conflicted
 
+  currentbranch = "! if [ -f .git/rebase-merge/head-name ]; then cat .git/rebase-merge/head-name | sed 's;refs/heads/;;'; else git branch --show-current; fi"
+
+	story = "! git config branch.$(git currentbranch).story"
+
+	openpr = "! echo TODO"
+	openci = "! echo TODO"
+
 [pager]
   diff = diff-so-fancy | less --tabs=1,5 -RFX
   show = diff-so-fancy | less --tabs=1,5 -RFX
@@ -75,3 +79,10 @@
 [notes "rewrite"]
   squash = true
   amend = true
+
+[filter "tabspace"]
+	# smudge = gunexpand --tabs=2 --first-only
+	clean = gexpand --tabs=2 --initial
+
+[filter "debugging"]
+	clean = ruby -pe '$_.gsub!(/.*/, "")'

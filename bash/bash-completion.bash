@@ -5,3 +5,6 @@ elif [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
 else
   echo run \`brew install bash-completion\`
 fi
+
+complete -F _command be
+complete -F _command de

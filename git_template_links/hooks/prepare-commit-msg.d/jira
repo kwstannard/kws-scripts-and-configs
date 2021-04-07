@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
-tmp = File.read(ARGV[0])
-i = 0
-tmp = tmp.lines.select{|l|
-  i += 4 if l == "### Jira\n"
-  i -= 1 unless i == 0
-  i == 0
-}.join("") + "\n\n### Jira\n\n#{ENV["STORY"]}"
-File.write(ARGV[0], tmp, 0)
+if ENV['SKIP_JIRA']
+  exit 0
+end
+
+story=`git story`.strip
+
+tmp=File.read(ARGV[0])
+  .gsub(/\n+### Jira.*/, "").tap{ |m| puts m }
+	.+ "\n### Jira [#{story}](#{ENV["JIRA_STORY_URL"]}#{story})\n"
+File.write(ARGV[0], tmp)

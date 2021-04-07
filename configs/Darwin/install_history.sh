@@ -1,50 +1,4 @@
 set -e
-install_stuff () {
-  set -v
-  if ! which brew; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-  brew install bash-completion
-  #brew cask install slack
-  brew install vim
-  brew install nvim
-  mkdir -p ~/.vim/backup
-
-  brew install bash
-  brew install grep
-  brew install ripgrep
-  brew install git
-  brew install gh
-  brew cask install keepassx
-  brew cask install dropbox
-  brew cask install homebrew/cask-versions/firefox-developer-edition
-  brew install tmux
-  brew install jq
-  brew install yq
-  brew install cloc
-  brew install postgresql@9.6
-  brew services start postgresql@9.6
-  brew install mysql@5.6
-  brew services start mysql@5.6
-
-
-  brew install https://raw.githubusercontent.com/kwstannard/kws-scripts-and-configs/master/homebrew_tap/skhd.rb
-  brew services start skhd
-
-  #cp ~/Google\ Drive/oracle/* ~/Library/Caches/Homebrew/
-
-  brew install htop
-  brew install diff-so-fancy
-  brew install fd
-  brew install chruby
-  brew install ruby-install
-
-#  git clone https://github.com/jwilm/alacritty ~/alacritty
-#  pushd ~/alacritty
-#  make app
-#  ln -sf $(pwd)/target/release/osx/Alacritty.app/ /Applications/
-#  popd
-}
 
 github() {
   echo ssh key pass?
@@ -79,7 +33,8 @@ fix_defaults() {
 }
 
 #fix_defaults
-install_stuff
+dir="$(dirname $0)"
+source $dir/install_libs.sh
 #github
 #repositories
 

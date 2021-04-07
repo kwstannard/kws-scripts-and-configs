@@ -1,7 +1,7 @@
 echo bashrc run
 
-ORIG_PATH=$PATH
-echo $TERM
+export SHELL_SESSION_HISTORY=0
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 source ~/scripts/init.bash
 
@@ -9,28 +9,3 @@ echo TERM = $TERM
 echo PATH = $PATH
 echo HIST = $HISTFILE
 history | wc -l
-
-if which tmux; then
-  echo tmux in PATH
-
-  if [[ $TMUX ]]; then
-    count="$(tmux list-windows | wc -l)"
-
-    if [[ "$count" -ge "25" ]]; then
-      tmux new-window -n "tasks" taskell
-      echo final window. $count
-    else
-      env PATH=$ORIG_PATH TERM=xterm-256color $(which tmux) new-window -d -t "$count" -n "generated$count"
-    fi
-  elif tmux has-session; then
-    echo old session
-    tmux attach
-  else
-    echo new session
-    env PATH=$ORIG_PATH  TERM=xterm-256color $(which tmux) new-session
-  fi
-else
-  echo tmux not in PATH
-fi
-
-unset ORIG_PATH

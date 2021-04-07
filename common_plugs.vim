@@ -11,6 +11,7 @@ Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/goyo.vim', { 'for': ['text', 'markdown'] }
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-arpeggio'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-user'
@@ -26,4 +27,9 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/groovy.vim'
+Plug 'vim-utils/vim-troll-stopper'
+Plug 'vim-utils/vim-space'
+Plug 'vim-utils/vim-all'
 Plug 'w0rp/ale'
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
+Plug 'junkblocker/patchreview-vim'
