@@ -11,18 +11,17 @@ FInd and REplace
 usage: fire <find pattern> <replace pattern> <OPT: file pattern>
 
 fire uses ruby's regexp gsub to match and replace. Wrap patterns in strings for
-anything more complex than alphanumeric characters. The default file pattern is
-"#{FindAndReplaceText.new.file_pattern}".
+anything more complex than alphanumeric characters.
 
 Examples:
 
 Replace all occurrences of hello with goodbye:
 
-  fire hello goodbye '*'
+  fire hello goodbye
 
 Replace all occurrences of hello with goodbye that occur in .yml files.
 
-  fire hello goodbye '*.yml'
+  fire hello goodbye
 
 Replace foo with bar only if it is at start of the line in default files:
 
@@ -47,7 +46,6 @@ end.parse!
 
 find = Regexp.new(ARGV[0], options[:regexp])
 replace = ARGV[1].gsub("//", "/")
-file = ARGV[2]
 
 at_exit { puts 3 }
 
@@ -55,6 +53,6 @@ if options[:class_name]
   FindAndReplacePath.new(find, replace).call
 else
   puts 1
-  FindAndReplaceText.new(find, replace, file).call
+  FindAndReplaceText.new(find, replace).call
   puts 2
 end

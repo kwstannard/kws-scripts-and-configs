@@ -65,6 +65,7 @@
   currentbranch = "! if [ -f .git/rebase-merge/head-name ]; then cat .git/rebase-merge/head-name | sed 's;refs/heads/;;'; else git branch --show-current; fi"
 
 	story = "! git config branch.$(git currentbranch).story"
+  branch-stories = "! git config --get-regexp 'branch.*.story' | ruby -pe '$_.gsub!(%(branch.),%()).gsub!(%(.story), %())' | column -t"
 
 	openpr = "! echo TODO"
 	openci = "! echo TODO"

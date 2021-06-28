@@ -15,7 +15,7 @@ class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
   end
 end
 
-class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pattern)
+class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
     files.each do |file|
@@ -23,14 +23,10 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :file_pat
     end
   end
 
-  def file_pattern
-    super || '{Rakefile,*.{rb,yml,erb,haml,slim,feature,rdoc,ru,gemspec,js,coffee}}'
-  end
-
   private
 
   def files
-    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd`.split("\n")
+    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd -tyaml`.split("\n")
   end
 
   def gsub_file(file)

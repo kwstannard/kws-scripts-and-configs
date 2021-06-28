@@ -12,6 +12,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/goyo.vim', { 'for': ['text', 'markdown'] }
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kana/vim-arpeggio'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-user'

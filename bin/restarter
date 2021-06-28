@@ -1,0 +1,10 @@
+#! /usr/bin/env sh
+
+cmd=$1
+shift
+fs_cmd="fswatch -o $@"
+
+exec $fs_cmd | ruby -e "
+while (pid=fork{ exec('$cmd') }) && gets do
+  Process.kill('TERM', pid); Process.wait
+end"
