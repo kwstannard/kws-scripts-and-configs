@@ -44,15 +44,13 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-find = Regexp.new(ARGV[0], options[:regexp])
-replace = ARGV[1].gsub("//", "/")
+find = Regexp.new(ARGV.shift, options[:regexp])
+replace = ARGV.shift.gsub("//", "/")
 
-at_exit { puts 3 }
+paths = ARGV
 
 if options[:class_name]
-  FindAndReplacePath.new(find, replace).call
+  FindAndReplacePath.new(find, replace, paths).call
 else
-  puts 1
-  FindAndReplaceText.new(find, replace).call
-  puts 2
+  FindAndReplaceText.new(find, replace, paths).call
 end

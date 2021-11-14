@@ -23,9 +23,11 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-abolish'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/groovy.vim'
 Plug 'vim-utils/vim-troll-stopper'

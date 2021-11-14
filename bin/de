@@ -4,5 +4,5 @@ require 'pathname'
 env = Pathname.pwd.ascend.map{|x| x.join(".env")}.select(&:exist?).map(&:read).reverse.join
 
 regexp = /^(?<a>\w+)=(?:'(?<b>.+?)'|"\g<b>"|\g<b>)$/m
-ENV.update env.scan(regexp).to_h
+ENV.update env.scan(regexp).to_h.merge(ENV.to_h)
 exec(ENV, *ARGV)

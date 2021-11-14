@@ -1,5 +1,5 @@
 require 'pathname'
-class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
+class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern, :paths)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
 
@@ -11,11 +11,13 @@ class FindAndReplacePath < Struct.new(:find_pattern, :replace_pattern)
   private
 
   def files
-    Pathname.glob(Pathname.pwd.join("**/*")).select{|p| p.to_s.match find_pattern}
+    paths.each do |path|
+      Pathname.glob(Pathname(path).join("**/*")).select{|p| p.to_s.match find_pattern}
+    end
   end
 end
 
-class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern)
+class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :paths)
   def call
     puts "#{find_pattern.inspect} => #{replace_pattern.inspect}"
     files.each do |file|
@@ -26,7 +28,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern)
   private
 
   def files
-    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd -tyaml`.split("\n")
+    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd -tyaml #{paths.join(" ")}`.split("\n")
   end
 
   def gsub_file(file)
