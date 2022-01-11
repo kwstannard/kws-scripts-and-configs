@@ -3,24 +3,24 @@ source ~/scripts/nvim_plugs.vim
 source ~/scripts/common_plugs.vim
 call plug#end()
 
-rubyfile ~/scripts/vim/convert_let.rb
-
 function! ConvertLet()
+  rubyfile ~/scripts/vim/convert_let.rb
   ruby ConvertLet.new.call
 endfunction
 
 nnoremap <leader>cl :call ConvertLet()<cr>
-
-rubyfile ~/scripts/vim/convert_hash.rb
+vnoremap <leader>cl :call ConvertLet()<cr>
 
 function! ConvertHash()
+  rubyfile ~/scripts/vim/convert_hash.rb
   ruby ConvertHash.new.call
 endfunction
 
 nnoremap <leader>ch :call ConvertHash()<cr>
+vnoremap <leader>ch :call ConvertHash()<cr>
 
-rubyfile ~/scripts/vim/corresponding_file_openner.rb
 function! OpenCorrespondingFile()
+  rubyfile ~/scripts/vim/corresponding_file_openner.rb
   ruby vim=Struct.new(:commander, :window).new(VIM, VIM::Window.current); CorrespondingFileOpenner.new(vim).open
 endfunction
 

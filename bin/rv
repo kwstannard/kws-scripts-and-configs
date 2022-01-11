@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+
+case ARGV.pop
+when 'interpolate'
+  lines = ARGF.readlines
+  puts lines[0...(lines.length/2)].zip(lines[(lines.length/2)..-1])
+end

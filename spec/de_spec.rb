@@ -13,6 +13,9 @@ RSpec.describe 'de' do
       lines"
     FILE
 
+    # $(which de) will return the absolute path to de
+    # env -i runs something with a clear env
+    # the string interpolation will happen before env clearing.
     expect(Marshal.load(`env -i $(which de) ruby -e "puts Marshal.dump(ENV.to_h)"`))
       .to include(
         "HELLO"=>"WORLD",

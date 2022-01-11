@@ -1,6 +1,5 @@
 :commit_author_capitalization:
-  :enabled: true
-  :severity: :error
+  :enabled: true :severity: :error
 :commit_author_email:
   :enabled: true
   :severity: :error

@@ -211,9 +211,9 @@ au BufNewFile,BufRead * :call s:DetectFileType()
 
 au BufEnter * :checktime
 
-" rotate windows
-nnoremap <c-w><end> :tabdo wincmd h \| wincmd K<cr>
-nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
+" " rotate windows
+" nnoremap <c-w><end> :tabdo wincmd h \| wincmd K<cr>
+" nnoremap <c-w><home> :tabdo wincmd k \| wincmd H<cr>
 
 
 let g:ale_lint_delay=500
@@ -264,3 +264,5 @@ let g:NERDSpaceDelims = 1
 
 let $BASH_ENV="~/scripts/vim.bash"
 set stl+=%{ConflictedVersion()}
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
