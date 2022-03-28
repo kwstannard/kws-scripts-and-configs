@@ -30,6 +30,15 @@ fix_defaults() {
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
   defaults write -g com.apple.swipescrolldirection -int 0
+
+  keyboard_props="$(ioreg -n "Apple Internal Keyboard / Trackpad" -r -c AppleUSBDevice)"
+  id_product="$(echo $keyboard_props | grep idProduct | grep -o '\w\+$')"
+  id_vendor="$(echo $keyboard_props | grep idVendor | grep -o '\w\+$')"
+  defaults -currentHost write -g com.apple.keyboard.modifiermapping.$id_vendor-$id_product-0\
+    -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'\
+     '<dict><key>HIDKeyboardModifierMappingDst</key><integer>0</integer><key>HIDKeyboardModifierMappingSrc</key><integer>2</integer></dict>'\
+     '<dict><key>HIDKeyboardModifierMappingDst</key><integer>3</integer><key>HIDKeyboardModifierMappingSrc</key><integer>4</integer></dict>'\
+     '<dict><key>HIDKeyboardModifierMappingDst</key><integer>4</integer><key>HIDKeyboardModifierMappingSrc</key><integer>3</integer></dict>'
 }
 
 #fix_defaults
