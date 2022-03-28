@@ -155,13 +155,8 @@ let g:ale_lint_on_enter=0
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
-map <leader>e :up<CR>:edit <C-r>=(expand('%:h')).'/'<cr>
-map <leader>E :up<CR>:edit ./
 map <leader>v :view <C-r>=(expand('%:h')).'/'<cr>
 map <leader>V :view ./
-map <leader>s :split <C-r>=(expand('%:h')).'/'<cr>
-map <leader>S :split ./
-map <leader>r :bufdo<space>e<cr>
 
 " RENAME CURRENT FILE
 function! RenameFile()
@@ -266,3 +261,5 @@ let $BASH_ENV="~/scripts/vim.bash"
 set stl+=%{ConflictedVersion()}
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+Abolish licence{e,s} license{}
