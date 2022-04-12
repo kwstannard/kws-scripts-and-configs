@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ "$(defaults -currentHost read ~/Library/Preferences/ByHost/com.apple.notificationcenterui doNotDisturb)" -eq 0 ]; then
+if [ "$(defaults read com.apple.controlcenter "NSStatusItem Visible FocusModes")" -eq 0 ]; then
   exec "$@"
 else
   printf "Do Not Disturb is on. Command not run\n"

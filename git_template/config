@@ -1,8 +1,0 @@
-[remote]
-  pushDefault = origin
-
-[branch "master"]
-  pushRemote = origin
-	remote = bny
-	merge = refs/heads/master
-	rebase = true

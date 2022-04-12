@@ -5,3 +5,6 @@
 	helper = osxkeychain
 [core]
 	autocrlf = input
+[init]
+	defaultBranch = integration
+	templatedir = /Users/kellystannard/scripts/git_template_ruby

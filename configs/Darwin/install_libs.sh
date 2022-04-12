@@ -85,3 +85,5 @@ brew install sqlite
 brew install tldr
 brew install v8
 brew install vim
+brew install taskell
+brew install awscli

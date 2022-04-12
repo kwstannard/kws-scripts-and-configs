@@ -10,6 +10,8 @@ pids=()
 #exitcodes=()
 hookname=$(basename $0)
 
+echo 1
+
 if [ $DEBUG ]; then printf "$hookname\n"; fi
 
 # Run each hook, passing through STDIN and storing the exit code.
