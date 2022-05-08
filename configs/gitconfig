@@ -1,7 +1,6 @@
 [core]
   editor = vim
   commentChar = ~
-  hooksPath = ../git/hooks
   autocrlf = true
 
 [user]

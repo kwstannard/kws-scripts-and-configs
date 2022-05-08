@@ -1,7 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'pathname'
-env = Pathname.pwd.ascend.map{|x| x.join(".env")}.select(&:exist?).map(&:read).reverse.join
+env = Pathname.pwd.ascend
+  .map{|x| x.join(".env")}
+  .reverse
+  .select(&:exist?)
+  .map(&:read)
+  .join
 
 regexp = /^(?<a>\w+)=(?:'(?<b>.+?)'|"\g<b>"|\g<b>)$/m
 ENV.update env.scan(regexp).to_h.merge(ENV.to_h)

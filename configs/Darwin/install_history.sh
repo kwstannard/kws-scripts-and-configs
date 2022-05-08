@@ -26,10 +26,10 @@ github() {
 fix_defaults() {
   defaults write -g KeyRepeat -int 1
   defaults write -g InitialKeyRepeat -int 10
+  defaults write -g com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadScroll -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
-  defaults write -g com.apple.swipescrolldirection -int 0
 
   keyboard_props="$(ioreg -n "Apple Internal Keyboard / Trackpad" -r -c AppleUSBDevice)"
   id_product="$(echo $keyboard_props | grep idProduct | grep -o '\w\+$')"

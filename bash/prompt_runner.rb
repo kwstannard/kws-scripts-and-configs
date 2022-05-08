@@ -1,7 +1,7 @@
 #! /Users/kellystannard/.rubies/scripting/bin/ruby
 
 #begin; require 'term/ansicolor'; rescue LoadError; puts "$ gem install term-ansicolor"; exit; end
-require 'mkmf'
+#require 'mkmf'
 
 # include Term::ANSIColor
 
