@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+puts Pathname.pwd.ascend
+  .map{|x| x.join(".env")}
+  .reverse
+  .select(&:exist?)
+  .map(&:read)
+  .join

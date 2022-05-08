@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+version="${RUBY_VERSION:-$(ruby-version)}"
+exec ~/.gem/ruby/$version/bin/"$@"

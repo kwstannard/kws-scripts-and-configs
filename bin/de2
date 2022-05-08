@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ascending-cat .env | dot-env - "$@"

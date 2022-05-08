@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+regexp = /^\w+=(?:'.+?'|".+?"|.+?)$/m
+puts ARGF.read.scan(regexp)
