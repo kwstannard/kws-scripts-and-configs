@@ -4,13 +4,15 @@ commit_file_path = ARGV[0]
 
 subject_line = File.read(commit_file_path).lines.first
 
+exit 0 if subject_line.split.first.match /(fixup!|squash!|merge)/i
+
 unless subject_line.size < 70
   puts "subject is too long"
   exit 1
 end
 
-allowed_verbs = %w[Add Drop Fix]
-unless allowed_verbs.include? subject_line.split.first
-  puts "Start commits with one of the following: #{allowed_verbs.join(", ")}"
+allowed_verbs = /(add|cut|fix)/i
+unless subject_line.split.first.match allowed_verbs
+  puts "Start commits with one of the following: add, cut, fix"
   exit 1
 end

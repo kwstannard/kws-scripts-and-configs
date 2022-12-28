@@ -15,6 +15,7 @@
 
 [push]
 	default = current
+  autoSetupRemote = true
 
 [pull]
   rebase = true
@@ -36,6 +37,7 @@
   st = status
   co = checkout
   sw = "!git branch $1; git switch"
+  nb = "!git branch $1; git rebase --onto $(git mainbranch) $1 --autostash"
   mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
   cbr = !git branch --merged | grep -v $(git mainbranch) | grep -v master | xargs git branch -d

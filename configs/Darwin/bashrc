@@ -8,4 +8,5 @@ source ~/scripts/init.bash
 echo TERM = $TERM
 echo PATH = $PATH
 echo HIST = $HISTFILE
+history -n
 history | wc -l

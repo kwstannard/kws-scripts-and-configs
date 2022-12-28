@@ -1,16 +1,9 @@
-set maxApplications to {¬
-	"Firefox Developer Edition", ¬
-	"Slack", ¬
-	"iTunes", ¬
-	"Activity Monitor",¬
-	"Terminal"¬
-}
+set maxApplications to {"Firefox Developer Edition","Slack","iTunes","Terminal","Kitty"}
 
 repeat with appName in maxApplications
-	try
-		tell application appName
-      tell windows to set zoomed to true
-		end tell
-	end try
+  try
+    tell application appName
+        tell the front window to set zoomed to true
+    end tell
+  end try
 end repeat
-
