@@ -2,7 +2,7 @@
 
 require 'pathname'
 env = Pathname.pwd.ascend
-  .map{|x| x.join(".env")}
+  .reduce([]){|a, x| a << x.join(".env.#{ENV['NAME']}") << x.join(".env")}
   .reverse
   .select(&:exist?)
   .map(&:read)

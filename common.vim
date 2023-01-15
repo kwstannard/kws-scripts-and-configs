@@ -1,7 +1,6 @@
 set nocompatible
 source ~/scripts/configs/vim/buffers.vim
 syntax enable
-colorscheme google
 set shell=/bin/bash
 set history=1000
 set t_Co=256
@@ -116,7 +115,23 @@ au FileType eruby filetype indent off
 au FileType eruby filetype indent on
 
 "colorscheme changes
+highlight Normal ctermbg=Black ctermfg=White
 highlight Comment ctermfg=LightRed
+highlight Define ctermfg=darkgrey
+highlight Type ctermfg=Grey
+highlight Number ctermfg=LightYellow
+highlight Constant ctermfg=LightMagenta
+highlight Function ctermfg=lightgrey
+highlight Statement ctermfg=grey
+highlight rubyBlockParameterList ctermfg=grey
+highlight rubyMethodBlock ctermfg=lightgrey
+highlight rubyDoBlock ctermfg=lightgrey
+highlight rubyCurlyBlock ctermfg=lightgrey
+highlight rubyCaseExpression ctermfg=lightgrey
+highlight rubySymbol ctermfg=LightYellow
+highlight Identifier ctermfg=grey
+highlight PreProc ctermfg=cyan
+
 highlight LineNr ctermfg=DarkGrey
 
 "whitespace highlighting
@@ -261,5 +276,7 @@ let $BASH_ENV="~/scripts/vim.bash"
 set stl+=%{ConflictedVersion()}
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+let g:EditorConfig_max_line_indicator = 'fill'
+hi ColorColumn ctermbg=darkgrey
 
 Abolish licence{e,s} license{}
