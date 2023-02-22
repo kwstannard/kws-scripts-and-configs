@@ -21,6 +21,17 @@ Precedence order.
 
 Tip: You may want to consider having ".env.local" files and also setting
 "export NAME=local" in your shell rc file.
+
+Valid variable formats (anything else will be ignored):
+
+  KEY=value
+  KEY=value with spaces
+  KEY="double quoted
+  multiline
+  value"
+  KEY='single quoted
+  multiline
+  value'
 HELP
 
 require 'pathname'

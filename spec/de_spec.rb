@@ -6,6 +6,7 @@ RSpec.describe 'de' do
       HELLO=WORLD
       quote=in'"string
       Goodbye='moon'
+      ???
       multi='line"
       string'
       # comment
