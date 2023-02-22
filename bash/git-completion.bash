@@ -3609,6 +3609,6 @@ if [ "$OSTYPE" = cygwin ]; then
 	___git_complete git.exe __git_main
 fi
 
-__git_complete sw _git_checkout
-__git_complete jit _git
-complete -o bashdefault -o default -F _git jit
+#__git_complete sw _git_checkout
+__git_complete jit git
+# complete -o bashdefault -o default -F __git_main jit
