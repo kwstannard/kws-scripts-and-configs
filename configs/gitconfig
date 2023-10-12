@@ -2,10 +2,12 @@
   editor = vim
   commentChar = ~
   autocrlf = true
+  excludesFile = ~/.config/git/info/ignore
 
 [user]
-  name = Kelly Stannard
+  name = Kelly Wolf Stannard
   email = kwstannard@gmail.com
+  signingKey = 2E8D6C9099081B63CE89C12D34717AC4CF994637
 
 [fetch]
   prune = true
@@ -25,9 +27,16 @@
   changed = yellow bold
   untracked = red bold ul
 
+[color "diff"]
+  old = "#ff6666"
+  new = "#11ff11"
+
 [branch]
 #  autosetupmerge = always
   autosetuprebase = always
+
+[commit]
+  gpgSign = true
 
 [diff]
   color = true
@@ -40,17 +49,18 @@
   nb = "!git branch $1; git rebase --onto $(git mainbranch) $1 --autostash"
   mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
-  cbr = !git branch --merged | grep -v $(git mainbranch) | grep -v master | xargs git branch -d
+  xcbr = !git branch --merged | grep -v $(git mainbranch) | grep -v master | xargs git branch -d
+	cbr = "! git checkout origin/develop && for b in $(git branch | grep -v develop | grep -v master | grep -v \"*\"); do git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code >/dev/null && git branch -D $b || (echo $b was kept && git merge --abort >/dev/null); done && git checkout -"
 
   l = log
   r = !git l -30 ra = !git r --all
   la = !git l --all
 
-  fu = commit -a --fixup
-  fuh = commit -a --fixup HEAD
-  sq = commit -a --squash
-  sqh = commit -a --squash HEAD
-  squash = "! git rebase -i --autosquash ${1:-$(git mainbranch)} #"
+  fu = commit -a -m '[ci skip]' --fixup
+  fuh = commit -a --fixup HEAD -m '[ci skip]'
+  sq = commit -a --squash -m '[ci skip]'
+  sqh = commit -a --squash HEAD -m '[ci skip]'
+  squash = "! git rebase -i --autosquash ${1:-$(git merge-base HEAD $(git mainbranch))} #"
 
   authorstats = shortlog -sn
   praise = blame
@@ -70,6 +80,8 @@
 
 	openpr = "! echo TODO"
 	openci = "! echo TODO"
+
+	gone = ! git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
 
 [pager]
   diff = diff-so-fancy | less --tabs=1,5 -RFX

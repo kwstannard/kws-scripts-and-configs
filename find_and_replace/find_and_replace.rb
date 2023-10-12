@@ -28,7 +28,7 @@ class FindAndReplaceText < Struct.new(:find_pattern, :replace_pattern, :paths)
   private
 
   def files
-    `rg --files -truby -tjs -thtml -ttxt -treadme -tjson -tmd -tyaml #{paths.join(" ")}`.split("\n")
+    `rg --files -truby -terb -tjs -thtml -ttxt -treadme -tjson -tmd -tyaml #{paths.join(" ")}`.split("\n")
   end
 
   def gsub_file(file)

@@ -21,6 +21,7 @@
   brew install tmux
   brew install jq
   brew install yq
+  brew install shellcheck
   brew install cloc
   brew install postgresql
   brew services start postgresql

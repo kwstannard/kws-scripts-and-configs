@@ -1,0 +1,10 @@
+{{/* table template */ -}}
+{{- defaultColWidth 120 -}}
+{{- headers "Priority" "Status" "Ticket" "Summary" -}}
+{{- range .issues -}}
+{{- row -}}
+{{- cell .fields.priority.name -}}
+{{- cell .fields.status.name -}}
+{{- cell .key -}}
+{{- cell .fields.summary -}}
+{{ end }}

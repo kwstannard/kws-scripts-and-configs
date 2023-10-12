@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-if [ -n "$SKIP_JIRA" ]; then
-  exit 0
-fi
+[ -n "$SKIP_JIRA" ] && echo SKIP_JIRA set && exit 0
+[ -f .git/MERGE_HEAD ] && exit 0
 
 if [ -z "$(git story)" ]; then
   echo No story is set

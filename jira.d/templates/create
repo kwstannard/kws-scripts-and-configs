@@ -1,0 +1,15 @@
+fields:
+  project:
+    key: ES
+  issuetype:
+    name: Task
+  summary: >-
+    {{ .overrides.summary }}
+  priority: # Values: Highest, High, Medium, Low, Lowest, Priority, Priority - ME, J,
+    name: Medium
+  description: |
+    {{ .overrides.description }}
+  assignee:
+    emailAddress: kelly.stannard@andros.co
+  customfield_10778:
+    value: API

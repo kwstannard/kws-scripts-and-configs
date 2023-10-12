@@ -4,7 +4,7 @@ commit_file_path = ARGV[0]
 
 subject_line = File.read(commit_file_path).lines.first
 
-exit 0 if subject_line.split.first.match /(fixup!|squash!|merge)/i
+exit 0 if subject_line.split.first.match /(fixup!|squash!|merge|mob)/i
 
 unless subject_line.size < 70
   puts "subject is too long"

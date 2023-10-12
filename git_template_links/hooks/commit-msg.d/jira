@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'shellwords'
 
-if ENV['SKIP_JIRA']
+if ENV['SKIP_JIRA'] || File.exist?(".git/MERGE_HEAD")
   exit 0
 end
 
@@ -18,14 +18,11 @@ if story.empty?
   args += %(-o description=#{description}) if description
 
   puts %x(
-  git story "$( \
-    jira create -p ES -o summary=#{summary} #{args} --noedit | \
-    ruby -ane 'puts $F[1]'
-  )"
+  git story "$( jira create -p ES -o summary=#{summary} #{args} --noedit | ruby -ane 'puts $F[1]')"
   )
 
   story = `git story`.strip
 end
 
-tmp = message + "\n### Jira [#{story}](#{ENV["JIRA_STORY_URL"]}#{story})\n"
+tmp = message + "\n### Jira #{story}\n"
 File.write(ARGV[0], tmp)

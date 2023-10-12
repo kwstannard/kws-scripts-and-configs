@@ -1,0 +1,9 @@
+{{- newTable (sub termWidth 10) -}}
+{{- tableHeaders "hello" -}}
+{{- tableRow "world" -}}
+{{ tableRender }}
+{{ "" }}
+{{- newTable (sub termWidth 10) -}}
+{{- tableHeaders "goodnight" -}}
+{{- tableRow "moon" -}}
+{{ tableRender }}

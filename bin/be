@@ -1,5 +1,11 @@
 #! /usr/bin/env ruby
 
+if ARGV[0] == 'rspec'
+  ENV['NAME'] = 'test'
+else
+  ENV['NAME'] = 'development'
+end
+
 if File.exists?("bin/#{ARGV[0]}")
   exec("de", "bin/#{ARGV[0]}", *ARGV[1..-1])
 else
