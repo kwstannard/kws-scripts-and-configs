@@ -3,4 +3,4 @@ user: kelly.stannard@andros.co
 password-source: keyring
 queries:
   api: status in ("Selected For Dev", "In Progress") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
-  api-ip: status in ("In Progress") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic"
+  api-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic"
