@@ -3,19 +3,22 @@
 commit_file_path = ARGV[0]
 
 commit_msg = File.read(commit_file_path)
-puts commit_msg if ENV['DEBUG']
 
 comment_char = `git config --get core.commentchar`.strip || "#"
 commit_msg_no_cmt = commit_msg.gsub(/^#{comment_char}.*\n/, '')
-puts commit_msg_no_cmt if ENV['DEBUG']
+puts "commit message", commit_msg_no_cmt if ENV['DEBUG']
+
+trailers= commit_msg_no_cmt.slice!(/\n\n(\S+:.*\n)*\n*\z/) || ""
+puts "trailers", trailers if ENV['DEBUG']
 
 commit_msg_unwrapped = commit_msg_no_cmt.gsub(/(\S)\n(\w)/, '\1 \2')
-puts commit_msg_unwrapped if ENV['DEBUG']
+puts "unwrapped", commit_msg_unwrapped if ENV['DEBUG']
 
 commit_msg_rewrapped = commit_msg_unwrapped
   .gsub("``` ", "```\n")
   .gsub('\ ', "\\\n")
-  .gsub(/(.{1,72})\s/, "\\1\n")
-puts commit_msg_rewrapped if ENV['DEBUG']
+  .gsub(/(.{1,72})(\s|$)/, "\\1\n")
+  .+(trailers)
+puts "rewrapped", commit_msg_rewrapped if ENV['DEBUG']
 
 File.write(commit_file_path, commit_msg_rewrapped)

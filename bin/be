@@ -3,7 +3,7 @@
 if ARGV[0] == 'rspec'
   ENV['NAME'] = 'test'
 else
-  ENV['NAME'] = 'development'
+  ENV['NAME'] ||= 'development'
 end
 
 if File.exists?("bin/#{ARGV[0]}")

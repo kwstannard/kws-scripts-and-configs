@@ -19,7 +19,6 @@ if [ $DEBUG ]; then printf "$hookname\n"; fi
 for hook in $PWD/.git/hooks/$hookname.d/*; do
   if [ $DEBUG ]; then printf "$hook\n"; fi
   test -x "$hook" || continue
-  echo $hook
   $hook "$@" &
   pids+=($!)
 done

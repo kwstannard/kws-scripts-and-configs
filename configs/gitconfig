@@ -46,11 +46,12 @@
   st = status
   co = checkout
   sw = "!git branch $1; git switch"
-  nb = "!git branch $1; git rebase --onto $(git mainbranch) $1 --autostash"
+  nb = "!git branch $1; git rebase --autostash --onto $(git mainbranch) $1"
+	nf = "!git nb $1; git story"
   mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
   fcbr = !(git remote | xargs git remote prune) && git branch --merged | grep -v develop | grep -v dev | xargs git branch -d
   xcbr = !git branch --merged | grep -v $(git mainbranch) | grep -v master | xargs git branch -d
-	cbr = "! git checkout origin/develop && for b in $(git branch | grep -v develop | grep -v master | grep -v \"*\"); do git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code >/dev/null && git branch -D $b || (echo $b was kept && git merge --abort >/dev/null); done && git checkout -"
+  cbr = "!bash -c 'mkdir -p /tmp/diff/f; git checkout od && for b in $(git branch | grep -v \"*\"); do test -n \"$(git config \"branch.$b.keep\")\" || (git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code > /tmp/diff/$b && git branch -D $b || echo $b was kept; git merge --abort >/dev/null;) done && git checkout -'" -
 
   l = log
   r = !git l -30 ra = !git r --all
@@ -83,6 +84,8 @@
 
 	gone = ! git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
 
+	pass = "!bash -c 'test -z $1 && git fuh || git sqh -m $1; git push'" -
+	get = pull
 [pager]
   diff = diff-so-fancy | less --tabs=1,5 -RFX
   show = diff-so-fancy | less --tabs=1,5 -RFX

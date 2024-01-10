@@ -3,7 +3,11 @@
 {{- headers "Priority" "Status" "Ticket" "Summary" -}}
 {{- range .issues -}}
 {{- row -}}
-{{- cell .fields.priority.name -}}
+{{- if .fields.priority }}
+{{- cell .fields.priority.name }}
+{{- else }}
+{{- cell "" }}
+{{- end }}
 {{- cell .fields.status.name -}}
 {{- cell .key -}}
 {{- cell .fields.summary -}}

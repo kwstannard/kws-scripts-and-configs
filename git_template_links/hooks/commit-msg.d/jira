@@ -7,8 +7,11 @@ end
 
 story=`git story`.strip
 
-message = File.read(ARGV[0])
-  .gsub(/\n+### Jira.*/, "").tap{ |m| puts m }
+message = File.read(ARGV[0]).gsub(/\n*\z/, "\n")
+
+if message.match(/\A(fixup|squash)!/)
+  exit 0
+end
 
 if story.empty?
   summary = message.lines[0].strip.shellescape
@@ -24,5 +27,4 @@ if story.empty?
   story = `git story`.strip
 end
 
-tmp = message + "\n### Jira #{story}\n"
-File.write(ARGV[0], tmp)
+File.write(ARGV[0], "#{story} #{message}\nProject: #{story}\nPair: sushil.thapa@andros.co")
