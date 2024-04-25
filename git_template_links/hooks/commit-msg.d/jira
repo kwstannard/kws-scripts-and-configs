@@ -12,12 +12,13 @@ if File.exist?(".git/MERGE_HEAD")
 end
 
 story=`git story`.strip
+project=`git project`.strip
 
 message = File.read(ARGV[0])
 
 message = message
-  .gsub(/\AES-\d+ */, '')
-  .gsub(/(Project: )?ES-\d+ */, '')
+  .gsub(/\A[A-Z]+-\d+ */, '')
+  .gsub(/(Project: )?[A-Z]+-\d+ */, '')
   .gsub(/\n*\z/, "\n")
 
 if message.match(/\A(fixup|squash)!/)
@@ -38,7 +39,7 @@ if story.empty?
   args += %(-o description=#{description}) if description
 
   puts %x(
-  git story "$( jira create -p ES -o summary=#{summary} #{args} --noedit | ruby -ane 'puts $F[1]')"
+  git story "$( jira create -p #{project} -o summary=#{summary} #{args} --noedit | ruby -ane 'puts $F[1]')"
   )
 
   story = `git story`.strip

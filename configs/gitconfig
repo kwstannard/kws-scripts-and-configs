@@ -76,6 +76,7 @@
 
   currentbranch = "! if [ -f .git/rebase-merge/head-name ]; then cat .git/rebase-merge/head-name | sed 's;refs/heads/;;'; else git branch --show-current; fi"
 
+	project = "! env | grep JIRA_PROJECT || git config core.project"
 	story = "! git config branch.$(git currentbranch).story"
   branch-stories = "! git config --get-regexp 'branch.*.story' | ruby -pe '$_.gsub!(%(branch.),%()).gsub!(%(.story), %())' | column -t"
 

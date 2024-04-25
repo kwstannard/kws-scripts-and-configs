@@ -7,7 +7,7 @@ if [ -z "$(git story)" ]; then
   echo No story is set
   echo '$ git story AA-1234'
   read -ep 'create new story? (enter for no)' NEW_STORY < /dev/tty
-  if [ -n "$NEW_STORY" ]; then
+  if [ "$NEW_STORY"  ]; then
     exit 0
   else
     exit 1
