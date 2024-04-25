@@ -3,9 +3,9 @@ require 'shellwords'
 
 # clear the original story
 
-File.write(
-  ARGV[0],
-  File.read(ARGV[0])
-    .gsub(/(Project: )?ES-\d+ */, '')
-    .gsub(/^Pair: .*/, '')
-)
+# File.write(
+#   ARGV[0],
+#   File.read(ARGV[0])
+#     .gsub(/(Project: )?ES-\d+ */, '')
+#     .gsub(/^Pair: .*/, '')
+# )

@@ -7,7 +7,12 @@ custom-commands:
     script: "{{jira}} list -n api-bl -l 1"
 config:
   noedit: true
+  no-edit: true
 queries:
+  crd: status in ("Selected For Dev", "In Progress") AND ("Dev Team[Dropdown]" IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
+  crd-bl: status in ("Selected For Dev") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
+  crd-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic"
+
   api: status in ("Selected For Dev", "In Progress") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
   api-bl: status in ("Selected For Dev") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
   api-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic"

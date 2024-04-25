@@ -59,8 +59,8 @@
 
   fu = commit -a -m '[ci skip]' --fixup
   fuh = commit -a --fixup HEAD -m '[ci skip]'
-  sq = commit -a --squash -m '[ci skip]'
-  sqh = commit -a --squash HEAD -m '[ci skip]'
+  sq = commit -a --squash
+  sqh = commit -a --squash HEAD
   squash = "! git rebase -i --autosquash ${1:-$(git merge-base HEAD $(git mainbranch))} #"
 
   authorstats = shortlog -sn

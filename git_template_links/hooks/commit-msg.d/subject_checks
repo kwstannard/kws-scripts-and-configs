@@ -2,7 +2,7 @@
 
 commit_file_path = ARGV[0]
 
-subject_line = File.read(commit_file_path).lines.first
+subject_line = File.read(commit_file_path).lines.first.gsub(/ES-\d+/,'')
 
 exit 0 if subject_line.split.first.match /(fixup!|squash!|merge|mob)/i
 
@@ -11,8 +11,8 @@ unless subject_line.size < 70
   exit 1
 end
 
-allowed_verbs = /(add|cut|fix)/i
+allowed_verbs = /(add|cut|fix|ref)/i
 unless subject_line.split.first.match allowed_verbs
-  puts "Start commits with one of the following: add, cut, fix"
+  puts "Start commits with one of the following: add, cut, fix, ref"
   exit 1
 end
