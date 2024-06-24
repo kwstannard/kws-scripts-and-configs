@@ -45,7 +45,6 @@
 [alias]
   st = status
   co = checkout
-  sw = "!git branch $1; git switch"
   nb = "!git branch $1; git rebase --autostash --onto $(git mainbranch) $1"
 	nf = "!git nb $1; git story"
   mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
@@ -78,6 +77,7 @@
 
 	project = "! env | grep JIRA_PROJECT || git config core.project"
 	story = "! git config branch.$(git currentbranch).story"
+	pull-request-id = "! git config branch.$(git currentbranch).pull-request-id"
   branch-stories = "! git config --get-regexp 'branch.*.story' | ruby -pe '$_.gsub!(%(branch.),%()).gsub!(%(.story), %())' | column -t"
 
 	openpr = "! echo TODO"

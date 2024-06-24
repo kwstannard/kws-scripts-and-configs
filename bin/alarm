@@ -1,0 +1,3 @@
+#! /usr/bin/env ruby
+
+[0.5,0.5,0.25,0.25,0.5].cycle{ printf "\a"; sleep _1 }

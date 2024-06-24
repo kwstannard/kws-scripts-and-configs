@@ -1,6 +1,8 @@
 " Plug 'bruno-/vim-ruby-fold'
 " Plug 'vim-syntastic/syntastic'
 " Plug 'aklt/plantuml-syntax'
+Plug 'sjl/gundo.vim'
+let g:gundo_prefer_python3 = 1
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-sort-motion'
@@ -20,10 +22,12 @@ Plug 'kwstannard/align'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
