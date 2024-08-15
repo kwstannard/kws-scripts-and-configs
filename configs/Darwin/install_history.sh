@@ -28,6 +28,7 @@ fix_defaults() {
   defaults write -g InitialKeyRepeat -int 10
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadScroll -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write -g NSWindowShouldDragOnGesture -bool true
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadPinch -int 0
   defaults write com.apple.AppleMultiTouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
 
