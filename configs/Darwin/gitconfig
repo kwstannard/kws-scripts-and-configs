@@ -7,4 +7,6 @@
 	autocrlf = input
 [init]
 	defaultBranch = integration
-	templatedir = /Users/kellystannard/scripts/git_template_ruby
+	templatedir = ~/scripts/git_template_ruby
+[user]
+	signingkey = 2E8D6C9099081B63CE89C12D34717AC4CF994637

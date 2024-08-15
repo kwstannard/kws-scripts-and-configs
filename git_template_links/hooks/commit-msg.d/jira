@@ -21,7 +21,7 @@ message = message
   .gsub(/(Project: )?[A-Z]+-\d+ */, '')
   .gsub(/\n*\z/, "\n")
 
-if message.match(/\A(fixup|squash)!/)
+if message.match(/\A(fixup|squash|amend)!/)
   puts "is fixup" if ENV['DEBUG']
   exit 0
 end
@@ -38,11 +38,17 @@ if story.empty?
   args = ''
   args += %(-o description=#{description}) if description
 
-  puts %x(
-  git story "$( jira create -p #{project} -o summary=#{summary} #{args} --noedit | ruby -ane 'puts $F[1]')"
-  )
+  story = %x(
+  jira create -p #{project}\
+  -o summary=#{summary} #{args}\
+  --noedit | ruby -ane 'puts $F[1]'
+  ).strip
 
-  story = `git story`.strip
+  exit 1 unless $?.success?
+
+  puts %x(
+  git story #{story}
+  )
 end
 
 File.write(ARGV[0], "#{story} #{message}\nProject: #{story}")

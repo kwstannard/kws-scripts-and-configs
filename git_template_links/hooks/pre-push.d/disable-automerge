@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+if test -n git pull-request-id; then
+  gh pr merge --disable-auto
+fi

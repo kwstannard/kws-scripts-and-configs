@@ -41,3 +41,4 @@ Plug 'w0rp/ale'
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'junkblocker/patchreview-vim'
 Plug 'pedrohdz/vim-yaml-folds', { 'for': 'yaml' }
+Plug 'mbbill/undotree'
