@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env chruby-exec scripting -- ruby
 require 'shellwords'
 
 if ENV['SKIP_JIRA']
@@ -32,6 +32,7 @@ if message.match(/\Aref/)
 end
 
 if story.empty?
+  puts 'creating story' if ENV['DEBUG']
   summary = message.lines[0].strip.shellescape
   description = message.lines[2..-1]&.map{|l| '    ' + l }&.join&.strip&.shellescape
 
@@ -39,10 +40,7 @@ if story.empty?
   args += %(-o description=#{description}) if description
 
   story = %x(
-  jira create -p #{project}\
-  -o summary=#{summary} #{args}\
-  --noedit | ruby -ane 'puts $F[1]'
-  ).strip
+  jira create -p #{project}\ -o summary=#{summary} #{args}\ --noedit | ruby -ane 'puts $F[1]').strip
 
   exit 1 unless $?.success?
 
