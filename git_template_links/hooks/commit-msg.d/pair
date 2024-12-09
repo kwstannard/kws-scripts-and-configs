@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require 'shellwords'
+require 'fileutils'
+
+file = '/tmp/pairs'
+FileUtils.touch(file)
+pairs = File.read(file)
+
+if File.exist?(".git/MERGE_HEAD")
+  exit 0
+end
+
+message = File.read(ARGV[0])
+
+og = (message.match(/(^Co-authored-by:.*\n)+(?!\1)/)&.[](0) || "")
+  .lines
+current = `cat #{file} | git check-mailmap --stdin`
+  .lines
+  .map{|l| "Co-authored-by: #{l}" }
+
+message = message.gsub(/^Co-authored-by: .*/, '')
+
+File.write(ARGV[0], "#{message}\n#{(og + current).uniq.join}")

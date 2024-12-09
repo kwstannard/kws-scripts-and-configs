@@ -6,7 +6,7 @@ else
   ENV['NAME'] ||= 'development'
 end
 
-if File.exists?("bin/#{ARGV[0]}")
+if File.exist?("bin/#{ARGV[0]}")
   exec("de", "bin/#{ARGV[0]}", *ARGV[1..-1])
 else
   exec("de", "bundle", "exec", *ARGV)

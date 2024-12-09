@@ -18,6 +18,8 @@ set expandtab
 " au FileType ruby setlocal tabstop=3 shiftwidth=3
 " au FileType javascript setlocal tabstop=3 shiftwidth=3
 
+" add '-' to the set of word chars so that * will pick up, eg:
+" foo-bar some-dashed-key et-cetera
 au FileType ruby,yaml setlocal iskeyword=@,48-57,-,_,192-255
 
 set noignorecase
@@ -63,35 +65,7 @@ nnoremap <enter> J
 
 filetype plugin indent on
 
-" RELATIVE LINE NUMBERING
-" set relativenumber
-set number
-
-"au InsertEnter * :set norelativenumber
-"au InsertLeave * :set relativenumber
-
-"au BufLeave * :set norelativenumber
-"au BufEnter * :set relativenumber
-
-"function! KwsFunFocusLose()
-  "if(empty(hasntNumber))
-    ":set number
-  "else
-    ":set nonumber
-  "endif
-"endfunc
-
-"function! KwsFunFocusGain()
-  "if(mode() == 'i')
-    ":set number
-  "else
-    ":set relativenumber
-  "endif
-"endfunc
-
 au FocusLost * silent! wa
-au FocusLost * set norelativenumber
-au FocusGained * set relativenumber
 " clear all buffers
 nnoremap <leader><delete> :bufdo<space>bd<Cr>
 nnoremap <leader><s-delete> :bufdo<space>bd<Cr>:q<Cr>
@@ -279,4 +253,5 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_max_line_indicator = 'fill'
 hi ColorColumn ctermbg=darkgrey
 
-Abolish licence{e,s} license{}
+command! Abolish licence{e,s} license{}
+command! Abolish licence{e,s} license{}

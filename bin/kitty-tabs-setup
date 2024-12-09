@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+4.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/scripts`
+end
+
+5.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/work/core`
+end
+
+5.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/work/core/tmp/fuzz`
+end
+
+5.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/work/NPDB`
+end
+
+4.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/`
+end

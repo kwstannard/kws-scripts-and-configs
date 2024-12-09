@@ -6,7 +6,7 @@ echo $system_type
 ln -fs $dir/configs/vimrc.vim ~/.vimrc
 mkdir -p ~/.config/nvim/autoload
 mkdir -p ~/.vim/autoload
-ln -fs $dir/configs/nvimrc.vim ~/.config/nvim/init.vim
+ln -fs $dir/configs/nvim-init.lua ~/.config/nvim/init.lua
 ln -fs $dir/configs/plug.vim ~/.config/nvim/autoload/plug.vim
 ln -fs $dir/configs/plug.vim ~/.vim/autoload/plug.vim
 

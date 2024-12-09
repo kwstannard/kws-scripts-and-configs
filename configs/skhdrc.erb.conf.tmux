@@ -63,8 +63,22 @@ alt + shift - i [
 ]
 
 <% first_window = ARGV[0].to_i * 5 %>
-<% 1.upto(5).each do |i| %>
-alt - <%= i %> : set sckt /tmp/kitty*; kitty @ --to=unix:$sckt action goto_tab <%= first_window + i %>; \
+<% 0.upto(4).each do |i| %>
+alt - <%= 1 + i %> : tmux select-window -t :=<%= first_window + i %>; \
+  tmux set status-left "[#S] e<%= ARGV[0] %> <%= first_window + i %>"; \
+  open -a <%= terminal %>
+
+alt + shift - <%= 1 + i %> : tmux swap-window -t :=<%= first_window + i %>; \
+  tmux set status-left "[#S] e<%= ARGV[0] %> <%= first_window + i %>"; \
+  open -a <%= terminal %>
+<% end %>
+<% %w[a s d f g].each.with_index do |k, i| %>
+alt - <%= k %> : tmux select-window -t :=<%= first_window + i %>; \
+  tmux set status-left "[#S] e<%= ARGV[0] %> <%= first_window + i %>"; \
+  open -a <%= terminal %>
+
+alt + shift - <%= k %> : tmux swap-window -t :=<%= first_window + i %>; \
+  tmux set status-left "[#S] e<%= ARGV[0] %> <%= first_window + i %>"; \
   open -a <%= terminal %>
 <% end %>
 

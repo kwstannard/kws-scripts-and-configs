@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+set -eo pipefail
+
+git diff --exit-code .circleci || circleci config validate

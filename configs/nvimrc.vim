@@ -26,9 +26,5 @@ endfunction
 
 map <leader><c-o> :call OpenCorrespondingFile()<cr>
 
-source ~/scripts/common.vim
-source ~/.config/work.vim
-
-au TermOpen * set nonumber
-au TermOpen * set norelativenumber
-au TermOpen * echo 'HI!!'
+" source ~/scripts/common.vim
+" source ~/.config/work.vim
