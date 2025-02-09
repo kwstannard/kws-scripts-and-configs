@@ -1,7 +1,7 @@
 [core]
   editor = vim
   commentChar = ~
-  autocrlf = true
+  #autocrlf = true
   excludesFile = ~/.config/git/info/ignore
 
 [user]

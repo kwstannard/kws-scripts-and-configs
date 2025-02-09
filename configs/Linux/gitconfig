@@ -1,2 +1,4 @@
 [include]
   path = ~/scripts/configs/gitconfig
+[user]
+	signingkey = Kelly Wolf Stannard

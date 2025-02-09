@@ -85,10 +85,10 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
   bindsym l exec --no-startup-id custom_locker, exec --no-startup-id special_mode_exit
     bindsym e exec --no-startup-id i3msg exit, exec --no-startup-id special_mode_exit
-    bindsym s exec --no-startup-id custom_locker && systemctl suspend, exec --no-startup-id special_mode_exit
-    bindsym h exec --no-startup-id custom_locker && systemctl hibernate, exec --no-startup-id special_mode_exit
-    bindsym r exec --no-startup-id systemctl reboot, exec --no-startup-id special_mode_exit
-    bindsym Shift+s exec --no-startup-id systemctl poweroff, exec --no-startup-id special_mode_exit
+    bindsym s exec --no-startup-id systemctl suspend && i3lock && special_mode_exit
+    bindsym h exec --no-startup-id systemctl hibernate && i3lock && special_mode_exit
+    bindsym r exec --no-startup-id systemctl reboot
+    bindsym Shift+s exec --no-startup-id systemctl poweroff
 
     # back to normal: Enter or Escape
     bindsym Shift+Escape mode "default"
@@ -156,7 +156,7 @@ mode "$mode_environment" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -245,7 +245,7 @@ mode "$mode_project_4" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -269,6 +269,8 @@ mode "$mode_project_4" {
   bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
   bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
   bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
+
+  bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+0 mode "$mode_project_4";workspace 25; exec --no-startup-id echo 25 > ~/.i3_workspace;exec --no-startup-id echo Project_4 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_4_config.sh ~/.current_config.sh
 
@@ -334,7 +336,7 @@ mode "$mode_project_3" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -358,6 +360,7 @@ mode "$mode_project_3" {
   bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
   bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
   bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
+  bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+9 mode "$mode_project_3";workspace 35; exec --no-startup-id echo 35 > ~/.i3_workspace;exec --no-startup-id echo Project_3 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_3_config.sh ~/.current_config.sh
 
@@ -423,7 +426,7 @@ mode "$mode_project_2" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -447,6 +450,7 @@ mode "$mode_project_2" {
   bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
   bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
   bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
+  bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
 
@@ -512,7 +516,7 @@ mode "$mode_project_1" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -536,6 +540,7 @@ mode "$mode_project_1" {
   bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
   bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
   bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
+  bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
 
@@ -601,7 +606,7 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -625,6 +630,7 @@ mode "$mode_project_0" {
   bindsym $mod+8 mode "$mode_project_2";workspace 45; exec --no-startup-id echo 45 > ~/.i3_workspace;exec --no-startup-id echo Project_2 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_2_config.sh ~/.current_config.sh
   bindsym $mod+7 mode "$mode_project_1";workspace 55; exec --no-startup-id echo 55 > ~/.i3_workspace;exec --no-startup-id echo Project_1 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_1_config.sh ~/.current_config.sh
   bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
+  bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
 bindsym $mod+Return exec konsole
@@ -647,7 +653,7 @@ bindsym $mod+Return exec konsole
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
-  bindsym $mod+p workspace 14: Firefox; exec --no-startup-id echo 14: Firefox > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -700,14 +706,91 @@ bar {
 }
 exec --no-startup-id nm-applet
 
-assign [class="Firefox"] 14: Firefox
+mode "mouse" {
+
+	# set your three speeds here
+
+	set $slow 5
+	set $quick 25
+	set $fast 75
+
+	# Mouse movement (slow/fine-tuned) -- vim keybindings
+
+	bindsym h exec xdotool mousemove_relative -- -$fast 0
+	bindsym j exec xdotool mousemove_relative 0 $fast
+	bindsym k exec xdotool mousemove_relative -- 0 -$fast
+	bindsym l exec xdotool mousemove_relative $fast 0
+
+	# Mouse movement (quicker) -- vim keybindings
+
+	bindsym n exec xdotool mousemove_relative -- -$quick 0
+	bindsym m exec xdotool mousemove_relative 0 $quick
+	bindsym comma exec xdotool mousemove_relative -- 0 -$quick
+	bindsym period exec xdotool mousemove_relative $quick 0
+
+	# Mouse movement (slow) -- vim keybindings
+
+	bindsym bracketleft exec xdotool mousemove_relative -- -$slow 0
+	bindsym bracketright exec xdotool mousemove_relative 0 $slow
+	bindsym grave exec xdotool mousemove_relative -- 0 -$slow
+	bindsym less exec xdotool mousemove_relative $slow 0
+
+	# Left Click
+	bindsym f exec --no-startup-id xdotool mousedown 1
+	bindsym f --release exec --no-startup-id xdotool mouseup 1
+
+	# Middle Click
+	bindsym d exec --no-startup-id xdotool mousedown 2
+	bindsym d --release exec --no-startup-id xdotool mouseup 2
+
+	# Right Click
+	bindsym s exec --no-startup-id xdotool mousedown 3
+	bindsym s --release exec --no-startup-id xdotool mouseup 3
+
+	# Left Click-and-drag
+	bindsym r exec xdotool mousedown 1
+
+	# Middle Click-and-drag 
+	bindsym e exec xdotool mousedown 2
+
+	# Right Click-and-drag
+	bindsym w exec xdotool mousedown 3
+
+	# Left Drag release
+	bindsym v exec xdotool mouseup 1
+
+	# Middle Drag release
+	bindsym c exec xdotool mouseup 2
+
+	# Right Drag release
+	bindsym x exec xdotool mouseup 3
+
+
+	# return to normal keybindings -- IMPORTANT!!
+
+	bindsym Escape exec --no-startup-id special_mode_exit
+}
+
+bindsym $mod+Shift+m mode "mouse"
+
+##  Screenshots in files
+bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+bindsym $mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-current.png"
+bindsym Shift+Print exec --no-startup-id maim --format=png --select "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-selected.png"
+
+## Screenshots in clipboards
+bindsym Ctrl+Print exec --no-startup-id maim --format=png | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
+
+assign [class="firefox"] 14: Web
 assign [class="Slack"] 13: Slack
 assign [class="Pidgin"] 12: Pidgin
-assign [class="Keepassx"] 11: Keepass
+assign [class="Keepassxc"] 11: Keepass
 assign [title="work_console"] 100: WorkConsole
 
 # startup apps
-exec --no-startup-id keepassx 
+exec --no-startup-id keepassxc
 exec --no-startup-id firefox
 exec --no-startup-id /usr/bin/slack
 exec --no-startup-id pidgin
@@ -717,4 +800,3 @@ exec --no-startup-id cron_notify_setup
 
 #screensaver + lock on screen saver
 exec_always --no-startup-id xautolock -time 15 -locker custom_lock
-
