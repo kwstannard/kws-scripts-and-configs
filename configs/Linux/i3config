@@ -9,11 +9,7 @@ set $homedir "/home/kwstannard/"
 hide_edge_borders both
 
 focus_follows_mouse no
-# max terminal screen space
-for_window [title=".*Konsole$"] border none
-for_window [title="Terminal"] border none
-for_window [class="Firefox"] border none
-for_window [class="Slack"] border none
+default_border none
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -83,7 +79,7 @@ mode "$mode_movement" {
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-  bindsym l exec --no-startup-id custom_locker, exec --no-startup-id special_mode_exit
+  bindsym l exec --no-startup-id i3lock, exec --no-startup-id special_mode_exit
     bindsym e exec --no-startup-id i3msg exit, exec --no-startup-id special_mode_exit
     bindsym s exec --no-startup-id systemctl suspend && i3lock && special_mode_exit
     bindsym h exec --no-startup-id systemctl hibernate && i3lock && special_mode_exit
@@ -136,11 +132,11 @@ mode "$mode_environment" {
   bindsym $mod+d workspace 15
   bindsym $mod+f workspace 14
   bindsym $mod+s workspace 12
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -155,7 +151,7 @@ mode "$mode_environment" {
   bindsym $mod+Shift+f fullscreen
   bindsym $mod+Shift+space floating toggle
   bindsym $mod+space focus mode_toggle
-  bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
+  bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 99: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
@@ -168,7 +164,7 @@ mode "$mode_environment" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -225,11 +221,11 @@ mode "$mode_project_4" {
   bindsym $mod+d workspace 25
   bindsym $mod+f workspace 24
   bindsym $mod+s workspace 22
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -257,7 +253,7 @@ mode "$mode_project_4" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -316,11 +312,11 @@ mode "$mode_project_3" {
   bindsym $mod+d workspace 35
   bindsym $mod+f workspace 34
   bindsym $mod+s workspace 32
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -348,7 +344,7 @@ mode "$mode_project_3" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -406,11 +402,11 @@ mode "$mode_project_2" {
   bindsym $mod+d workspace 45
   bindsym $mod+f workspace 44
   bindsym $mod+s workspace 42
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -438,7 +434,7 @@ mode "$mode_project_2" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -496,11 +492,11 @@ mode "$mode_project_1" {
   bindsym $mod+d workspace 55
   bindsym $mod+f workspace 54
   bindsym $mod+s workspace 52
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -528,7 +524,7 @@ mode "$mode_project_1" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -586,11 +582,11 @@ mode "$mode_project_0" {
   bindsym $mod+d workspace 65
   bindsym $mod+f workspace 64
   bindsym $mod+s workspace 62
-  bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+  bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -618,7 +614,7 @@ mode "$mode_project_0" {
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -633,11 +629,11 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+m mode "mouse"
 }
 bindsym $mod+6 mode "$mode_project_0";workspace 65; exec --no-startup-id echo 65 > ~/.i3_workspace;exec --no-startup-id echo Project_0 > ~/.i3_project;exec --no-startup-id ln -sf ~/.config/i3/Project_0_config.sh ~/.current_config.sh
-bindsym $mod+Return exec konsole
-  bindsym $mod+Shift+Return split h; exec konsole; split v
+bindsym $mod+Return exec kitty
+  bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
-  bindsym $mod+Shift+a split toggle; exec dmenu_run; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -665,7 +661,7 @@ bindsym $mod+Return exec konsole
   bindsym $mod+r mode "resize"
   bindsym $mod+m mode "$mode_movement"
   bindsym $mod+End mode "$mode_system"
-  bindsym $mod+Escape exec custom_locker
+  bindsym $mod+Escape exec i3lock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym $mod+Shift+Prior exec --no-startup-id xbacklight -inc 10
@@ -784,18 +780,17 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotoo
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
 
 assign [class="firefox"] 14: Web
-assign [class="Slack"] 13: Slack
-assign [class="Pidgin"] 12: Pidgin
-assign [class="Keepassxc"] 11: Keepass
+assign [class="slack"] 13: Slack
+assign [class="signal"] 12: Pidgin
+assign [class="KeePassXC"] 11: Keepass
 assign [title="work_console"] 100: WorkConsole
 
 # startup apps
 exec --no-startup-id keepassxc
 exec --no-startup-id firefox
-exec --no-startup-id /usr/bin/slack
-exec --no-startup-id pidgin
+exec --no-startup-id signal
 
-exec --no-startup-id konsole --profile work_console
+exec --no-startup-id kitty --profile work_console
 exec --no-startup-id cron_notify_setup
 
 #screensaver + lock on screen saver
