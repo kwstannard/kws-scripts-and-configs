@@ -136,7 +136,7 @@ mode "$mode_environment" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -225,7 +225,7 @@ mode "$mode_project_4" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -316,7 +316,7 @@ mode "$mode_project_3" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -406,7 +406,7 @@ mode "$mode_project_2" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -496,7 +496,7 @@ mode "$mode_project_1" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -586,7 +586,7 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -633,7 +633,7 @@ bindsym $mod+Return exec kitty
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop --dmenu=dmenu_run_history
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -781,7 +781,7 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip
 
 assign [class="firefox"] 14: Web
 assign [class="slack"] 13: Slack
-assign [class="signal"] 12: Pidgin
+assign [class="signal beta"] 12: Pidgin
 assign [class="KeePassXC"] 11: Keepass
 assign [title="work_console"] 100: WorkConsole
 
