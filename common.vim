@@ -252,6 +252,7 @@ set stl+=%{ConflictedVersion()}
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_max_line_indicator = 'fill'
 hi ColorColumn ctermbg=darkgrey
+nnoremap giw :exec "normal v\<Plug>(textobj-indent-i)gw" <CR>
 
 command! Abolish licence{e,s} license{}
 command! Abolish licence{e,s} license{}
