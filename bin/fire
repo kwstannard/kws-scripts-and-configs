@@ -21,11 +21,11 @@ Replace all occurrences of hello with goodbye:
 
 Replace all occurrences of hello with goodbye that occur in .yml files.
 
-  fire hello goodbye
+  fire hello goodbye *.yml
 
 Replace foo with bar only if it is at start of the line in default files:
 
-  fire '$foo' bar
+  fire '^foo' bar
 
   HELP
   exit
