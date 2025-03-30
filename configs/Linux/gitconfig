@@ -2,3 +2,5 @@
   path = ~/scripts/configs/gitconfig
 [user]
 	signingkey = Kelly Wolf Stannard
+[core]
+	editor = nvim
