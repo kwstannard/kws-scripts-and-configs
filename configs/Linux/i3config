@@ -153,6 +153,7 @@ mode "$mode_environment" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 99: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -242,6 +243,7 @@ mode "$mode_project_4" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -333,6 +335,7 @@ mode "$mode_project_3" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -423,6 +426,7 @@ mode "$mode_project_2" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -513,6 +517,7 @@ mode "$mode_project_1" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -603,6 +608,7 @@ mode "$mode_project_0" {
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -650,6 +656,7 @@ bindsym $mod+Return exec kitty
   bindsym $mod+space focus mode_toggle
   bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
   bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
@@ -779,6 +786,7 @@ bindsym Ctrl+Print exec --no-startup-id maim --format=png | xclip -selection cli
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
 
+assign [class="firefox-default"] 15: Playwright
 assign [class="firefox"] 14: Web
 assign [class="slack"] 13: Slack
 assign [class="signal beta"] 12: Pidgin
@@ -787,7 +795,8 @@ assign [title="work_console"] 100: WorkConsole
 
 # startup apps
 exec --no-startup-id keepassxc
-exec --no-startup-id firefox
+exec --no-startup-id firefox --no-remote -P default
+exec --no-startup-id firefox --no-remote -P default --class slack
 exec --no-startup-id signal
 
 exec --no-startup-id kitty --profile work_console
