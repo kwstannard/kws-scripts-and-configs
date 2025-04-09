@@ -237,7 +237,7 @@ endfunction
 
 command! ProseMode call ProseMode()
 nmap \p :Goyo<CR>
-nmap ZZ :w<CR>:q<CR>:q<CR>
+nmap ZZ :Goyo!<CR>:wq<CR>
 au User GoyoEnter nested call ProseMode()
 au VimEnter PULLREQ_EDITMSG,*.txt Goyo
 
