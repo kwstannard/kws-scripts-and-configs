@@ -155,9 +155,9 @@ mode "$mode_environment" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -245,9 +245,9 @@ mode "$mode_project_4" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -337,9 +337,9 @@ mode "$mode_project_3" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -428,9 +428,9 @@ mode "$mode_project_2" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -519,9 +519,9 @@ mode "$mode_project_1" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -610,9 +610,9 @@ mode "$mode_project_0" {
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
@@ -658,9 +658,9 @@ bindsym $mod+Return exec kitty
   bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
-  bindsym $mod+i workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
-  bindsym $mod+Shift+u workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
-  bindsym $mod+u exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
   bindsym $mod+y workspace 101: Calendar
   bindsym $mod+Shift+c reload
