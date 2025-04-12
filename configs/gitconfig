@@ -84,6 +84,9 @@
 
 	pass = "!bash -c 'test -z $1 && git fuh || git sqh -m $1; git push'" -
 	get = pull
+
+  sw = switch
+  rs = restore
 [pager]
   diff = diff-so-fancy | less --tabs=1,5 -RFX
   show = diff-so-fancy | less --tabs=1,5 -RFX
