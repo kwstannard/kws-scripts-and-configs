@@ -3,3 +3,4 @@ if status is-interactive
     set --append PATH $HOME/scripts/bin
     set --append PATH $HOME/bin
 end
+fish_config theme choose 'Tomorrow Night Bright'

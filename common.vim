@@ -223,23 +223,28 @@ let g:ruby_indent_assignment_style = 'variable'
 let g:ruby_recommended_style = 0
 
 
-function! ProseMode()
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
   set spell noci nosi noai nolist noshowmode noshowcmd wrap linebreak
   set complete+=s
   set bg=light
-  nunmap J
-  nunmap K
-  if !has('gui_running')
-    let g:solarized_termcolors=256
-  endif
   colors seoul256
 endfunction
 
-command! ProseMode call ProseMode()
-nmap \p :Goyo<CR>
-nmap ZZ :Goyo!<CR>:wq<CR>
-au User GoyoEnter nested call ProseMode()
-au VimEnter PULLREQ_EDITMSG,*.txt Goyo
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  normal ZZ
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+au VimEnter COMMIT_MSG,PULLREQ_EDITMSG,*.txt Goyo
 
 let g:sort_motion_flags = "i"
 

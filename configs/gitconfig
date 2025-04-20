@@ -22,9 +22,9 @@
   rebase = true
 
 [color "status"]
-  added = green bold
-  changed = yellow bold
-  untracked = red bold ul
+  added = brightgreen bold
+  changed = brightyellow bold
+  untracked = brightred bold ul
 
 [color "diff"]
   old = "#ff6666"
