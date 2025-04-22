@@ -789,6 +789,7 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip
 assign [class="firefox-default"] 15: Playwright
 assign [class="firefox"] 14: Web
 assign [class="slack"] 13: Slack
+assign [class="FFPWA-01JSCE590DW14AWY07GXNXFR2K"] 13: Slack
 assign [class="signal beta"] 12: Pidgin
 assign [class="KeePassXC"] 11: Keepass
 assign [title="work_console"] 100: WorkConsole
@@ -796,7 +797,7 @@ assign [title="work_console"] 100: WorkConsole
 # startup apps
 exec --no-startup-id keepassxc
 exec --no-startup-id firefox --no-remote -P default
-exec --no-startup-id firefox --no-remote -P default --class slack
+exec --no-startup-id /usr/bin/firefoxpwa site launch 01JSCE590DW14AWY07GXNXFR2K
 exec --no-startup-id signal
 
 exec --no-startup-id kitty --profile work_console
