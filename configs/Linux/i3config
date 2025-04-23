@@ -159,7 +159,7 @@ mode "$mode_environment" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -249,7 +249,7 @@ mode "$mode_project_4" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -341,7 +341,7 @@ mode "$mode_project_3" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -432,7 +432,7 @@ mode "$mode_project_2" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -523,7 +523,7 @@ mode "$mode_project_1" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -614,7 +614,7 @@ mode "$mode_project_0" {
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -662,7 +662,7 @@ bindsym $mod+Return exec kitty
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
 
-  bindsym $mod+y workspace 101: Calendar
+  bindsym $mod+y exec notify-send "-" "$(rem)"
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
@@ -802,6 +802,8 @@ exec --no-startup-id signal
 
 exec --no-startup-id kitty --profile work_console
 exec --no-startup-id cron_notify_setup
+
+exec --no-startup-id rem -z -k'notify-send %s &'
 
 #screensaver + lock on screen saver
 exec_always --no-startup-id xautolock -time 15 -locker custom_lock

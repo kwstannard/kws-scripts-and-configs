@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
 
 require 'io/console'
+require 'open3'
 stack = [ARGF.read]
 
+ARGF.close
+
 until stack.empty?
-  puts %x[echo '#{stack.last}' | jq '(keys)? // .']
+  Open3.popen2('jq "(keys)? // ."') { |i, o| i.puts(stack.last); i.close; puts o.read }
   case x=IO.console.gets&.strip
   when 'exit', 'up', '', nil then stack.pop
   when 'show' then puts stack.last
-  when /(.*)/ then stack.push(%x[echo '#{stack.last}' | jq '#{$1}'])
+  when /(.*)/ then stack.push(Open3.popen2("jq '#{$1}'"){|i,o| i.puts(stack.last); i.close; o.read })
   end
 end
