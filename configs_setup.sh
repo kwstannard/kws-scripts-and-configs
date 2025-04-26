@@ -4,13 +4,9 @@ system_type="$(uname -s)"
 echo $system_type
 
 ln -fs $dir/configs/vimrc.vim ~/.vimrc
-mkdir -p ~/.config/nvim/autoload
 mkdir -p ~/.vim/autoload
-ln -fs $dir/configs/nvim-init.lua ~/.config/nvim/init.lua
-ln -fs $dir/configs/plug.vim ~/.config/nvim/autoload/plug.vim
-ln -fs $dir/configs/plug.vim ~/.vim/autoload/plug.vim
 
-for f in $(ls $dir/config); do ln -fs $dir/config/$f ~/config/$f; done
+for f in $(ls $dir/dot-config); do ln -fs $dir/dot-config/$f ~/.config/$f; done
 
 ln -fs $dir/configs/vimperatorrc ~/.vimperatorrc
 ln -fs $dir/configs/pryrc ~/.pryrc
@@ -28,6 +24,7 @@ ln -fs $dir/git_template ~/.git_template
 case $system_type in
   "Linux")
     ln -fs /bin/grep ~/bin/ggrep
+    ln -fs $dir/configs/xmodmaprc ~/.xmodmaprc
     ;;
   "Darwin")
     ruby -r erb -e 'puts ERB.new(File.read(Dir.home+"/scripts/configs/khdrc.erb.conf")).result binding' 0 > ~/.khdrc
