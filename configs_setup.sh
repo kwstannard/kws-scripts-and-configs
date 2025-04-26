@@ -24,7 +24,8 @@ ln -fs $dir/git_template ~/.git_template
 case $system_type in
   "Linux")
     ln -fs /bin/grep ~/bin/ggrep
-    ln -fs $dir/configs/xmodmaprc ~/.xmodmaprc
+    ln -fs $dir/configs/Linux/xmodmaprc ~/.xmodmaprc
+    ln -fs $dir/configs/Linux/xinit ~/.xinit
     ;;
   "Darwin")
     ruby -r erb -e 'puts ERB.new(File.read(Dir.home+"/scripts/configs/khdrc.erb.conf")).result binding' 0 > ~/.khdrc
