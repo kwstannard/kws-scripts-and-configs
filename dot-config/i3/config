@@ -97,17 +97,17 @@ mode "$mode_environment" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -136,7 +136,7 @@ mode "$mode_environment" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -187,17 +187,17 @@ mode "$mode_project_4" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -226,7 +226,7 @@ mode "$mode_project_4" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -279,17 +279,17 @@ mode "$mode_project_3" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -318,7 +318,7 @@ mode "$mode_project_3" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -370,17 +370,17 @@ mode "$mode_project_2" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -409,7 +409,7 @@ mode "$mode_project_2" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -461,17 +461,17 @@ mode "$mode_project_1" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -500,7 +500,7 @@ mode "$mode_project_1" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -552,17 +552,17 @@ mode "$mode_project_0" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
   bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
   bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
-  
+
   # Sreen brightness controls
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
   bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
   bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-  
+
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-  
+
   # Media player controls
   bindsym XF86AudioPlay exec playerctl play
   bindsym XF86AudioPause exec playerctl pause
@@ -591,7 +591,7 @@ mode "$mode_project_0" {
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -639,7 +639,7 @@ bindsym $mod+Return exec kitty
   bindsym $mod+Shift+Return split h; exec kitty; split v
   bindsym $mod+Shift+q kill
   bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
-  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop 
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
   bindsym $mod+h focus left
   bindsym $mod+j focus down
   bindsym $mod+k focus up
@@ -740,15 +740,15 @@ mode "mouse" {
 
 	# Left Click
 	bindsym f exec --no-startup-id xdotool mousedown 1
-	bindsym f --release exec --no-startup-id xdotool mouseup 1
+	bindsym --release f exec --no-startup-id xdotool mouseup 1
 
 	# Middle Click
 	bindsym d exec --no-startup-id xdotool mousedown 2
-	bindsym d --release exec --no-startup-id xdotool mouseup 2
+	bindsym --release d exec --no-startup-id xdotool mouseup 2
 
 	# Right Click
 	bindsym s exec --no-startup-id xdotool mousedown 3
-	bindsym s --release exec --no-startup-id xdotool mouseup 3
+	bindsym --release s exec --no-startup-id xdotool mouseup 3
 
 	# Left Click-and-drag
 	bindsym r exec xdotool mousedown 1
@@ -796,11 +796,10 @@ assign [title="work_console"] 100: WorkConsole
 
 # startup apps
 exec --no-startup-id keepassxc
-exec --no-startup-id firefox --no-remote -P default
+exec --no-startup-id librewolf
 exec --no-startup-id /usr/bin/firefoxpwa site launch 01JSCE590DW14AWY07GXNXFR2K
 exec --no-startup-id signal
 
-exec --no-startup-id kitty --profile work_console
 exec --no-startup-id cron_notify_setup
 
 exec --no-startup-id rem -z -k'notify-send %s &'
