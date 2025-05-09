@@ -18,4 +18,4 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
       vim.keymap.set('n', 'q', ':q!<Enter>')
       vim.keymap.set('v', 'y', '"+y')
     end
-    })
+  })

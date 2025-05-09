@@ -15,7 +15,7 @@ default_border none
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 12
+font pango:Atkinson Hyperlegible Next 12
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -788,9 +788,11 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip
 
 assign [class="firefox-default"] 15: Playwright
 assign [class="firefox"] 14: Web
+assign [class="LibreWolf"] 14: Web
 assign [class="slack"] 13: Slack
-assign [class="FFPWA-01JSCE590DW14AWY07GXNXFR2K"] 13: Slack
+assign [class="^FFPWA-.*"] 13: Slack
 assign [class="signal beta"] 12: Pidgin
+assign [class="signal"] 12: Pidgin
 assign [class="KeePassXC"] 11: Keepass
 assign [title="work_console"] 100: WorkConsole
 
@@ -803,6 +805,8 @@ exec --no-startup-id signal
 exec --no-startup-id cron_notify_setup
 
 exec --no-startup-id rem -z -k'notify-send %s &'
+
+exec --no-startup-id special_mode_exit
 
 #screensaver + lock on screen saver
 exec_always --no-startup-id xautolock -time 15 -locker custom_lock

@@ -1,4 +1,4 @@
-#! /usr/bin/ruby
+#! /usr/bin/env ruby
 
 require 'pathname'
 puts Pathname.pwd.ascend.map{|d| d.join(".ruby-version")}.detect(&:exist?).read
