@@ -1,4 +1,10 @@
 #! /usr/bin/env bash
 
-i3-msg mode "$(<.i3_project)"
-i3-msg workspace "$(<.i3_workspace)"
+if test "$DESKTOP_SESSION" = "sway"; then
+  exec=swaymsg
+else
+  exec=i3-msg
+fi
+
+$exec mode "$(<.i3_project)"
+$exec workspace "$(<.i3_workspace)"

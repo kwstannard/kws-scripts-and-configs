@@ -1,6 +1,8 @@
 [include]
   path = ~/scripts/configs/gitconfig
 [user]
-	signingkey = Kelly Wolf Stannard
+	signingkey = /home/piper/.ssh/id_ed25519
 [core]
 	editor = nvim
+[gpg]
+	format = ssh

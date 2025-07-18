@@ -1,0 +1,113 @@
+#! /usr/bin/env -S chruby-exec scripting -- ruby
+
+require 'erb'
+
+template = DATA.read
+modes = [6,7,8,9,0].each.with_index.reduce("") do |agg, (key, multiplier)|
+  agg << ERB
+    .new(template)
+    .result(binding)
+  agg
+end
+
+File.write(Dir.home + '/.config/i3/modes.conf', modes)
+
+__END__
+mode "project_<%= key %>" {
+
+  bindswitch --reload --locked lid:on output eDP-1 disable, output DP-1 enable, output DP-2 enable
+  bindswitch --reload --locked lid:off output eDP-1 enable, output DP-1 disable, output DP-2 disable
+
+  # use xev to determine correct keys if these don't work
+  bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
+  bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- unmute
+  bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
+
+  # Sreen brightness controls
+  # i3 doesn't seem to let you modify the audio buttons
+  #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
+  #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
+  bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5+
+  bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5-
+
+  # Touchpad controls
+  bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+  # Media player controls
+  bindsym XF86AudioPlay exec playerctl play
+  bindsym XF86AudioPause exec playerctl pause
+  bindsym XF86AudioNext exec playerctl next
+  bindsym XF86AudioPrev exec playerctl previous
+
+  <% 5.times do |i| %>
+  bindsym $mod+<%= i+1 %> workspace <%= 20 + 10 * multiplier + i %>; exec --no-startup-id echo <%= 20 + 10 * multiplier + i %> > ~/.i3_workspace
+  bindsym $mod+Shift+<%= i+1 %> exec --no-startup-id swap_workspace <%= 20 + 10 * multiplier + i %>
+  bindsym $mod+Control+<%= i+1 %> move workspace <%= 20 + 10 * multiplier + i %>
+  <% end %>
+  bindsym $mod+d workspace 15
+  bindsym $mod+f workspace 14
+  bindsym $mod+s workspace 12
+  bindsym $mod+Return exec $term
+  bindsym $mod+Shift+Return split h; exec $term; split v
+  bindsym $mod+Shift+q kill
+  bindsym $mod+Shift+a split toggle; exec dmenu_run_history; split toggle
+  bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+  bindsym $mod+h focus left
+  bindsym $mod+j focus down
+  bindsym $mod+k focus up
+  bindsym $mod+l focus right
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
+  bindsym $mod+Shift+Left workspace prev
+  bindsym $mod+Shift+Right workspace next
+  bindsym $mod+b split t
+  bindsym $mod+Shift+f fullscreen
+  bindsym $mod+Shift+space floating toggle
+  bindsym $mod+space focus mode_toggle
+  bindsym $mod+bracketleft workspace 101: Tasks; exec --no-startup-id echo 101: Tasks > ~/.i3_workspace
+  bindsym $mod+backslash workspace 100: WorkConsole; exec --no-startup-id echo 100: WorkConsole > ~/.i3_workspace
+  bindsym $mod+p workspace 14: Web; exec --no-startup-id echo 14: Web > ~/.i3_workspace
+  bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
+  bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
+  bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
+  bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu         --database $homedir/Dropbox/puppies.kdbx         --label password         --cache-password $((86400 - `date +%s` % 86400 + 7*3600 ))
+
+  bindsym $mod+Shift+c reload
+  bindsym $mod+Shift+r restart
+  bindsym $mod+r mode "resize"
+  bindsym $mod+m mode "$mode_movement"
+  bindsym $mod+End mode "$mode_system"
+  bindsym $mod+Escape exec swaylock
+  bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute
+  bindsym $mod+Next exec --no-startup-id amixer -D pulse sset Master 5%- unmute
+  bindsym $mod+Shift+Prior exec --no-startup-id brightnessctl set +10
+  bindsym $mod+Shift+Next exec --no-startup-id brightnessctl set 10-
+
+  <% [6,7,8,9,0].each.with_index do |x,y| %>
+    <% z = 20 + 10 * y %>
+    bindsym $mod+<%= x %> mode project_<%= x %>;workspace <%= z %>; exec --no-startup-id echo <%= z %> > ~/.i3_workspace;exec --no-startup-id echo project_<%= x %> > ~/.i3_project
+  <% end %>
+
+  ##  Screenshots in files
+  # print screen
+  bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+  # print window
+  bindsym $mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-current.png"
+  # print selection
+  bindsym Shift+Print exec maim --format=png --select "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-selected.png"
+
+  ## Screenshots in clipboards
+  # copy screen
+  bindsym Ctrl+Print exec --no-startup-id $screen-ss-cmd | $copy-tool -t image/png
+  # copy window
+  bindsym Ctrl+$mod+Print exec --no-startup-id $window-ss-cmd | $copy-tool -t image/png
+  # copy selection
+  bindsym Ctrl+Shift+Print exec --no-startup-id $selection-ss-cmd | $copy-tool -t image/png
+
+  bindsym $mod+Control+r exec --no-startup-id xrandr -s 0
+}
+bindsym $mod+<%= key %> mode project_<%= key %>;workspace <%= 20 + 10 * multiplier %>; exec --no-startup-id echo <%= 20 + 10 * multiplier %> > ~/.i3_workspace;exec --no-startup-id echo project_<%= key %> > ~/.i3_project
+

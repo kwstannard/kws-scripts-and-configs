@@ -1,9 +1,9 @@
 # https://github.com/pry/pry/wiki/Customization-and-configuration
 
-path = Dir.glob(Dir.home + "/.gem/ruby/*/gems/pry-theme-*/lib").first
-$LOAD_PATH << path
-require 'pry-theme'
-Pry.config.theme = 'railscasts'
+# path = Dir.glob(Dir.home + "/.gem/ruby/*/gems/pry-theme-*/lib").first
+# $LOAD_PATH << path
+# require 'pry-theme'
+# Pry.config.theme = 'railscasts'
 
 # editor when running `edit`
 Pry.editor = 'vim'

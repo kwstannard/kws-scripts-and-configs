@@ -1,0 +1,22 @@
+#! /usr/bin/env ruby
+require 'open3'
+require 'io/console'
+
+puts 'db file:'
+db_file = STDIN.gets.chomp
+puts 'password:'
+password = STDIN.noecho { gets }.chomp
+
+`rclone listremotes`.split("\n").tap{ puts _1.inspect }.each do |remote|
+  system("rclone", 'copy', "#{remote}#{db_file}", "/tmp/#{remote}")
+
+  Open3.popen3("keepassxc-cli", "merge", db_file, "/tmp/#{remote}/#{db_file}") do |i,o,e|
+    i.puts password
+    i.puts password
+    i.close
+    puts o.read
+    puts e.read
+  end
+end.each do |remote|
+  system("rclone", 'copy', db_file, "#{remote}")
+end
