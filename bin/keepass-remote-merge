@@ -7,7 +7,7 @@ db_file = STDIN.gets.chomp
 puts 'password:'
 password = STDIN.noecho { gets }.chomp
 
-`rclone listremotes`.split("\n").tap{ puts _1.inspect }.each do |remote|
+`rclone listremotes`.split("\n").tap{ puts "remotes: ", _1.inspect }.each do |remote|
   system("rclone", 'copy', "#{remote}#{db_file}", "/tmp/#{remote}")
 
   Open3.popen3("keepassxc-cli", "merge", db_file, "/tmp/#{remote}/#{db_file}") do |i,o,e|
@@ -18,5 +18,5 @@ password = STDIN.noecho { gets }.chomp
     puts e.read
   end
 end.each do |remote|
-  system("rclone", 'copy', db_file, "#{remote}")
+  system("rclone", 'copy', db_file, remote)
 end
