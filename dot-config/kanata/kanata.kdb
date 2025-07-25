@@ -1,0 +1,9 @@
+;; Launch kanata with $ kanata -c .config/kanata/kanata.kdb
+
+(defsrc)
+(
+ deflayermap (base-layer)
+ caps (tap-hold 200 100 esc ctl)
+ met alt
+ alt met
+ )
