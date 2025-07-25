@@ -2,7 +2,7 @@
 
 commit_file_path = ARGV[0]
 
-subject_line = File.read(commit_file_path).lines.first.gsub(/ES-\d+/,'')
+subject_line = File.read(commit_file_path).lines.first.gsub(/BP-\d+/,'')
 
 exit 0 if subject_line.split.first.match(/(fixup!|squash!|merge|mob|amend!|reword!)/i)
 

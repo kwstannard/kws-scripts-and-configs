@@ -1,13 +1,13 @@
-endpoint: https://credsimple.atlassian.net
-user: kelly.stannard@andros.co
+endpoint: https://boldpenguin.atlassian.net
+user: wolf.stannard@boldpenguin.com
 password-source: keyring
 custom-commands:
   - name: next
     help: get next issue
     script: "{{jira}} list -n api-bl -l 1"
 config:
-  noedit: true
-  no-edit: true
+  # noedit: true
+  # no-edit: true
 queries:
   crd: status in ("Selected For Dev", "In Progress") AND ("Dev Team[Dropdown]" IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
   crd-bl: status in ("Selected For Dev") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK

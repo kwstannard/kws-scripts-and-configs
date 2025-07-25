@@ -2,4 +2,8 @@
 
 set -eo pipefail
 
-git diff --exit-code .circleci || circleci config validate
+if test which circleci; then
+  git diff --exit-code .circleci || circleci config validate
+else
+  echo Warning: please update the CI step
+fi

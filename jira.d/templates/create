@@ -1,6 +1,6 @@
 fields:
   project:
-    key: ES
+    key: {{ .overrides.project }}
   issuetype:
     name: Story
   summary: >-
@@ -10,4 +10,4 @@ fields:
   description: |
     {{ .overrides.description }}
   assignee:
-    emailAddress: kelly.stannard@andros.co
+    emailAddress: {{ .overrides.author }}

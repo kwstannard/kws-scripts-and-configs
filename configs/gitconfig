@@ -2,6 +2,7 @@
   commentChar = ~
   #autocrlf = true
   excludesFile = ~/.config/git/info/ignore
+  hooksPath = ~/scripts/git_template_links/hooks
 
 [user]
   name = Kelly Wolf Stannard
