@@ -3,16 +3,19 @@
 commit_file_path = ARGV[0]
 
 subject_line = File.read(commit_file_path).lines.first.gsub(/BP-\d+/,'')
+puts subject_line if ENV['DEBUG']
 
 exit 0 if subject_line.split.first.match(/(fixup!|squash!|merge|mob|amend!|reword!)/i)
 
 unless subject_line.size < 70
-  puts "subject is too long"
+  STDERR.puts "subject is too long"
   exit 1
 end
 
-allowed_verbs = /(add|cut|fix|ref)/i
-unless subject_line.split.first.match allowed_verbs
-  puts "Start commits with one of the following: add, cut, fix, ref"
+allowed_verbs = Regexp.new(`git subject-prefixes`.chomp)
+unless subject_line.split.first.tap{ @type = _1 }.match allowed_verbs
+  STDERR.puts "Start commits with one of the following: #{allowed_verbs}"
   exit 1
 end
+
+`git interpret-trailers --in-place #{commit_file_path} --trailer type=#{@type}`

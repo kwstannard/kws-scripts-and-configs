@@ -1,6 +1,7 @@
 #! /usr/bin/env chruby-exec scripting -- ruby
 require 'shellwords'
 
+commit_file_path = ARGV[0]
 if ENV['SKIP_JIRA']
   puts "SKIP_JIRA set" if ENV['DEBUG']
   exit 0
@@ -14,7 +15,9 @@ end
 story=`git story`.strip
 project=`git project`.strip
 
-message = File.read(ARGV[0])
+raise "run `git project {my_project}`" if project.empty?
+
+message = File.read(commit_file_path)
 
 message = message
   .gsub(/\A[A-Z]+-\d+ */, '')
@@ -23,11 +26,6 @@ message = message
 
 if message.match(/\A(fixup|squash|amend)!/)
   puts "is fixup" if ENV['DEBUG']
-  exit 0
-end
-
-if message.match(/\Aref/)
-  puts "is refactor" if ENV['DEBUG']
   exit 0
 end
 
@@ -49,4 +47,6 @@ if story.empty?
   )
 end
 
-File.write(ARGV[0], "#{story} #{message}\nProject: #{story}")
+`git interpret-trailers --in-place #{commit_file_path} --trailer project=#{story}`.tap do |msg|
+  STDERR.puts msg if ENV['DEBUG']
+end

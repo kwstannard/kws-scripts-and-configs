@@ -1,0 +1,8 @@
+# ATTACHMENTS
+{{- range . }}
+{{if (eq .mimeType "image/png") }}
+![{{.id}}](file:///tmp/attachment_{{ .filename | pathEscape }})
+{{else}}
+{{.id}} [{{ .filename }}](file:///tmp/attachment_{{ .filename | pathEscape }})
+{{end}}
+{{end}}

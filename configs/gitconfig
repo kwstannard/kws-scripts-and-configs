@@ -7,7 +7,6 @@
 [user]
   name = Kelly Wolf Stannard
   email = kwstannard@gmail.com
-  signingKey = 2E8D6C9099081B63CE89C12D34717AC4CF994637
 
 [fetch]
   prune = true
@@ -22,6 +21,10 @@
 [pull]
   rebase = true
 
+[rebase]
+  autostash = true
+  updateRefs = true
+
 [color "status"]
   added = brightgreen bold
   changed = brightyellow bold
@@ -34,21 +37,34 @@
 [branch]
 #  autosetupmerge = always
   autosetuprebase = always
+  sort = committerdate
 
 [commit]
   gpgSign = true
 
 [diff]
+  algorithm = histogram
   color = true
+  colorMoved = true
   whitespace = red reverse
 
+[grep]
+  patternType = perl
+
+[help]
+  autocorrect = prompt
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
 [alias]
+  subject-prefixes = "!echo (add|cut|fix|ref)"
   st = status
   co = checkout
-  nb = "!git branch $1; git rebase --autostash --onto $(git mainbranch) $1"
+  nb = "!git branch $1; git rebase --autostash --onto integration $1"
 	nf = "!git nb $1; git story"
-  mainbranch = "!cat .attributes/git/main_branch 2>/dev/null || echo master"
-  cbr = "!bash -c 'mkdir -p /tmp/diff/f; git checkout od && for b in $(git branch | grep -v \"*\"); do test -n \"$(git config \"branch.$b.keep\")\" || (git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code > /tmp/diff/$b && git branch -D $b; git merge --abort >/dev/null;) done && git checkout -'" -
+  cbr = "!bash -c 'mkdir -p /tmp/diff/f; git checkout integration && for b in $(git branch | grep -v \"*\"); do test -n \"$(git config \"branch.$b.keep\")\" || (git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code > /tmp/diff/$b && git branch -D $b; git merge --abort >/dev/null;) done && git checkout -'" -
 
   l = log
   r = !git l -30 ra = !git r --all
@@ -58,7 +74,7 @@
   fuh = commit -a --fixup HEAD -m '[ci skip]'
   sq = commit -a --squash
   sqh = commit -a --squash HEAD
-  squash = "! git rebase -i --autosquash ${1:-$(git merge-base HEAD $(git mainbranch))} #"
+  squash = "! git rebase -i --autosquash ${1:-$(git merge-base HEAD integration)} #"
 
   authorstats = shortlog -sn
   praise = blame

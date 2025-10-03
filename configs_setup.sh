@@ -6,7 +6,10 @@ echo $system_type
 ln -fs $dir/configs/vimrc.vim ~/.vimrc
 mkdir -p ~/.vim/autoload
 
-for f in $(ls $dir/dot-config); do ln -fs $dir/dot-config/$f ~/.config/$f; done
+for f in $(ls $dir/dot-config); do
+  rm ~/.config/$f
+  ln -s $dir/dot-config/$f ~/.config/$f
+done
 
 ln -fs $dir/configs/vimperatorrc ~/.vimperatorrc
 ln -fs $dir/configs/pryrc ~/.pryrc

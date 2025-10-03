@@ -2,25 +2,23 @@
 
 set -ep
 
+if test -n "$(git pull-request-id)"; then
+  echo "Branch already has a pull request"
+  exit 1
+fi
+
 title="$(git log od..HEAD --reverse --format=%s | head -n1)"
 body="$(git log od..HEAD --reverse --format='### %s%n%b')"
 
 echo "$title"
 echo "$body"
 
-if test -n "$(git pull-request-id)"; then
-  gh pr edit \
-    --title "$title" \
-    --body "$body" 2>&1
-else
-  url="$(gh pr create \
-    --reviewer andros/eng-cred \
-    --title "$title" \
-    --body "$body")"
+url="$(gh pr create \
+  --title "$title" \
+  --body "$body")"
 
-  echo $url
-  git pull-request-id "$(echo "$url" | sed 's/.*\///')"
-fi
+echo $url
+git pull-request-id "$(echo "$url" | sed 's/.*\///')"
 ##! /usr/bin/env fish
 #
 #if test $(git log --oneline od..HEAD | wc -l) -eq 1;

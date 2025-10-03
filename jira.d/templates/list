@@ -10,5 +10,5 @@
 {{- end }}
 {{- cell .fields.status.name -}}
 {{- cell .key -}}
-{{- cell .fields.summary -}}
+{{- cell (fit 80 .fields.summary) -}}
 {{ end }}

@@ -1,18 +1,46 @@
+#!/usr/bin/env chruby-exec scripting -- ruby
+
+require 'erb'
+
+fragments = {
+  "todo" => %(status in ("To Do")),
+  "team" => %(project = BP AND ("Dev Team[Select List (multiple choices)]" IN ("Comp Rater"))),
+  "unassigned" => %(assignee is NULL),
+  "mine" => %(assignee="Wolf Stannard"),
+}
+
+queries = (1..fragments.keys.size).flat_map {|n|
+  fragments.keys.permutation(n).map {|keys|
+    "#{keys.join(",")}: #{keys.map(&fragments).join(" AND ")} ORDER BY Rank ASC"
+  }
+}
+
+puts ERB.new(DATA.read).result(self.binding)
+
+__END__
 endpoint: https://boldpenguin.atlassian.net
 user: wolf.stannard@boldpenguin.com
 password-source: keyring
 custom-commands:
   - name: next
     help: get next issue
-    script: "{{jira}} list -n api-bl -l 1"
+    script: "{{jira}} list -n todo,team -l 1"
+  - name: status
+    help: short view
+    args:
+      - name: STORY
+        required: true
+    script: "{{jira}} view --gjq=fields.status.name --field=status {{args.STORY}}"
 config:
   # noedit: true
   # no-edit: true
 queries:
-  crd: status in ("Selected For Dev", "In Progress") AND ("Dev Team[Dropdown]" IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
-  crd-bl: status in ("Selected For Dev") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
-  crd-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic"
+  <%= queries.join("\n  ") %>
 
-  api: status in ("Selected For Dev", "In Progress") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
-  api-bl: status in ("Selected For Dev") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
-  api-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic"
+  # crd: status in ("Selected For Dev", "In Progress") AND ("Dev Team[Dropdown]" IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
+  # crd-bl: status in ("Selected For Dev") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic" ORDER BY RANK
+  # crd-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND ("Dev Team[Dropdown]"  IN ("Cred Core", "Cred Apps")) AND issuetype != "Epic"
+
+  # api: status in ("Selected For Dev", "In Progress") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
+  # api-bl: status in ("Selected For Dev") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic" ORDER BY RANK
+  # api-ip: status in ("In Progress", "Dev Complete", "Ready for QA", "QA") AND (component = androsAPI OR "Dev Team[Dropdown]" = API) AND issuetype != "Epic"

@@ -1,23 +1,11 @@
-#!/usr/bin/env osascript -l JavaScript
+#!/usr/bin/osascript
 
-function run() {
-  ['librewolf', 'kitty', 'Work - Slack'].forEach
-app = Application.currentApplication();
-  console.log(app.windows());
-app.includeStandardAdditions = true;
-app.displayNotification("Hello, Notification", {
-  withTitle: "Notification Title",
-  subtitle: "Subtitle",
-  soundName: "default",
-});
-}
+set maxApplications to {"Work - Slack","librewolf", "Music","Terminal","Kitty"}
 
-// set maxApplications to {"Firefox Developer Edition","iTunes","Terminal","Kitty"}
-
-// repeat with appName in maxApplications
-//   try
-//     tell application appName
-//         tell the front window to set zoomed to true
-//     end tell
-//   end try
-// end repeat
+repeat with appName in maxApplications
+  try
+    tell application appName
+        tell the front window to set zoomed to true
+    end tell
+  end try
+end repeat

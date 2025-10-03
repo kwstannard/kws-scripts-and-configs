@@ -89,24 +89,24 @@ au FileType eruby filetype indent off
 au FileType eruby filetype indent on
 
 "colorscheme changes
-highlight Normal ctermbg=Black ctermfg=White
-highlight Comment ctermfg=LightRed
-highlight Define ctermfg=darkgrey
-highlight Type ctermfg=Grey
-highlight Number ctermfg=LightYellow
-highlight Constant ctermfg=LightMagenta
-highlight Function ctermfg=lightgrey
-highlight Statement ctermfg=grey
-highlight rubyBlockParameterList ctermfg=grey
-highlight rubyMethodBlock ctermfg=lightgrey
-highlight rubyDoBlock ctermfg=lightgrey
-highlight rubyCurlyBlock ctermfg=lightgrey
-highlight rubyCaseExpression ctermfg=lightgrey
-highlight rubySymbol ctermfg=LightYellow
-highlight Identifier ctermfg=grey
-highlight PreProc ctermfg=cyan
+highlight Normal ctermbg=Black guibg=Black ctermfg=White guifg=White
+highlight Comment ctermfg=LightRed guifg=LightRed
+highlight Define ctermfg=darkgrey guifg=darkgrey
+highlight Type ctermfg=Grey guifg=Grey
+highlight Number ctermfg=LightYellow guifg=LightYellow
+highlight Constant ctermfg=LightMagenta guifg=LightMagenta
+highlight Function ctermfg=lightgrey guifg=lightgrey
+highlight Statement ctermfg=grey guifg=grey
+highlight rubyBlockParameterList ctermfg=grey guifg=grey
+highlight rubyMethodBlock ctermfg=lightgrey guifg=lightgrey
+highlight rubyDoBlock ctermfg=lightgrey guifg=lightgrey
+highlight rubyCurlyBlock ctermfg=lightgrey guifg=lightgrey
+highlight rubyCaseExpression ctermfg=lightgrey guifg=lightgrey
+highlight rubySymbol ctermfg=LightYellow guifg=LightYellow
+highlight Identifier ctermfg=grey guifg=grey
+highlight PreProc ctermfg=cyan guifg=cyan
 
-highlight LineNr ctermfg=DarkGrey
+highlight LineNr ctermfg=DarkGrey guifg=DarkGrey
 
 "whitespace highlighting
 
@@ -134,11 +134,11 @@ let g:ale_lint_on_enter=0
 
 " indent highlighting
 
-"highlight OddIndent ctermbg=236 guibg=#303030
-"highlight EvenIndent ctermbg=240 guibg=#585858
+highlight OddIndent ctermbg=236 guibg=#303030
+highlight EvenIndent ctermbg=240 guibg=#585858
 
-"au FileType * call matchadd('OddIndent', '\%(^\|\%(\s\s\)\)\zs\s\s\ze\s\s')
-"au FileType * call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
+au FileType yaml,json call matchadd('OddIndent', '\%(^\|\%(\s\s\)\)\zs\s\s\ze\s\s')
+au FileType yaml,json call matchadd('EvenIndent', '\(\s\s\)\zs\1\ze\1')
 
 " STATUS LINE
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -164,7 +164,7 @@ function! GitMoveFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
   if new_name != '' && new_name != old_name
-    exec ':GMove ' . new_name
+    exec ':Git mv ' . new_name
     redraw!
   endif
 endfunction

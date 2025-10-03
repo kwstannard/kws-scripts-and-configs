@@ -1,1 +1,1 @@
-fish_add_path .git/safe/../../bin
+set -x --prepend PATH .git/safe/../../bin

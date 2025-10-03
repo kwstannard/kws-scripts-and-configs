@@ -1,17 +1,15 @@
 #!/usr/bin/env ruby
 
+`kitty @ set-tab-title Scripts`
+
 4.times do
-  `kitty @ launch --type=tab --no-response --cwd=~/scripts`
+  `kitty @ launch --type=tab --no-response --cwd=~/scripts --tab-title=Scripts`
 end
 
 Dir[Dir.home + '/current/*'].each do |dir|
   5.times do
-    `kitty @ launch --type=tab --no-response --cwd=#{dir}`
+    `kitty @ launch --type=tab --no-response --cwd=#{dir} --tab-title=#{File.basename(dir)}`
   end
 end
 
-5.times do
-  `kitty @ launch --type=tab --no-response --cwd=~/`
-end
-
-`kitty @ launch --type=tab --no-response taskell`
+`kitty @ launch --type=tab --no-response --tab-title=Taskell taskell`

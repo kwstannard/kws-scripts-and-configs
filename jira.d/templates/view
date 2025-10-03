@@ -1,28 +1,28 @@
 {{/* view template */ -}}
 # {{ .fields.summary }}
+{{- newTable (sub termWidth 10) -}}
+{{- tableHeaders "age" "Priority" "key" "status" "type" "reporter" }}
+{{- tableRow (.fields.created | age) .fields.priority.name .key .fields.status.name .fields.issuetype.name .fields.reporter.displayName }}
+{{ tableRender }}
 {{if .fields.issuelinks -}}
-blockers: {{ range .fields.issuelinks }}{{if .outwardIssue}}{{ .outwardIssue.key }}[{{.outwardIssue.fields.status.name}}]{{end}}{{end}}
-depends: {{ range .fields.issuelinks }}{{if .inwardIssue}}{{ .inwardIssue.key }}[{{.inwardIssue.fields.status.name}}]{{end}}{{end}}
-{{end -}}
-{{if .fields.votes -}}
-votes: {{ .fields.votes.votes}}
+LINKS: {{ range .fields.issuelinks }}{{if .outwardIssue}}{{ .outwardIssue.key }}[{{.outwardIssue.fields.status.name}}]{{end}}{{end}}
+DEPENDS: {{ range .fields.issuelinks }}{{if .inwardIssue}}{{ .inwardIssue.key }}[{{.inwardIssue.fields.status.name}}]{{end}}{{end}}
 {{end -}}
 {{if .fields.labels -}}
-# labels:
-  {{ join ", " .fields.labels | indent 2}}
+# LABELS : {{ (join ", " .fields.labels) }}
 {{end -}}
-# description: |
-	{{ or .fields.description "" | indent 2 }}
+# DESCRIPTION
+{{ or .fields.description "" | toMd }}
 {{ "" }}
-{{- newTable (sub termWidth 10) -}}
-{{- tableHeaders "Priority" "key" "when" "status" "type" "reporter" }}
-{{- tableRow .fields.priority.name .key (.fields.created | age) .fields.status.name .fields.issuetype.name .fields.reporter.displayName }}
-{{ tableRender }}
+{{if .fields.customfield_10068 }}
+# Acceptance Criteria
+{{ .fields.customfield_10068 }}
+{{end -}}
 {{if .fields.comment.comments}}
 {{- newTable (sub termWidth 10) -}}
 {{- tableHeaders "Author" "When" "Comment" }}
 {{- range .fields.comment.comments -}}
-{{- tableRow .author.displayName (.created | age) (or .body "") }}
+{{- tableRow .author.displayName (.created | age) (or .body "" | toMd) }}
 {{ end}}
 {{ tableRender}}
 {{end -}}

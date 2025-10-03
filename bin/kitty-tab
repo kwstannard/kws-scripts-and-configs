@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+tab_num=$(kitten @ --to=unix:$(ls /tmp/kitty*) ls | jq ".[0].tabs.[] | select(.title == \"$1\").id")
+
+kitten @ --to=unix:$(ls /tmp/kitty*) action goto_tab $tab_num

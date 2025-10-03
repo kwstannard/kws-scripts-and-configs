@@ -1,3 +1,5 @@
 .DS_Store
 dot-config/i3/modes.conf
 dot-config/fish/fish_variables
+dot-config/**/*.private.fish
+dot-config/**/*.work.fish

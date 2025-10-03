@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>local.boot</string>
+        <key>Program</key>
+        <string>
+          for i in 0 1 2 3 4; do
+            echo $(($i * 5 + 1)) > /tmp/_wkspc_${i}_window;
+          done
+        </string>
+        <key>StandardErrorPath</key>
+        <string>/var/tmp/karabiner-driver.err.log</string>
+        <key>StandardOutPath</key>
+        <string>/var/tmp/karabiner-driver.out.log</string>
+        <key>RunAtLoad</key>
+        <true/>
+    </dict>
+</plist>

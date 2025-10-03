@@ -4,5 +4,5 @@ if status is-interactive
     set --append PATH $HOME/bin
 end
 fish_config theme choose 'Tomorrow Night Bright'
-eval "$(/opt/homebrew/bin/brew shellenv)"
-set -x --append PATH /opt/local/bin
+set -x SHELL fish
+set -x EDITOR nvim
