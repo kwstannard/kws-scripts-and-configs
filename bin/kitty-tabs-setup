@@ -3,13 +3,17 @@
 `kitty @ set-tab-title Scripts`
 
 4.times do
-  `kitty @ launch --type=tab --no-response --cwd=~/scripts --tab-title=Scripts`
+  `kitty @ launch --type=tab --no-response --cwd=~/scripts --tab-title=Scripts -- fish -c "while true; fish; end"`
+end
+
+5.times do
+  `kitty @ launch --type=tab --no-response --cwd=~/work --tab-title=Work -- fish -c "while true; fish; end"`
 end
 
 Dir[Dir.home + '/current/*'].each do |dir|
   5.times do
-    `kitty @ launch --type=tab --no-response --cwd=#{dir} --tab-title=#{File.basename(dir)}`
+    `kitty @ launch --type=tab --no-response --cwd=#{dir} --tab-title=#{File.basename(dir)} -- fish -c "while true; fish; end"`
   end
 end
 
-`kitty @ launch --type=tab --no-response --tab-title=Taskell taskell`
+`kitty @ launch --type=tab --no-response --tab-title=Taskell -- fish -c "while true; taskell; end"`
