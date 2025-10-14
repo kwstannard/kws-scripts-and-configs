@@ -1,22 +1,29 @@
 #! /usr/bin/env ruby
 require 'open3'
 require 'io/console'
+require 'uri'
 
 puts 'db file:'
 db_file = STDIN.gets.chomp
-puts 'password:'
-password = STDIN.noecho { gets }.chomp
+puts 'password or file uri:'
+password_or_file = STDIN.noecho { gets }.chomp
+
+if URI::File === URI.parse(password_or_file)
+  file = password_or_file
+else
+  password = password_or_file
+end
+
 
 `rclone listremotes`.split("\n").tap{ puts "remotes: ", _1.inspect }.each do |remote|
   system("rclone", 'copy', "#{remote}#{db_file}", "/tmp/#{remote}")
 
-  Open3.popen3("keepassxc-cli", "merge", db_file, "/tmp/#{remote}/#{db_file}") do |i,o,e|
-    i.puts password
-    i.puts password
+  Open3.popen3("keepassxc-cli", "merge", "-s", (file ? "-k #{file}" : ""), db_file, "/tmp/#{remote}/#{db_file}") do |i,o,e|
+    i.puts password if password
     i.close
     puts o.read
     puts e.read
-  end
+  end && puts("#{remote} merged!")
 end.each do |remote|
-  system("rclone", 'copy', db_file, remote)
+  system("rclone", 'copy', db_file, remote) && puts("#{remote} pushed!")
 end
