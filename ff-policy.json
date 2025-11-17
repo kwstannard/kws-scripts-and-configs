@@ -1,0 +1,14 @@
+{
+  "policies": {
+    "ExtensionSettings": {
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "file:///usr/share/mozilla/extensions/uBlock0-latest.xpi"
+      },
+      "tridactyl.vim.betas@cmcaine.co.uk": {
+        "installation_mode": "force_installed",
+        "install_url": "file:///usr/share/mozilla/extensions/tridactyl-latest.xpi"
+      }
+    }
+  }
+}

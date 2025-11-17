@@ -1,3 +1,6 @@
+" Note to self use UBlock origin to block javascript on sites
+
+
 " Only hint search results on Google and DDG
 bindurl www.google.com f hint -Jc .rc > div > a
 bindurl www.google.com F hint -Jbc .rc > div > a
@@ -11,3 +14,5 @@ bind ;c hint -Jc [class*="expand"],[class="togg"],[class="comment_folder"]
 
 bindurl ^https://duckduckgo.com f hint -J
 bindurl ^https://duckduckgo.com gi focusinput
+
+autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")

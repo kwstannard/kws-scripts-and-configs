@@ -2,28 +2,48 @@
 require 'open3'
 require 'io/console'
 require 'uri'
+require 'optionparser'
 
-puts 'db file:'
-db_file = STDIN.gets.chomp
-puts 'password or file uri:'
-password_or_file = STDIN.noecho { gets }.chomp
+opts = Struct.new(:db_file, :keyfile, :remotes).new(
+  nil,
+  nil,
+  `rclone listremotes`.split("\n")
+)
 
-if URI::File === URI.parse(password_or_file)
-  file = password_or_file
-else
-  password = password_or_file
-end
+OptionParser.new do |p|
+  p.on("-h", "--help") do
+    puts p
+    exit
+  end
+  p.on("-r", "--remotes REMOTES", "pick subset of (#{opts.remotes.join(",")})") do |v|
+    opts.remotes = opts.remotes & v.split(",")
+  end
+  p.on("-d", "--database FILE") do |v|
+    opts.db_file = v
+  end
+  p.on("-k", "--keyfile FILE") { opts.keyfile = it }
+end.parse!
 
+puts opts if ENV['DEBUG']
+puts 'password for ' + opts.db_file
+password = STDIN.noecho { gets }.chomp
+puts password.inspect if ENV['DEBUG']
 
-`rclone listremotes`.split("\n").tap{ puts "remotes: ", _1.inspect }.each do |remote|
-  system("rclone", 'copy', "#{remote}#{db_file}", "/tmp/#{remote}")
+opts.remotes.each do |remote|
+  system("rclone", 'copy', "#{remote}#{opts.db_file}", "/tmp/#{remote}") || exit(1)
+  puts File.stat("/tmp/#{remote}/#{opts.db_file}").mtime if ENV['DEBUG']
 
-  Open3.popen3("keepassxc-cli", "merge", "-s", (file ? "-k #{file}" : ""), db_file, "/tmp/#{remote}/#{db_file}") do |i,o,e|
-    i.puts password if password
+  kf = opts.keyfile ? ["-k", opts.keyfile] : []
+  pw = password.empty? ? ["--no-password"] : []
+  cmd = ["keepassxc-cli", "merge", "-s", *kf, *pw, opts.db_file, "/tmp/#{remote}/#{opts.db_file}"]
+  puts cmd.inspect if ENV['DEBUG']
+  Open3.popen3(*cmd) do |i,o,e|
+    i.puts password
     i.close
     puts o.read
     puts e.read
   end && puts("#{remote} merged!")
+  puts File.stat(opts.db_file).mtime if ENV['DEBUG']
 end.each do |remote|
-  system("rclone", 'copy', db_file, remote) && puts("#{remote} pushed!")
+  system("rclone", 'copy', opts.db_file, remote) && puts("#{remote} pushed!")
 end

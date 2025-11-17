@@ -6,8 +6,4 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'pmizio/typescript-tools.nvim'
-" <<<<
-Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
-" >>>>
-

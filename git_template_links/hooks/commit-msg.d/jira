@@ -1,4 +1,4 @@
-#! /usr/bin/env chruby-exec scripting -- ruby
+#! /usr/bin/env -S chruby-exec scripting -- ruby
 require 'shellwords'
 
 commit_file_path = ARGV[0]
