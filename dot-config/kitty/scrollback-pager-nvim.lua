@@ -1,9 +1,5 @@
 vim.opt.encoding='utf-8'
 
-vim.cmd("call plug#begin('~/.vim/bundle')")
-vim.cmd("Plug 'mikesmithgh/kitty-scrollback.nvim'")
-vim.cmd("call plug#end()")
-
 require('kitty-scrollback').setup()
 require('kitty-scrollback.api')
 

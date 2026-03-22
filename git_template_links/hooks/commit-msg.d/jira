@@ -1,6 +1,8 @@
 #! /usr/bin/env -S chruby-exec scripting -- ruby
 require 'shellwords'
 
+exit 0
+
 commit_file_path = ARGV[0]
 if ENV['SKIP_JIRA']
   puts "SKIP_JIRA set" if ENV['DEBUG']

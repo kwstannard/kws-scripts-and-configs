@@ -261,3 +261,5 @@ nnoremap giw :exec "normal v\<Plug>(textobj-indent-i)gw" <CR>
 
 command! Abolish licence{e,s} license{}
 command! Abolish licence{e,s} license{}
+
+let g:claude_api_key = $CLAUDE_CODE_OAUTH_TOKEN

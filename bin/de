@@ -2,7 +2,7 @@
 
 puts(<<HELP) || exit(1) if ARGV.empty?
 
-de is a solution to manageme environment variables on development machines.
+de is a solution to manage environment variables on development machines.
 It transverses the parents of the present working directory, concatenates any
 .env files found, and runs the given command. Optionally set NAME to also load
 files of the pattern .env.{NAME}

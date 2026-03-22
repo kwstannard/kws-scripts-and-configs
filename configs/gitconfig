@@ -59,7 +59,7 @@
   autoupdate = true
 
 [alias]
-  subject-prefixes = "!echo (add|cut|fix|ref)"
+  subject-prefixes = "!echo '(add|cut|fix|ref)'"
   st = status
   co = checkout
   nb = "!git branch $1; git rebase --autostash --onto integration $1"

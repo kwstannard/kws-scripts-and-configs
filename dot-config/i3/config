@@ -5,7 +5,10 @@ include ~/.config/i3/modes.conf
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
+
+# Your preferred terminal emulator
+set $term ~/bin/kitty
 
 set $copy-tool xclip -selection pasteboard
 
@@ -77,7 +80,7 @@ mode "$mode_movement" {
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
   bindsym l exec --no-startup-id i3lock, exec --no-startup-id special_mode_exit
-    bindsym e exec --no-startup-id i3msg exit, exec --no-startup-id special_mode_exit
+    bindsym e exec --no-startup-id i3-msg exit, exec --no-startup-id special_mode_exit
     bindsym s exec --no-startup-id systemctl suspend && i3lock && special_mode_exit
     bindsym h exec --no-startup-id systemctl hibernate && i3lock && special_mode_exit
     bindsym r exec --no-startup-id systemctl reboot
@@ -173,25 +176,8 @@ mode "mouse" {
 
 bindsym $mod+Shift+m mode "mouse"
 
-assign [app_id="firefox-default"] 15: Playwright
-assign [app_id="firefox"] 14: Web
-assign [app_id="librewolf"] 14: Web
-#assign [app_id="slack"] 13: Slack
-assign [app_id="^FFPWA-.*"] 13: Slack
-assign [app_id="signal beta"] 12: Pidgin
-assign [class="signal"] 12: Pidgin
-assign [app_id=".*KeePassXC$"] 11: Keepass
-assign [app_id="evolution"] 100: WorkConsole
-
-# startup apps
-exec --no-startup-id keepassxc
-exec --no-startup-id librewolf
-exec --no-startup-id /usr/bin/firefoxpwa site launch 01JSCE590DW14AWY07GXNXFR2K
-exec --no-startup-id signal
-
-exec --no-startup-id cron_notify_setup
-
-exec --no-startup-id rem -z -k'notify-send %s &'
+exec_always ~/scripts/bin/Linux/i3-sway-apps > /tmp/i3-sway-apps.conf
+include /tmp/i3-sway-apps.conf
 
 exec --no-startup-id special_mode_exit
 
