@@ -1,8 +1,6 @@
 #! /usr/bin/env -S chruby-exec scripting -- ruby
 require 'shellwords'
 
-exit 0
-
 commit_file_path = ARGV[0]
 if ENV['SKIP_JIRA']
   puts "SKIP_JIRA set" if ENV['DEBUG']
@@ -40,7 +38,10 @@ if story.empty?
   args += %(-o description=#{description}) if description
 
   story = %x(
-  jira create -p #{project}\ -o summary=#{summary} #{args}\ --noedit | ruby -ane 'puts $F[1]').strip
+    echo "" |
+      jira create -p #{project}\ -o summary=#{summary} #{args}\ --noedit |
+      ruby -ane 'puts $F[1]'
+  ).strip
 
   exit 1 unless $?.success?
 
@@ -48,6 +49,8 @@ if story.empty?
   git story #{story}
   )
 end
+
+puts 2
 
 `git interpret-trailers --in-place #{commit_file_path} --trailer project=#{story}`.tap do |msg|
   STDERR.puts msg if ENV['DEBUG']

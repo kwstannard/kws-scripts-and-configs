@@ -6,6 +6,7 @@ include ~/.config/i3/modes.conf
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $klock i3lock -f -c 333333
 
 # Your preferred terminal emulator
 set $term ~/bin/kitty
@@ -79,10 +80,10 @@ mode "$mode_movement" {
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-  bindsym l exec --no-startup-id i3lock, exec --no-startup-id special_mode_exit
+  bindsym l exec --no-startup-id $klock, exec --no-startup-id special_mode_exit
     bindsym e exec --no-startup-id i3-msg exit, exec --no-startup-id special_mode_exit
-    bindsym s exec --no-startup-id systemctl suspend && i3lock && special_mode_exit
-    bindsym h exec --no-startup-id systemctl hibernate && i3lock && special_mode_exit
+    bindsym s exec --no-startup-id systemctl suspend && $klock && special_mode_exit
+    bindsym h exec --no-startup-id systemctl hibernate && $klock && special_mode_exit
     bindsym r exec --no-startup-id systemctl reboot
     bindsym Shift+s exec --no-startup-id systemctl poweroff
 
@@ -109,6 +110,40 @@ bar {
 }
 exec --no-startup-id nm-applet
 
+set $spire_mode sts
+mode "sts" {
+	bindsym Shift+Escape exec --no-startup-id special_mode_exit
+
+	# Left Click
+	bindsym space exec --no-startup-id xdotool mousedown 1
+	bindsym --release space exec --no-startup-id xdotool mouseup 1
+
+# enemy positions
+	bindsym i exec xdotool mousemove 2300 1100
+#left menu
+	bindsym y exec xdotool mousemove 300 1500
+# midscreen
+	bindsym u exec xdotool mousemove 1500 1500
+
+
+	bindsym h exec --no-startup-id xdotool mousemove_relative -- -300 0
+	bindsym Shift+h exec --no-startup-id xdotool mousemove_relative -- -150 0
+	bindsym j exec --no-startup-id --no-startup-id xdotool mousemove_relative 0 75
+	bindsym k exec --no-startup-id --no-startup-id xdotool mousemove_relative -- 0 -75
+	bindsym Control+j exec --no-startup-id --no-startup-id xdotool click 5
+	bindsym Control+k exec --no-startup-id --no-startup-id xdotool click 4
+	bindsym l exec --no-startup-id --no-startup-id xdotool mousemove_relative 300 0
+	bindsym Shift+l exec --no-startup-id --no-startup-id xdotool mousemove_relative 150 0
+
+  bindsym Shift exec --no-startup-id "xdotool key 5"
+  bindsym z exec --no-startup-id "xdotool key 6"
+  bindsym x exec --no-startup-id "xdotool key 7"
+  bindsym c exec --no-startup-id "xdotool key 8"
+  bindsym v exec --no-startup-id "xdotool key 9"
+  bindsym equal exec --no-startup-id "xdotool key 0"
+}
+
+set $mode_mouse mouse
 mode "mouse" {
 
 	# set your three speeds here
@@ -174,12 +209,12 @@ mode "mouse" {
 	bindsym Escape exec --no-startup-id special_mode_exit
 }
 
-bindsym $mod+Shift+m mode "mouse"
+#bindsym $mod+Shift+m mode "mouse"
+
+exec_always special_mode_exit
 
 exec_always ~/scripts/bin/Linux/i3-sway-apps > /tmp/i3-sway-apps.conf
 include /tmp/i3-sway-apps.conf
 
-exec --no-startup-id special_mode_exit
-
-#screensaver + lock on screen saver
-exec_always --no-startup-id xautolock -time 15 -locker i3lock
+#screensaver + lock on screen save
+exec_always xautolock -time 25 -locker $klock

@@ -42,6 +42,8 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'junkblocker/patchreview-vim'
 Plug 'pedrohdz/vim-yaml-folds', { 'for': 'yaml' }
 Plug 'mbbill/undotree'
+Plug 'hashivim/vim-terraform', { 'for': 'tf' }
+Plug 'inkarkat/vim-SyntaxRange'
 
 " JAVA
 Plug 'mfussenegger/nvim-jdtls'

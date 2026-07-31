@@ -27,8 +27,8 @@ mode "project_<%= key %>" {
   # i3 doesn't seem to let you modify the audio buttons
   #"XF86AudioRaiseVolume" => "exec --no-startup-id xbacklight -inc 10",
   #"XF86AudioLoweraiseVolume" => "exec --no-startup-id xbacklight -dec 10",
-  bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5+
-  bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5-
+  bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 20+%
+  bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 20-%
 
   # Touchpad controls
   bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -72,6 +72,8 @@ mode "project_<%= key %>" {
   bindsym $mod+Shift+p workspace  15: Playwright; exec --no-startup-id echo 5: Playwright > ~/.i3_workspace
   bindsym $mod+o workspace 13: Slack; exec --no-startup-id echo 13: Slack > ~/.i3_workspace
   bindsym $mod+Shift+o workspace 12: Pidgin; exec --no-startup-id echo 12: Pidgin > ~/.i3_workspace
+  bindsym $mod+Control+o workspace <%= key + 50 %>: Work chat
+  bindsym $mod+Shift+Control+o move workspace <%= key + 50 %>: Work chat
   bindsym $mod+i workspace 11: Keepass; exec --no-startup-id echo 11: Keepass > ~/.i3_workspace
   bindsym $mod+Shift+i exec --no-startup-id i3exec keepass-dmenu\
     --database $homedir/Dropbox/puppies.kdbx\
@@ -81,7 +83,8 @@ mode "project_<%= key %>" {
   bindsym $mod+Shift+c reload
   bindsym $mod+Shift+r restart
   bindsym $mod+r mode "resize"
-  bindsym $mod+m mode "$mode_movement"
+  bindsym $mod+w+m mode "$mode_movement"
+  bindsym $mod+m mode "$mode_mouse"
   bindsym $mod+End mode "$mode_system"
   bindsym $mod+Escape exec $klock
   bindsym $mod+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ unmute

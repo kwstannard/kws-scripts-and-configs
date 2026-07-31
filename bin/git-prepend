@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+b="prep-$(git branch --show-current)"
+
+git sw $b || git sw -c $b main
+
+git commit "$@"
+
+git sw -
+
+git rebase $b

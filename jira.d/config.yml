@@ -1,10 +1,10 @@
-#!/usr/bin/env chruby-exec scripting -- ruby
+#!/usr/bin/env -S chruby-exec scripting -- ruby
 
 require 'erb'
 
 fragments = {
   "todo" => %(status in ("To Do")),
-  "team" => %(project = BP AND ("Dev Team[Select List (multiple choices)]" IN ("Comp Rater"))),
+  #"team" => %(project = BP AND ("Dev Team[Select List (multiple choices)]" IN ("Comp Rater"))),
   "unassigned" => %(assignee is NULL),
   "mine" => %(assignee="Wolf Stannard"),
 }
@@ -18,9 +18,9 @@ queries = (1..fragments.keys.size).flat_map {|n|
 puts ERB.new(DATA.read).result(self.binding)
 
 __END__
-endpoint: https://boldpenguin.atlassian.net
-user: wolf.stannard@boldpenguin.com
-password-source: keyring
+endpoint: https://maplight.atlassian.net
+user: kelly.stannard
+login: kelly.stannard@maplight.org
 custom-commands:
   - name: next
     help: get next issue

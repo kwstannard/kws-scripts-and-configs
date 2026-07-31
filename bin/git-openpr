@@ -7,8 +7,8 @@ if test -n "$(git pull-request-id)"; then
   exit 1
 fi
 
-title="$(git log od..HEAD --reverse --format=%s | head -n1)"
-body="$(git log od..HEAD --reverse --format='### %s%n%b')"
+title="$(git log main..HEAD --reverse --format=%s | head -n1)"
+body="$(git log main..HEAD --reverse --format='### %s%n%b')"
 
 echo "$title"
 echo "$body"
@@ -21,12 +21,12 @@ echo $url
 git pull-request-id "$(echo "$url" | sed 's/.*\///')"
 ##! /usr/bin/env fish
 #
-#if test $(git log --oneline od..HEAD | wc -l) -eq 1;
+#if test $(git log --oneline main..HEAD | wc -l) -eq 1;
 #  gh pr create --fill
 #else
 #  gh pr create \
 #    --title "$(git show -s --format="%s" HEAD)" \
-#    --body "$(git log --format="## %s%n%n%b" od..HEAD)"
+#    --body "$(git log --format="## %s%n%n%b" main..HEAD)"
 #end 2>&1
 #
 #gh pr view

@@ -46,6 +46,7 @@
   algorithm = histogram
   color = true
   colorMoved = true
+  mnemonicPrefix = true
   whitespace = red reverse
 
 [grep]
@@ -62,9 +63,9 @@
   subject-prefixes = "!echo '(add|cut|fix|ref)'"
   st = status
   co = checkout
-  nb = "!git branch $1; git rebase --autostash --onto integration $1"
+  nb = "!git branch $1; git rebase --autostash --onto ${2:-integration} $1 #"
 	nf = "!git nb $1; git story"
-  cbr = "!bash -c 'mkdir -p /tmp/diff/f; git checkout integration && for b in $(git branch | grep -v \"*\"); do test -n \"$(git config \"branch.$b.keep\")\" || (git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code > /tmp/diff/$b && git branch -D $b; git merge --abort >/dev/null;) done && git checkout -'" -
+  cbr = "!bash -c 'mkdir -p /tmp/diff/f; git checkout integration && for b in $(git branch | grep -v \"*\" -v main); do test -n \"$(git config \"branch.$b.keep\")\" || (git merge --no-commit --no-ff $b &>/dev/null; git diff --cached --exit-code > /tmp/diff/$b && git branch -D $b; git merge --abort >/dev/null;) done && git checkout -'" -
 
   l = log
   r = !git l -30 ra = !git r --all

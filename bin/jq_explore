@@ -2,15 +2,34 @@
 
 require 'io/console'
 require 'open3'
-stack = [ARGF.read]
+require 'reline'
+require 'json'
+histfile = "/tmp/#{ARGV[0].gsub("/", ".")}_history"
 
+stack = [ARGF.read]
 ARGF.close
 
+FileUtils.touch(histfile)
+Reline::HISTORY.concat File.readlines(histfile)
+
 until stack.empty?
-  Open3.popen2('jq "(keys)? // ."') { |i, o| i.puts(stack.last); i.close; puts o.read }
-  case x=IO.console.gets&.strip
+  Open3.popen2('jq "(keys)? // ."') { |i, o|
+    i.puts(stack.last)
+    i.close
+    o.read.tap {|keys|
+      puts keys
+      Reline.completion_proc = proc { |word|
+        JSON.parse(keys.gsub(/"(\w)/, '".\1'))
+      }
+    }
+  }
+  case Reline.readline("> ", true)
   when 'exit', 'up', '', nil then stack.pop
   when 'show' then puts stack.last
   when /(.*)/ then stack.push(Open3.popen2("jq '#{$1}'"){|i,o| i.puts(stack.last); i.close; o.read })
   end
 end
+
+at_exit {
+  File.write(histfile, Reline::HISTORY.join("\n"))
+}

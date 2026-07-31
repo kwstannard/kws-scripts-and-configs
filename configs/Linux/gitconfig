@@ -3,6 +3,6 @@
 [user]
 	signingkey = /home/piper/.ssh/id_ed25519
 [core]
-	editor = nvim
+	editor = nvim +\"vertical Git diff --cached\" +\"wincmd h\" 
 [gpg]
 	format = ssh

@@ -6,7 +6,7 @@ when /sway/ then x="app_id"
 when /GNOME/ then x="whoops"
 end
 
-puts <<DOC
+File.write '/tmp/i3-sway-apps.conf', <<DOC
 assign [#{x}="firefox-default"] 15: Playwright
 assign [#{x}="firefox"] 14: Web
 assign [#{x}="librewolf"] 14: Web
@@ -17,8 +17,10 @@ for_window [#{x}='.*'] inhibit_idle fullscreen
 assign [#{x}="slack"] 13: Slack
 assign [#{x}="^FFPWA-.*"] 13: Slack
 assign [#{x}="signal"] 12: Pidgin
+assign [#{x}="Signal"] 12: Pidgin
 assign [#{x}="KeePassXC"] 11: Keepass
-assign [#{x}="evolution"] 100: WorkConsole
+assign [#{x}="Evolution"] 100: WorkConsole
+assign [#{x}="Thunderbird"] 100: WorkConsole
 
 # startup apps
 exec gtk-launch org.keepassxc.KeePassXC
@@ -30,8 +32,6 @@ exec gtk-launch org.gnome.Evolution
 exec gtk-launch FFPWA-01JT10PGTHA645AC1F4WFK8M2D.desktop
 # Indy
 exec gtk-launch FFPWA-01JVTRCMMJJDZFX7H6JT84VJZ3.desktop
-
-exec cron_notify_setup
 
 exec rem -z -k'notify-send %s &'
 DOC

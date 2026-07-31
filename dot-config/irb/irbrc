@@ -1,0 +1,39 @@
+class IRB::Command::Play < IRB::Command::Base
+  category "Debugging"
+  description "play lines from a file"
+
+  help_message(<<~DESC)
+    Play lines from a file.
+
+    > play START END [FILE | current file]
+  DESC
+
+  def execute(arg)
+    start, fin, file = arg.split
+
+    start = start.to_i - 1
+    fin = fin.to_i
+    file ||= IRB.CurrentContext.irb_path
+
+    if File.exist?(file)
+      eval(
+        File.foreach(file).take(fin)[start..].join
+      )
+    elsif file == '(irb)'
+      warn "Using play outside of a debugger requires a file"
+    else
+      warn "Not a valid file: #{file}"
+    end
+  end
+
+  ::IRB::Command.register(:play, self)
+end
+
+# IRB::Command.register(
+#   :watch,
+#   Class.new(IRB::Command::Base) {
+#     def execute(*args)
+#       @cache ||= 
+#     end
+#   }
+# )
